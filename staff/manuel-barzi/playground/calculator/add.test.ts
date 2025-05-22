@@ -8,7 +8,7 @@ console.info("CASE a is 10 and b is 20 then r 30")
 {
     const r = add(10, 20)
 
-    console.assert(r === 30, 'r is 30')
+    console.assert(r === 30, "r is 30")
 }
 
 
