@@ -4,17 +4,15 @@ REQUIREMENTS
 - behavior: forward,backward,right,left by steps
 */
 
-export type Orientation = "N" | "E" | "S" | "W"
-
 type Robot = {
     x: number
     y: number
-    orientation: Orientation
+    orientation: "N" | "E" | "S" | "W"
 
-    forward(): void
-    backward(): void
-    right(): void
-    left(): void
+    forward: () => void
+    backward: () => void
+    right: () => void
+    left: () => void
 }
 
 export const robot: Robot = {
@@ -23,69 +21,69 @@ export const robot: Robot = {
     orientation: "E",
 
     forward() {
-        switch (this.orientation) {
+        switch (robot.orientation) {
             case "E":
-                this.x = this.x + 10
+                robot.x = robot.x + 10
                 break
             case "S":
-                this.y = this.y + 10
+                robot.y = robot.y + 10
                 break
             case "W":
-                this.x = this.x - 10
+                robot.x = robot.x - 10
                 break
             case "N":
-                this.y = this.y - 10
+                robot.y = robot.y - 10
                 break
         }
     },
 
     backward() {
-        switch (this.orientation) {
+        switch (robot.orientation) {
             case "E":
-                this.x = this.x - 10
+                robot.x = robot.x - 10
                 break
             case "S":
-                this.y = this.y - 10
+                robot.y = robot.y - 10
                 break
             case "W":
-                this.x = this.x + 10
+                robot.x = robot.x + 10
                 break
             case "N":
-                this.y = this.y + 10
+                robot.y = robot.y + 10
                 break
         }
     },
 
     left() {
-        switch (this.orientation) {
+        switch (robot.orientation) {
             case "E":
-                this.orientation = "N"
+                robot.orientation = "N"
                 break
             case "S":
-                this.orientation = "E"
+                robot.orientation = "E"
                 break
             case "W":
-                this.orientation = "S"
+                robot.orientation = "S"
                 break
             case "N":
-                this.orientation = "W"
+                robot.orientation = "W"
                 break
         }
     },
 
     right() {
-        switch (this.orientation) {
+        switch (robot.orientation) {
             case "E":
-                this.orientation = "S"
+                robot.orientation = "S"
                 break
             case "S":
-                this.orientation = "W"
+                robot.orientation = "W"
                 break
             case "W":
-                this.orientation = "N"
+                robot.orientation = "N"
                 break
             case "N":
-                this.orientation = "E"
+                robot.orientation = "E"
                 break
         }
     }

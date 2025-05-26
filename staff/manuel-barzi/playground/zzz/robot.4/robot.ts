@@ -4,12 +4,10 @@ REQUIREMENTS
 - behavior: forward,backward,right,left by steps
 */
 
-export type Orientation = "N" | "E" | "S" | "W"
-
 type Robot = {
     x: number
     y: number
-    orientation: Orientation
+    orientation: "N" | "E" | "S" | "W"
 
     forward(): void
     backward(): void

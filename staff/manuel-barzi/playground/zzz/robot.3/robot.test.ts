@@ -1,4 +1,4 @@
-import { robot, Orientation } from "./robot"
+import { robot } from "./robot"
 
 console.info("TEST robot")
 
@@ -41,7 +41,7 @@ console.info("CASE robots turns left one step")
 
     console.assert(robot.x === 0, "robot x is 0")
     console.assert(robot.y === 0, "robot y is 0")
-    console.assert(robot.orientation as Orientation === "N", "robot orientation is N")
+    console.assert(robot.orientation === "N", "robot orientation is N")
 }
 
 console.info("CASE robots turns right one step")
@@ -55,7 +55,7 @@ console.info("CASE robots turns right one step")
 
     console.assert(robot.x === 0, "robot x is 0")
     console.assert(robot.y === 0, "robot y is 0")
-    console.assert(robot.orientation as Orientation === "S", "robot orientation is S")
+    console.assert(robot.orientation === "S", "robot orientation is S")
 }
 
 console.info("CASE robots turns right one step from N to E")
@@ -69,7 +69,7 @@ console.info("CASE robots turns right one step from N to E")
 
     console.assert(robot.x === 0, "robot x is 0")
     console.assert(robot.y === 0, "robot y is 0")
-    console.assert(robot.orientation as Orientation === "E", "robot orientation is E")
+    console.assert(robot.orientation === "E", "robot orientation is E")
 }
 
 console.info("CASE robot moves to x 100 and y 50 and ends with orientation N")
@@ -89,5 +89,5 @@ console.info("CASE robot moves to x 100 and y 50 and ends with orientation N")
 
     console.assert(robot.x === 100, "robot x is 100")
     console.assert(robot.y === 50, "robot y is 50")
-    console.assert(robot.orientation as Orientation === "N", "robot orientation is N")
+    console.assert(robot.orientation === "N", "robot orientation is N")
 }
