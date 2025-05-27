@@ -1,4 +1,4 @@
-import { robot, Orientation } from "./robot";
+import { robot, Orientation } from "./robot.js";
 
 console.info("TEST robot");
 
