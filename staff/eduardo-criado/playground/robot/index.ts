@@ -2,14 +2,14 @@ import { robot } from "./robot.js";
 
 const robotHead = document.createElement("div");
 
-robotHead.style.backgroundColor = "black";
+robotHead.style.backgroundColor = "blue";
 robotHead.style.position = "absolute";
 robotHead.style.width = "100px";
 robotHead.style.height = "100px";
 
 const robotEye1 = document.createElement("div");
 
-robotEye1.style.backgroundColor = "white";
+robotEye1.style.backgroundColor = "yellow";
 robotEye1.style.position = "absolute";
 robotEye1.style.width = "20px";
 robotEye1.style.height = "20px";
@@ -20,7 +20,7 @@ robotHead.appendChild(robotEye1);
 
 const robotEye2 = document.createElement("div");
 
-robotEye2.style.backgroundColor = "white";
+robotEye2.style.backgroundColor = "red";
 robotEye2.style.position = "absolute";
 robotEye2.style.width = "20px";
 robotEye2.style.height = "20px";
@@ -31,7 +31,7 @@ robotHead.appendChild(robotEye2);
 
 const robotMouth = document.createElement("div");
 
-robotMouth.style.backgroundColor = "white";
+robotMouth.style.backgroundColor = "lightgreen";
 robotMouth.style.position = "absolute";
 robotMouth.style.width = "60px";
 robotMouth.style.height = "20px";
