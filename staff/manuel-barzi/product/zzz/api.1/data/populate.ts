@@ -1,5 +1,5 @@
 import { connect, disconnect } from "mongoose"
-import { User } from "./models.js"
+import { User } from "./models"
 // import { IUserDoc } from "./types"
 
 try {
@@ -30,7 +30,7 @@ try {
     try {
         user = await User.findById("68360519eadd29752ce2b85b").lean()
     } catch (error) {
-        throw new Error((error as Error).message)
+        throw new Error(error.message)
     }
 
     if (!user) throw new Error("user not found")
