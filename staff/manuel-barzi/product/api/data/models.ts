@@ -14,8 +14,7 @@ const user = new Schema<IUserDoc>({
     },
 
     avatar: {
-        type: String,
-        required: true
+        type: String
     },
 
     username: {
