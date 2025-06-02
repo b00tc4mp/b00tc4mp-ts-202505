@@ -10,7 +10,8 @@ const user = new Schema<IUserDoc>({
 
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
 
     avatar: {
@@ -19,7 +20,8 @@ const user = new Schema<IUserDoc>({
 
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
 
     password: {

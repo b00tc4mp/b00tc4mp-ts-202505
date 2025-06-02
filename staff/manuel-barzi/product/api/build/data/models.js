@@ -6,14 +6,16 @@ const user = new Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     avatar: {
         type: String
     },
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -21,3 +23,4 @@ const user = new Schema({
     }
 });
 export const User = model("User", user);
+//# sourceMappingURL=models.js.map
