@@ -10,7 +10,7 @@ export const user = new Schema({
     },
     avatar: {
         type: String,
-        required: true,
+        // required: true,
     },
     username: {
         type: String,
