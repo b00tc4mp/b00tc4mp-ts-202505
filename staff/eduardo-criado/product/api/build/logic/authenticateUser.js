@@ -9,7 +9,7 @@ export const authenticateUser = (username, password) => {
         .then((user) => {
         if (!user)
             throw new CredentialsError("invalid credentials");
-        return user;
+        return user._id.toString();
     });
 };
 //# sourceMappingURL=authenticateUser.js.map

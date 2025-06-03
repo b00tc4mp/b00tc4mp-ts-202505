@@ -7,6 +7,7 @@ describe("authenticateUser", () => {
     before(() => connect(MONGO_URL_TEST));
     beforeEach(() => User.deleteMany());
     it("authenticates a user", () => {
+        let userIdCreated;
         return User.create({
             name: "Eduardo",
             email: "edu@mail.com",
@@ -14,13 +15,10 @@ describe("authenticateUser", () => {
             username: "edu",
             password: "123123123",
         })
+            .then((user) => (userIdCreated = user._id.toString()))
             .then(() => authenticateUser("edu", "123123123"))
-            .then((user) => {
-            expect(user).not.to.be.null;
-            if (user) {
-                expect(user.username).to.equal("edu");
-                expect(user.password).to.equal("123123123");
-            }
+            .then((userId) => {
+            expect(userId).to.equal(userIdCreated);
         })
             .catch((error) => {
             throw new Error(error.message);
@@ -36,9 +34,6 @@ describe("authenticateUser", () => {
             password: "123123123",
         })
             .then(() => authenticateUser("edu", "wrongpassword"))
-            .then(() => {
-            throw new Error("Expected CredentialsError, but none was thrown");
-        })
             .catch((error) => (errorThrown = error))
             .finally(() => {
             expect(errorThrown).to.be.instanceOf(CredentialsError);

@@ -11,7 +11,7 @@ export type RegisterUser = (
 export type AuthenticateUser = (
   username: string,
   password: string
-) => Promise<IUserDoc>;
+) => Promise<string>;
 
 export type Logic = {
   registerUser: RegisterUser;

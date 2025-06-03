@@ -11,6 +11,6 @@ export const authenticateUser: AuthenticateUser = (username, password) => {
     .then((user) => {
       if (!user) throw new CredentialsError("invalid credentials");
 
-      return user;
+      return user._id.toString();
     });
 };
