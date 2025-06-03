@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start-watch": "node --env-file=.env build",
+    "start-watch": "node --env-file=.env --watch build",
     "compile-watch": "tsc --watch",
     "populate": "tsx data/populate.ts",
     "test": "node --env-file=.env node_modules/mocha/bin/mocha build/logic/*.spec.js",

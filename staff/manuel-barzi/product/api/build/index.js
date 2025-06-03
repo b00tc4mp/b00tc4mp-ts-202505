@@ -24,6 +24,21 @@ connect(MONGO_URL)
             res.status(500).json({ error: constructor.name, message });
         }
     });
+    api.post("/users/auth", jsonBodyParser, (req, res) => {
+        try {
+            const { username, password } = req.body;
+            logic.authenticateUser(username, password)
+                .then(userId => res.json(userId))
+                .catch(error => {
+                const { constructor, message } = error;
+                res.status(500).json({ error: constructor.name, message });
+            });
+        }
+        catch (error) {
+            const { constructor, message } = error;
+            res.status(500).json({ error: constructor.name, message });
+        }
+    });
     api.listen(PORT, () => console.log(`API is up and listening on port ${PORT}`));
     process.on("SIGINT", () => {
         console.log("API is down");
