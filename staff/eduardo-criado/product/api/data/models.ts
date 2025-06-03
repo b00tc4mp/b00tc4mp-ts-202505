@@ -10,6 +10,7 @@ export const user = new Schema<IUserDoc>({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
 
   avatar: {
@@ -20,6 +21,7 @@ export const user = new Schema<IUserDoc>({
   username: {
     type: String,
     required: true,
+    unique: true,
   },
 
   password: {

@@ -2,7 +2,10 @@ import express from "express";
 import { logic } from "./logic/index.js";
 import { connect, disconnect } from "./data/index.js";
 
-connect("mongodb://localhost:27017/product-api")
+const { PORT = 8080, MONGO_URL = "mongodb://localhost:27017/product-api" } =
+  process.env;
+
+connect(MONGO_URL)
   .then(() => {
     const api = express();
 
@@ -31,7 +34,9 @@ connect("mongodb://localhost:27017/product-api")
       }
     });
 
-    api.listen(8080, () => console.log("API is up on port 8080"));
+    api.listen(PORT, () =>
+      console.log(`API is up & listening on port ${PORT}`)
+    );
 
     process.on("SIGINT", () => {
       console.log("API is down");

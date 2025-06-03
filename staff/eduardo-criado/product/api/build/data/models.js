@@ -7,6 +7,7 @@ export const user = new Schema({
     email: {
         type: String,
         required: true,
+        unique: true,
     },
     avatar: {
         type: String,
@@ -15,6 +16,7 @@ export const user = new Schema({
     username: {
         type: String,
         required: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -32,3 +34,4 @@ export const User = model("User", user);
 // });
 // User.findOne();
 // export default User;
+//# sourceMappingURL=models.js.map
