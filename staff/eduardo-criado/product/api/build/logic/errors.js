@@ -13,4 +13,9 @@ export class DuplicityError extends Error {
         super(message);
     }
 }
+export class CredentialsError extends Error {
+    constructor(message) {
+        super(message);
+    }
+}
 //# sourceMappingURL=errors.js.map
