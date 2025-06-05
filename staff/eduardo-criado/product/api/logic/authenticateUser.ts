@@ -1,15 +1,17 @@
 import { AuthenticateUser } from "./types.js";
 import { User } from "../data/models.js";
-import { SystemError, CredentialsError } from "./errors.js";
+import { NotFoundError, PasswordError, SystemError } from "./errors.js";
 
 export const authenticateUser: AuthenticateUser = (username, password) => {
-  return User.findOne({ username, password })
+  return User.findOne({ username })
     .lean()
     .catch((error) => {
-      throw new SystemError(error.message);
+      new SystemError(error.message);
     })
     .then((user) => {
-      if (!user) throw new CredentialsError("invalid credentials");
+      if (!user) throw new NotFoundError("user not found");
+
+      if (user.password !== password) throw new PasswordError("wrong password");
 
       return user._id.toString();
     });

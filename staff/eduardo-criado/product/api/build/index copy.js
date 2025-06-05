@@ -27,6 +27,25 @@ connect(MONGO_URL)
             res.status(500).json({ error: constructor.name, message });
         }
     });
+    // api.post("/users/auth", jsonBodyParser, (req, res) => {
+    //   try {
+    //     const { username, password } = req.body;
+    //     logic
+    //       .authenticateUser(username, password)
+    //       .then((userId) => res.status(200).json({ userId }))
+    //       .catch((error) => {
+    //         const { constructor, message } = error as Error;
+    //         if (constructor.name === "CredentialsError") {
+    //           res.status(401).json({ error: constructor.name, message });
+    //         } else {
+    //           res.status(500).json({ error: constructor.name, message });
+    //         }
+    //       });
+    //   } catch (error) {
+    //     const { constructor, message } = error as Error;
+    //     res.status(500).json({ error: constructor.name, message });
+    //   }
+    // });
     api.post("/users/auth", jsonBodyParser, (req, res) => {
         try {
             const { username, password } = req.body;
@@ -55,4 +74,4 @@ connect(MONGO_URL)
     });
 })
     .catch((error) => console.error(error));
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=index%20copy.js.map

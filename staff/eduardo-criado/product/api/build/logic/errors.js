@@ -18,4 +18,14 @@ export class CredentialsError extends Error {
         super(message);
     }
 }
+export class NotFoundError extends Error {
+    constructor(message) {
+        super(message);
+    }
+}
+export class PasswordError extends Error {
+    constructor(message) {
+        super(message);
+    }
+}
 //# sourceMappingURL=errors.js.map

@@ -21,3 +21,15 @@ export class CredentialsError extends Error {
     super(message);
   }
 }
+
+export class NotFoundError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
+export class PasswordError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}

@@ -3,7 +3,7 @@ import { connect, disconnect, User } from "../data/index.js";
 import { registerUser } from "./registerUser.js";
 import { DuplicityError } from "./errors.js";
 
-const { MONGO_URL_TEST = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } =
+const { MONGO_URL_TEST = "mongodb://localhost:27017/product-api-test" } =
   process.env;
 
 describe("registerUser", () => {

@@ -1,9 +1,9 @@
 import { expect } from "chai";
 import { connect, disconnect, User } from "../data/index.js";
 import { authenticateUser } from "./authenticateUser.js";
-import { CredentialsError } from "./errors.js";
+import { NotFoundError, PasswordError } from "./errors.js";
 
-const { MONGO_URL_TEST = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } =
+const { MONGO_URL_TEST = "mongodb://localhost:27017/product-api-test" } =
   process.env;
 
 describe("authenticateUser", () => {
@@ -11,48 +11,66 @@ describe("authenticateUser", () => {
 
   beforeEach(() => User.deleteMany());
 
-  it("authenticates a user", () => {
-    let userIdCreated: string;
+  it("authenticates on existing user", () => {
+    let existingUserId: string;
 
     return User.create({
-      name: "Eduardo",
-      email: "edu@mail.com",
-      avatar: "http://image.com/edu",
-      username: "edu",
+      name: "Wendy Darling",
+      email: "wendydarling@mail.com",
+      username: "wendydarling",
       password: "123123123",
     })
-      .then((user) => (userIdCreated = user._id.toString()))
-      .then(() => authenticateUser("edu", "123123123"))
-      .then((userId) => {
-        expect(userId).to.equal(userIdCreated);
-      })
-      .catch((error) => {
-        throw new Error(error.message);
+      .then((user) => (existingUserId = user.id)) // equal to ._id.toString()
+      .then(() => authenticateUser("wendydarling", "123123123"))
+      .then((userId) => expect(userId).to.equal(existingUserId));
+  });
+
+  it("fails on non-existing user", () => {
+    let errorThrown: Error;
+
+    return authenticateUser("wendydarling", "123123123")
+      .catch((error) => (errorThrown = error))
+      .finally(() => {
+        expect(errorThrown).to.be.instanceOf(NotFoundError);
+        expect(errorThrown.message).to.equal("user not found");
       });
   });
 
-  it("fails on invalid credentials", () => {
+  it("fails on existing user but wrong password", () => {
     let errorThrown: Error;
 
     return User.create({
-      name: "Eduardo",
-      email: "edu@mail.com",
-      avatar: "http://image.com/edu",
-      username: "edu",
+      name: "Wendy Darling",
+      email: "wendydarling@mail.com",
+      username: "wendydarling",
       password: "123123123",
     })
-      .then(() => authenticateUser("edu", "wrongpassword"))
-
+      .then(() => authenticateUser("wendydarling", "123123123_"))
       .catch((error) => (errorThrown = error))
       .finally(() => {
-        expect(errorThrown).to.be.instanceOf(CredentialsError);
-        expect(errorThrown.message).to.equal("invalid credentials");
+        expect(errorThrown).to.be.instanceOf(PasswordError);
+        expect(errorThrown.message).to.equal("wrong password");
+      });
+  });
+
+  it("fails on existing user but wrong username", () => {
+    let errorThrown: Error;
+
+    return User.create({
+      name: "Wendy Darling",
+      email: "wendydarling@mail.com",
+      username: "wendydarling",
+      password: "123123123",
+    })
+      .then(() => authenticateUser("wendydarling_", "123123123"))
+      .catch((error) => (errorThrown = error))
+      .finally(() => {
+        expect(errorThrown).to.be.instanceOf(NotFoundError);
+        expect(errorThrown.message).to.equal("user not found");
       });
   });
 
   afterEach(() => User.deleteMany());
 
-  after(() => {
-    disconnect();
-  });
+  after(() => disconnect());
 });
