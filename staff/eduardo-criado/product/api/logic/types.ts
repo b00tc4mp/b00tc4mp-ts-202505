@@ -13,7 +13,10 @@ export type AuthenticateUser = (
   password: string
 ) => Promise<string>;
 
+export type GetUserInfo = (id: string) => Promise<IUserDoc>;
+
 export type Logic = {
   registerUser: RegisterUser;
   authenticateUser: AuthenticateUser;
+  getUserInfo: GetUserInfo;
 };

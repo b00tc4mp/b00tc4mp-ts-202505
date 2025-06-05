@@ -53,6 +53,25 @@ connect(MONGO_URL)
       }
     });
 
+    api.get("/users/:userId", (req, res) => {
+      try {
+        const { userId } = req.params;
+
+        logic
+          .getUserInfo(userId)
+          .then((userInfo) => res.json(userInfo))
+          .catch((error) => {
+            const { constructor, message } = error as Error;
+
+            res.status(500).json({ error: constructor.name, message });
+          });
+      } catch (error) {
+        const { constructor, message } = error as Error;
+
+        res.status(500).json({ error: constructor.name, message });
+      }
+    });
+
     api.listen(PORT, () =>
       console.log(`API is up & listening on port ${PORT}`)
     );
