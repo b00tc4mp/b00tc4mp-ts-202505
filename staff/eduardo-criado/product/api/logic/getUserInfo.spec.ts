@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { connect, disconnect, User } from "../data/index.js";
 import { getUserInfo } from "./getUserInfo.js";
-import { NotFoundError } from "./errors.js";
+import { NotFoundError, ValidationError } from "./errors.js";
 import { Types } from "mongoose";
 
 const { MONGO_URL_TEST = "mongodb://localhost:27017/product-api-test" } =
@@ -40,6 +40,20 @@ describe("getUserInfo", () => {
         expect(errorThrown).to.be.instanceOf(NotFoundError);
         expect(errorThrown.message).to.equal("user not found");
       });
+  });
+
+  it("fails on invalid user id type", () => {
+    let errorThrown: Error;
+
+    try {
+      /* @ts-ignore */
+      getUserInfo(true);
+    } catch (error) {
+      errorThrown = error as Error;
+    } finally {
+      expect(errorThrown!).to.be.instanceOf(ValidationError);
+      expect(errorThrown!.message).to.equal("invalid user id type");
+    }
   });
 
   afterEach(() => User.deleteMany());
