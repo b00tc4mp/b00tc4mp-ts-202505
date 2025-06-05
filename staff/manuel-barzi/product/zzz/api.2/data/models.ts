@@ -5,17 +5,13 @@ import { IUserDoc } from "./types.js"
 const user = new Schema<IUserDoc>({
     name: {
         type: String,
-        required: true,
-        minlength: 1,
-        maxlength: 100
+        required: true
     },
 
     email: {
         type: String,
         required: true,
-        unique: true,
-        minlength: 6,
-        maxlength: 100
+        unique: true
     },
 
     avatar: {
@@ -25,16 +21,12 @@ const user = new Schema<IUserDoc>({
     username: {
         type: String,
         required: true,
-        unique: true,
-        minlength: 3,
-        maxlength: 30
+        unique: true
     },
 
     password: {
         type: String,
-        required: true,
-        minlength: 8,
-        maxlength: 100
+        required: true
     }
 })
 

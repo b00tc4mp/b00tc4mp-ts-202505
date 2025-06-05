@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import { connect, disconnect, User } from "../data/index.js"
 import { registerUser } from "./registerUser.js"
-import { DuplicityError } from "./errors.js"
+import { DuplicityError, ValidationError } from "./errors.js"
 
 const { MONGO_URL_TEST = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } = process.env
 
@@ -41,6 +41,179 @@ describe("registerUser", () => {
                 expect(errorThrown).to.be.instanceOf(DuplicityError)
                 expect(errorThrown.message).to.equal("user already exists")
             })
+    })
+
+    it("fails on invalid name type", () => {
+        let errorThrown: Error
+
+        try {
+            /* @ts-ignore */
+            registerUser(undefined, "campa@nilla.com", "campanilla", "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid name type")
+        }
+    })
+
+    it("fails on invalid name min length", () => {
+        let errorThrown: Error
+
+        try {
+            registerUser("", "campa@nilla.com", "campanilla", "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid name min length")
+        }
+    })
+
+    it("fails on invalid name max length", () => {
+        let errorThrown: Error
+
+        try {
+            registerUser("01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", "campa@nilla.com", "campanilla", "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid name max length")
+        }
+    })
+
+    it("fails on invalid email type", () => {
+        let errorThrown: Error
+
+        try {
+            /* @ts-ignore */
+            registerUser("Campa Nilla", undefined, "campanilla", "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid email type")
+        }
+    })
+
+    it("fails on invalid email min length", () => {
+        let errorThrown: Error
+
+        try {
+            registerUser("Campa Nilla", "", "campanilla", "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid email min length")
+        }
+    })
+
+    it("fails on invalid email max length", () => {
+        let errorThrown: Error
+
+        try {
+            registerUser("Campa Nilla", "campa0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789@nilla.com", "campanilla", "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid email max length")
+        }
+    })
+
+    it("fails on invalid email format", () => {
+        let errorThrown: Error
+
+        try {
+            registerUser("Campa Nilla", "campa$nilla.com", "campanilla", "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid email format")
+        }
+    })
+
+    it("fails on invalid username type", () => {
+        let errorThrown: Error
+
+        try {
+            /* @ts-ignore */
+            registerUser("Campa Nilla", "campa@nilla.com", undefined, "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid username type")
+        }
+    })
+
+    it("fails on invalid username min length", () => {
+        let errorThrown: Error
+
+        try {
+            registerUser("Campa Nilla", "campa@nilla.com", "", "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid username min length")
+        }
+    })
+
+    it("fails on invalid username max length", () => {
+        let errorThrown: Error
+
+        try {
+            registerUser("Campa Nilla", "campa@nilla.com", "0123456789012345678901234567890", "123123123")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid username max length")
+        }
+    })
+
+    it("fails on invalid password type", () => {
+        let errorThrown: Error
+
+        try {
+            /* @ts-ignore */
+            registerUser("Campa Nilla", "campa@nilla.com", "campanilla", undefined)
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid password type")
+        }
+    })
+
+    it("fails on invalid password min length", () => {
+        let errorThrown: Error
+
+        try {
+            registerUser("Campa Nilla", "campa@nilla.com", "campanilla", "")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid password min length")
+        }
+    })
+
+    it("fails on invalid password max length", () => {
+        let errorThrown: Error
+
+        try {
+            registerUser("Campa Nilla", "campa@nilla.com", "campanilla", "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890")
+        } catch (error) {
+            errorThrown = error as Error
+        } finally {
+            expect(errorThrown!).to.be.instanceOf(ValidationError)
+            expect(errorThrown!.message).to.equal("invalid password max length")
+        }
     })
 
     afterEach(() => User.deleteMany())
