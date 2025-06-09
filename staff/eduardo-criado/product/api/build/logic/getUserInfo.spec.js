@@ -23,7 +23,7 @@ describe("getUserInfo", () => {
             expect(user.password).to.equal("123123123");
         });
     });
-    it("fails on non-existing user", () => {
+    it("fails on non-existing user id", () => {
         let errorThrown;
         // return getUserInfo("5f8a1f8a1f8a1f8a1f8a1f8a")
         return getUserInfo(new ObjectId().toString())
@@ -38,6 +38,62 @@ describe("getUserInfo", () => {
         try {
             /* @ts-ignore */
             getUserInfo(true);
+        }
+        catch (error) {
+            errorThrown = error;
+        }
+        finally {
+            expect(errorThrown).to.be.instanceOf(ValidationError);
+            expect(errorThrown.message).to.equal("invalid user id type");
+        }
+    });
+    it("fails on invalid user id format", () => {
+        let errorThrown;
+        try {
+            getUserInfo("5f8a1f8a1f8a1f8a1f8a1f8zZZZ");
+            // getUserInfo("invalid_id");
+        }
+        catch (error) {
+            errorThrown = error;
+        }
+        finally {
+            expect(errorThrown).to.be.instanceOf(ValidationError);
+            expect(errorThrown.message).to.equal("invalid user id format");
+        }
+    });
+    it("fails on null user id", () => {
+        let errorThrown;
+        try {
+            // @ts-ignore
+            getUserInfo(null);
+        }
+        catch (error) {
+            errorThrown = error;
+        }
+        finally {
+            expect(errorThrown).to.be.instanceOf(ValidationError);
+            expect(errorThrown.message).to.equal("invalid user id type");
+        }
+    });
+    it("fails on undefined user id", () => {
+        let errorThrown;
+        try {
+            // @ts-ignore
+            getUserInfo(undefined);
+        }
+        catch (error) {
+            errorThrown = error;
+        }
+        finally {
+            expect(errorThrown).to.be.instanceOf(ValidationError);
+            expect(errorThrown.message).to.equal("invalid user id type");
+        }
+    });
+    it("fails on object as user id", () => {
+        let errorThrown;
+        try {
+            // @ts-ignore
+            getUserInfo({});
         }
         catch (error) {
             errorThrown = error;

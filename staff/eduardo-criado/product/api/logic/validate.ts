@@ -1,6 +1,6 @@
 import { ValidationError } from "./errors.js";
 
-const ID_REGEX = /^[0-9a-z]+$/;
+const ID_REGEX = /^[0-9a-f]{24}$/i;
 
 const EMAIL_REGEX =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
