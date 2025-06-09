@@ -1,5 +1,5 @@
 import { User } from "../data/models.js";
-import validate from "./validate.js";
+import { validate } from "./validate.js";
 import { NotFoundError } from "./errors.js";
 export const getUserInfo = (userId) => {
     validate.id(userId, "user id");
