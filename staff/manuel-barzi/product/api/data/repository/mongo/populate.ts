@@ -1,5 +1,5 @@
 import { connect, disconnect } from "mongoose"
-import { User } from "./models.js"
+import { User } from "./index.js"
 // import { IUserDoc } from "./types"
 
 try {

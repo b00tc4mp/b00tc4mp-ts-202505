@@ -1,5 +1,6 @@
 import { RegisterUser } from "./types.js"
-import { User } from "../data/models.js"
+// import { UserRepository } from "../data/repository/mongo/UserRepository.js"
+import { UserRepository } from "../data/repository/fs/UserRepository.js"
 import { DuplicityError, SystemError } from "./errors.js"
 import { validate } from "./validate.js"
 
@@ -9,9 +10,9 @@ export const registerUser: RegisterUser = (name, email, username, password) => {
     validate.text(username, "username", 3, 30)
     validate.text(password, "password", 8, 100)
 
-    return User.create({ name, email, username, password })
+    return UserRepository.save({ id: UserRepository.generateId(), name, email, username, password })
         .catch(error => {
-            if (error.code === 11000) throw new DuplicityError("user already exists")
+            if (error.code === 11000 || error.message === "user data exists") throw new DuplicityError("user already exists")
 
             throw new SystemError(error.message)
         })

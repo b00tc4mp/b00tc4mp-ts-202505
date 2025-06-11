@@ -1,17 +1,19 @@
 import { expect } from "chai";
-import { connect, disconnect, User } from "../data/index.js";
+import { connect, disconnect } from "../data/repository/mongo/index.js";
 import { registerUser } from "./registerUser.js";
 import { DuplicityError, ValidationError } from "./errors.js";
+// import { UserRepository } from "../data/repository/mongo/UserRepository.js"
+import { UserRepository } from "../data/repository/fs/UserRepository.js";
 const { MONGO_URL_TEST = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } = process.env;
 describe("registerUser", () => {
     before(() => connect(MONGO_URL_TEST));
-    beforeEach(() => User.deleteMany());
+    beforeEach(() => UserRepository.removeAll());
     it("registers a new user", () => {
         return registerUser("Peter Pan", "peterpan@mail.com", "peterpan", "123123123")
             .then(result => {
             //expect(result).not.to.exist
             expect(result).to.be.undefined;
-            return User.findOne({ name: "Peter Pan" }).lean();
+            return UserRepository.findByUsername("peterpan");
         })
             .then(user => {
             //expect(user).to.exist
@@ -26,7 +28,7 @@ describe("registerUser", () => {
     });
     it("fails on existing user", () => {
         let errorThrown;
-        return User.create({ name: "Wendy Darling", email: "wendydarling@mail.com", username: "wendydarling", password: "123123123" })
+        return UserRepository.save({ id: "012345678901234567890123", name: "Wendy Darling", email: "wendydarling@mail.com", username: "wendydarling", password: "123123123" })
             .then(() => registerUser("Wendy Darling", "wendydarling@mail.com", "wendydarling", "123123123"))
             .catch(error => errorThrown = error)
             .finally(() => {
@@ -207,7 +209,7 @@ describe("registerUser", () => {
             expect(errorThrown.message).to.equal("invalid password max length");
         }
     });
-    afterEach(() => User.deleteMany());
+    afterEach(() => UserRepository.removeAll());
     after(() => disconnect());
 });
 //# sourceMappingURL=registerUser.spec.js.map

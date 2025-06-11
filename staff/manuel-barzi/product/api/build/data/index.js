@@ -1,4 +1,5 @@
-import { connect, disconnect } from "mongoose";
+import { connect, disconnect, Types } from "mongoose";
 import { User } from "./models.js";
-export { connect, disconnect, User };
+const { ObjectId } = Types;
+export { connect, disconnect, ObjectId, User };
 //# sourceMappingURL=index.js.map

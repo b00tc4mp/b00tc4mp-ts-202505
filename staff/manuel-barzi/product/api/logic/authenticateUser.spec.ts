@@ -1,5 +1,7 @@
 import { expect } from "chai"
-import { connect, disconnect, User } from "../data/index.js"
+import { connect, disconnect } from "../data/repository/mongo/index.js"
+// import { UserRepository } from "../data/repository/mongo/UserRepository.js"
+import { UserRepository } from "../data/repository/fs/UserRepository.js"
 import { authenticateUser } from "./authenticateUser.js"
 import { NotFoundError, PasswordError } from "./errors.js"
 
@@ -8,17 +10,14 @@ const { MONGO_URL_TEST = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } =
 describe("authenticateUser", () => {
     before(() => connect(MONGO_URL_TEST))
 
-    beforeEach(() => User.deleteMany())
+    beforeEach(() => UserRepository.removeAll())
 
     it("authenticates on existing user", () => {
-        let existingUserId: string
-
-        return User.create({
-            name: "Wendy Darling", email: "wendydarling@mail.com", username: "wendydarling", password: "123123123"
+        return UserRepository.save({
+            id: "012345678901234567890123", name: "Wendy Darling", email: "wendydarling@mail.com", username: "wendydarling", password: "123123123"
         })
-            .then(user => existingUserId = user.id) // equal to ._id.toString()
             .then(() => authenticateUser("wendydarling", "123123123"))
-            .then(userId => expect(userId).to.equal(existingUserId))
+            .then(userId => expect(userId).to.equal("012345678901234567890123"))
     })
 
     it("fails on non-existing user", () => {
@@ -35,7 +34,9 @@ describe("authenticateUser", () => {
     it("fails on existing user but wrong password", () => {
         let errorThrown: Error
 
-        return User.create({ name: "Wendy Darling", email: "wendydarling@mail.com", username: "wendydarling", password: "123123123" })
+        return UserRepository.save({
+            id: "012345678901234567890123", name: "Wendy Darling", email: "wendydarling@mail.com", username: "wendydarling", password: "123123123"
+        })
             .then(() => authenticateUser("wendydarling", "123123123_"))
             .catch(error => errorThrown = error)
             .finally(() => {
@@ -44,7 +45,7 @@ describe("authenticateUser", () => {
             })
     })
 
-    afterEach(() => User.deleteMany())
+    afterEach(() => UserRepository.removeAll())
 
     after(() => disconnect())
 })
