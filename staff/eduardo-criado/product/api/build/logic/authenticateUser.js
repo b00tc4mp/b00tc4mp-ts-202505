@@ -1,11 +1,10 @@
-import { User } from "../data/models.js";
+import { UserRepository } from "../data/repository/fs/UserRepository.js";
 import { NotFoundError, PasswordError, SystemError } from "./errors.js";
 import { validate } from "./validate.js";
 export const authenticateUser = (username, password) => {
     validate.text(username, "username", 3, 30);
     validate.text(password, "password", 8, 100);
-    return User.findOne({ username })
-        .lean()
+    return UserRepository.findByUsername(username)
         .catch((error) => {
         new SystemError(error.message);
     })
@@ -14,7 +13,7 @@ export const authenticateUser = (username, password) => {
             throw new NotFoundError("user not found");
         if (user.password !== password)
             throw new PasswordError("wrong password");
-        return user._id.toString();
+        return user.id;
     });
 };
 //# sourceMappingURL=authenticateUser.js.map

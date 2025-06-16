@@ -1,8 +1,9 @@
 import { expect } from "chai";
-import { connect, disconnect, User } from "../data/index.js";
+import { connect, disconnect } from "../data/repository/mongo/index.js";
 import { getUserInfo } from "./getUserInfo.js";
 import { NotFoundError, ValidationError } from "./errors.js";
 import { Types } from "mongoose";
+import { UserRepository } from "../data/repository/fs/UserRepository.js";
 
 const { MONGO_URL_TEST = "mongodb://localhost:27017/product-api-test" } =
   process.env;
@@ -12,16 +13,17 @@ const { ObjectId } = Types;
 describe("getUserInfo", () => {
   before(() => connect(MONGO_URL_TEST));
 
-  beforeEach(() => User.deleteMany());
+  beforeEach(() => UserRepository.removeAll());
 
   it("gets info on existing user", () => {
-    return User.create({
+    return UserRepository.save({
+      id: "68505d6ee96dfc66eb4a9fe9",
       name: "Wendy Darling",
       email: "wendydarling@mail.com",
       username: "wendydarling",
       password: "123123123",
     })
-      .then((user) => getUserInfo(user.id)) // equal to ._id.toString()
+      .then((user) => getUserInfo("68505d6ee96dfc66eb4a9fe9")) // equal to ._id.toString()
       .then((user) => {
         expect(user.name).to.equal("Wendy Darling");
         expect(user.email).to.equal("wendydarling@mail.com");
@@ -109,7 +111,7 @@ describe("getUserInfo", () => {
     }
   });
 
-  afterEach(() => User.deleteMany());
+  afterEach(() => UserRepository.removeAll());
 
   after(() => disconnect());
 });

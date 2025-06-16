@@ -4,4 +4,4 @@
 
 # curl -X POST -H 'Content-Type: application/json' -d '{"name":"Pablo Motos ","email":"pablo@motos.com","username":"pablito","password":"123123123"}' http://localhost:8080/users -v | jq
 
-curl -X POST -H 'Content-Type: application/json' -d '{"name":"Ramon Cin ","email":"ramon@cin.com","username":"ramoncin","password":"123123123"}' http://localhost:8080/users -v 
+curl -X POST -H 'Content-Type: application/json' -d '{"name":"Wendy Darling","email":"wendydarling@mail.com","username":"wendydarling","password":"123123123"}' http://localhost:8080/users -v 

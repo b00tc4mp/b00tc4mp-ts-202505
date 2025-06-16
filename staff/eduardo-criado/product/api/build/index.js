@@ -1,6 +1,6 @@
 import express from "express";
 import { logic } from "./logic/index.js";
-import { connect, disconnect } from "./data/index.js";
+import { connect, disconnect } from "./data/repository/mongo/index.js";
 const { PORT = 8080, MONGO_URL = "mongodb://localhost:27017/product-api" } = process.env;
 connect(MONGO_URL)
     .then(() => {

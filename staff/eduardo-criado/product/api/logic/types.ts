@@ -1,4 +1,4 @@
-import { User } from "../data/models.js";
+import { User } from "../data/repository/mongo/index.js";
 import { IUserDoc } from "../data/types.js";
 
 export type RegisterUser = (
