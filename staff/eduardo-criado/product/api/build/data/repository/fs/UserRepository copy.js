@@ -1,3 +1,5 @@
+// import { IUserRepository, IUserData } from "../types.js";
+// import fs from "fs/promises";
 import fs from "fs/promises";
 import { SystemError } from "../../../logic/errors.js";
 const { FS_USERS = "./data/repository/fs/users.json" } = process.env;
@@ -57,4 +59,4 @@ export const UserRepository = {
         return Number((Date.now() + Math.random()).toString().replace(".", "")).toString(36);
     },
 };
-//# sourceMappingURL=UserRepository.js.map
+//# sourceMappingURL=UserRepository%20copy.js.map
