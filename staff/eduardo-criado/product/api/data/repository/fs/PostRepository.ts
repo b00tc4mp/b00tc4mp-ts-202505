@@ -54,7 +54,7 @@ export const PostRepository: IPostRepository = {
       });
   },
 
-  findByUser(userId) {
+  findByAuthor(author) {
     return fs
       .readFile(FS_POSTS, "utf8")
       .catch((error) => {
@@ -62,8 +62,8 @@ export const PostRepository: IPostRepository = {
       })
       .then((json) => {
         const posts: IPostData[] = JSON.parse(json);
-        const userPosts = posts.filter((post) => post.userId === userId);
-        return userPosts;
+        const authorPosts = posts.filter((post) => post.author === author);
+        return authorPosts;
       });
   },
 

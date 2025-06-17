@@ -43,7 +43,7 @@ const user = new Schema<IUserDoc>({
 const User = model("User", user);
 
 const post = new Schema<IPostDoc>({
-  userId: {
+  author: {
     type: String,
     required: true,
   },
@@ -65,8 +65,8 @@ const post = new Schema<IPostDoc>({
   image: {
     type: String,
     required: true,
-    // minlength: 1,
-    // maxlength: 500,
+    minlength: 1,
+    maxlength: 500,
   },
 
   createdAt: {

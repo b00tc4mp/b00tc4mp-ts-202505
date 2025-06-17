@@ -4,7 +4,7 @@ export const PostRepository = {
     save(post) {
         const post2 = {
             _id: new ObjectId(post.id),
-            userId: post.userId,
+            author: post.author,
             title: post.title,
             description: post.description,
             image: post.image,
@@ -25,7 +25,7 @@ export const PostRepository = {
             if (post)
                 return {
                     id: post.id,
-                    userId: post.userId,
+                    author: post.author,
                     title: post.title,
                     description: post.description,
                     image: post.image,
@@ -41,21 +41,21 @@ export const PostRepository = {
         })
             .then((posts) => posts.map((post) => ({
             id: post.id,
-            userId: post.userId,
+            author: post.author,
             title: post.title,
             description: post.description,
             image: post.image,
             createdAt: post.createdAt,
         })));
     },
-    findByUser(userId) {
-        return Post.find({ userId })
+    findByAuthor(authorId) {
+        return Post.find({ author: authorId })
             .catch((error) => {
             throw new SystemError(error.message);
         })
             .then((posts) => posts.map((post) => ({
             id: post.id,
-            userId: post.userId,
+            author: post.author,
             title: post.title,
             description: post.description,
             image: post.image,

@@ -9,7 +9,7 @@ describe("PostRepository (Mongo)", () => {
         it("saves a new post", () => {
             const post = {
                 id: "012345678901234567890123",
-                userId: "123456789012345678901234",
+                author: "123456789012345678901234",
                 title: "Post Title",
                 description: "Post Description",
                 image: "http://image.com/post",
@@ -21,7 +21,7 @@ describe("PostRepository (Mongo)", () => {
                 if (!post)
                     throw new Error("post not found");
                 expect(post.id).to.equal("012345678901234567890123");
-                expect(post.userId).to.equal("123456789012345678901234");
+                expect(post.author).to.equal("123456789012345678901234");
                 expect(post.title).to.equal("Post Title");
                 expect(post.description).to.equal("Post Description");
                 expect(post.image).to.equal("http://image.com/post");
@@ -32,7 +32,7 @@ describe("PostRepository (Mongo)", () => {
             it("finds a post by id", () => {
                 const post = {
                     id: "012345678901234567890123",
-                    userId: "123456789012345678901234",
+                    author: "123456789012345678901234",
                     title: "Post Title",
                     description: "Post Description",
                     image: "http://image.com/post",
@@ -44,7 +44,7 @@ describe("PostRepository (Mongo)", () => {
                     if (!foundPost)
                         throw new Error("post not found");
                     expect(foundPost.id).to.equal("012345678901234567890123");
-                    expect(foundPost.userId).to.equal("123456789012345678901234");
+                    expect(foundPost.author).to.equal("123456789012345678901234");
                     expect(foundPost.title).to.equal("Post Title");
                     expect(foundPost.description).to.equal("Post Description");
                     expect(foundPost.image).to.equal("http://image.com/post");
@@ -56,7 +56,7 @@ describe("PostRepository (Mongo)", () => {
             it("finds all posts", () => {
                 const post = {
                     id: "012345678901234567890123",
-                    userId: "123456789012345678901234",
+                    author: "123456789012345678901234",
                     title: "Post Title",
                     description: "Post Description",
                     image: "http://image.com/post",
@@ -67,7 +67,7 @@ describe("PostRepository (Mongo)", () => {
                     .then((posts) => {
                     expect(posts).to.have.lengthOf(1);
                     expect(posts[0].id).to.equal("012345678901234567890123");
-                    expect(posts[0].userId).to.equal("123456789012345678901234");
+                    expect(posts[0].author).to.equal("123456789012345678901234");
                     expect(posts[0].title).to.equal("Post Title");
                     expect(posts[0].description).to.equal("Post Description");
                     expect(posts[0].image).to.equal("http://image.com/post");
@@ -75,22 +75,22 @@ describe("PostRepository (Mongo)", () => {
                 });
             });
         });
-        describe("findByUser", () => {
-            it("finds posts by userId", () => {
+        describe("findByAuthor", () => {
+            it("finds posts by author", () => {
                 const post = {
                     id: "012345678901234567890123",
-                    userId: "123456789012345678901234",
+                    author: "123456789012345678901234",
                     title: "Post Title",
                     description: "Post Description",
                     image: "http://image.com/post",
                     createdAt: new Date(),
                 };
                 return PostRepository.save(post)
-                    .then(() => PostRepository.findByUser(post.userId))
+                    .then(() => PostRepository.findByAuthor(post.author))
                     .then((posts) => {
                     expect(posts).to.have.lengthOf(1);
                     expect(posts[0].id).to.equal("012345678901234567890123");
-                    expect(posts[0].userId).to.equal("123456789012345678901234");
+                    expect(posts[0].author).to.equal("123456789012345678901234");
                     expect(posts[0].title).to.equal("Post Title");
                     expect(posts[0].description).to.equal("Post Description");
                     expect(posts[0].image).to.equal("http://image.com/post");
@@ -102,7 +102,7 @@ describe("PostRepository (Mongo)", () => {
             it("removes a post by id", () => {
                 const post = {
                     id: "012345678901234567890123",
-                    userId: "123456789012345678901234",
+                    author: "123456789012345678901234",
                     title: "Post Title",
                     description: "Post Description",
                     image: "http://image.com/post",

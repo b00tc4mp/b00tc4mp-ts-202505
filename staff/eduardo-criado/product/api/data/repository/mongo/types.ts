@@ -7,7 +7,7 @@ export interface IUserDoc {
 }
 
 export interface IPostDoc {
-  userId: string;
+  author: string;
   title: string;
   description: string;
   image: string;

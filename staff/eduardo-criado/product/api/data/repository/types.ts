@@ -9,7 +9,7 @@ export interface IUserData {
 
 export interface IPostData {
   id: string;
-  userId: string;
+  author: string;
   title: string;
   description: string;
   image: string;
@@ -28,7 +28,7 @@ export interface IPostRepository {
   save(post: IPostData): Promise<void>;
   findById(id: string): Promise<IPostData | null>;
   findAll(): Promise<IPostData[]>;
-  findByUser(userId: string): Promise<IPostData[]>;
+  findByAuthor(authorId: string): Promise<IPostData[]>;
   remove(postId: string): Promise<void>;
   generateId(): string;
 }

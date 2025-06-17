@@ -1,9 +1,9 @@
 import { connect, disconnect } from "mongoose";
-import { User } from "./index.js";
+import { UserRepository } from "./UserRepository.js";
 // import { IUserDoc } from "./types"
 
 try {
-  await connect("mongodb://localhost:27017/product-edu");
+  await connect("mongodb://localhost:27017/product-api");
 
   // try {
   //     await User.deleteMany()
@@ -28,14 +28,17 @@ try {
   let user;
 
   try {
-    user = await User.findById("68360519eadd29752ce2b85b").lean();
+    await UserRepository.save({
+      id: UserRepository.generateId(),
+      name: "EduFo",
+      email: "edufo@gmail.com",
+      avatar: "http://image.com/edufo",
+      username: "eduFo",
+      password: "123123123",
+    });
   } catch (error) {
     throw new Error((error as Error).message);
   }
-
-  if (!user) throw new Error("user not found");
-
-  console.log(user.name);
 } catch (error) {
   console.error(error);
 } finally {

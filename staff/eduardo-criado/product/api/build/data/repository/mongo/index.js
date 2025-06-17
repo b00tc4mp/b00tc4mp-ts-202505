@@ -33,7 +33,7 @@ const user = new Schema({
 });
 const User = model("User", user);
 const post = new Schema({
-    userId: {
+    author: {
         type: String,
         required: true,
     },
@@ -52,8 +52,8 @@ const post = new Schema({
     image: {
         type: String,
         required: true,
-        // minlength: 1,
-        // maxlength: 500,
+        minlength: 1,
+        maxlength: 500,
     },
     createdAt: {
         type: Date,

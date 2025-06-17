@@ -1,16 +1,14 @@
 import { connect, disconnect } from "mongoose";
-import { UserRepository } from "./repository/mongo/UserRepository.js";
-// import { IUserDoc } from "./types"
+import { UserRepository } from "./mongo/UserRepository.js";
 try {
     await connect("mongodb://localhost:27017/product-api");
-    let user;
     try {
         await UserRepository.save({
             id: UserRepository.generateId(),
-            name: "EduFo",
-            email: "edufo@gmail.com",
-            avatar: "http://image.com/edufo",
-            username: "eduFo",
+            name: "EduMar",
+            email: "edumar@gmail.com",
+            avatar: "http://image.com/edumar",
+            username: "eduMar",
             password: "123123123",
         });
     }

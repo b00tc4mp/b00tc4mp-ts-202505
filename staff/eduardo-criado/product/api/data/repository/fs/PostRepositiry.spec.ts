@@ -13,7 +13,7 @@ describe("PostRepository (FS)", () => {
     it("saves a new post", () => {
       const post: IPostData = {
         id: "post-3",
-        userId: "user-1",
+        author: "user-1",
         title: "Post Title",
         description: "Post Description",
         image: "image.jpg",
@@ -28,7 +28,7 @@ describe("PostRepository (FS)", () => {
           if (!savedPost) throw new Error("post not found");
 
           expect(savedPost.id).to.equal("post-3");
-          expect(savedPost.userId).to.equal("user-1");
+          expect(savedPost.author).to.equal("user-1");
           expect(savedPost.title).to.equal("Post Title");
           expect(savedPost.description).to.equal("Post Description");
           expect(savedPost.image).to.equal("image.jpg");
@@ -41,7 +41,7 @@ describe("PostRepository (FS)", () => {
     it("finds a post by id", () => {
       const post: IPostData = {
         id: "post-3",
-        userId: "user-1",
+        author: "user-1",
         title: "Post Title",
         description: "Post Description",
         image: "image.jpg",
@@ -55,7 +55,7 @@ describe("PostRepository (FS)", () => {
         .then(() => PostRepository.findById("post-3"))
         .then((post: IPostData | null) => {
           expect(post!.id).to.equal("post-3");
-          expect(post!.userId).to.equal("user-1");
+          expect(post!.author).to.equal("user-1");
           expect(post!.title).to.equal("Post Title");
           expect(post!.description).to.equal("Post Description");
           expect(post!.image).to.equal("image.jpg");
@@ -68,7 +68,7 @@ describe("PostRepository (FS)", () => {
     it("finds all posts", () => {
       const post: IPostData = {
         id: "post-3",
-        userId: "user-1",
+        author: "user-1",
         title: "Post Title",
         description: "Post Description",
         image: "image.jpg",
@@ -82,7 +82,7 @@ describe("PostRepository (FS)", () => {
         .then((posts: IPostData[]) => {
           expect(posts).to.have.lengthOf(1);
           expect(posts[0].id).to.equal("post-3");
-          expect(posts[0].userId).to.equal("user-1");
+          expect(posts[0].author).to.equal("user-1");
           expect(posts[0].title).to.equal("Post Title");
           expect(posts[0].description).to.equal("Post Description");
           expect(posts[0].image).to.equal("image.jpg");
@@ -91,11 +91,11 @@ describe("PostRepository (FS)", () => {
     });
   });
 
-  describe("findByUser", () => {
-    it("finds posts by userId", () => {
+  describe("findByAuthor", () => {
+    it("finds posts by authorId", () => {
       const post1: IPostData = {
         id: "post-1",
-        userId: "user-1",
+        author: "user-1",
         title: "Post 1 Title",
         description: "Post 1 Description",
         image: "image1.jpg",
@@ -104,7 +104,7 @@ describe("PostRepository (FS)", () => {
 
       const post2: IPostData = {
         id: "post-2",
-        userId: "user-2",
+        author: "user-2",
         title: "Post 2 Title",
         description: "Post 2 Description",
         image: "image2.jpg",
@@ -117,11 +117,11 @@ describe("PostRepository (FS)", () => {
 
       return fs
         .writeFile(FS_POSTS, json)
-        .then(() => PostRepository.findByUser("user-1"))
+        .then(() => PostRepository.findByAuthor("user-1"))
         .then((userPosts: IPostData[]) => {
           expect(userPosts).to.have.lengthOf(1);
           expect(userPosts[0].id).to.equal("post-1");
-          expect(userPosts[0].userId).to.equal("user-1");
+          expect(userPosts[0].author).to.equal("user-1");
           expect(userPosts[0].title).to.equal("Post 1 Title");
           expect(userPosts[0].description).to.equal("Post 1 Description");
           expect(userPosts[0].image).to.equal("image1.jpg");
@@ -134,7 +134,7 @@ describe("PostRepository (FS)", () => {
     it("removes a post by id", () => {
       const post: IPostData = {
         id: "post-3",
-        userId: "user-1",
+        author: "user-1",
         title: "Post Title",
         description: "Post Description",
         image: "image.jpg",
