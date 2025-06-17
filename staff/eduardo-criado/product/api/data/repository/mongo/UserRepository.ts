@@ -1,3 +1,4 @@
+import { SystemError } from "../../../logic/errors.js";
 import { IUserRepository, IUserData } from "../types.js";
 import { User, ObjectId } from "./index.js";
 
@@ -12,61 +13,59 @@ export const UserRepository: IUserRepository = {
       avatar: user.avatar,
     };
 
-    return (
-      User.create(user2)
-        // TODO manage system errors (catch)
-        .then(() => {})
-    );
+    return User.create(user2)
+      .catch((error) => {
+        throw new SystemError(error.message);
+      })
+      .then(() => {});
   },
 
   findByUsername(username) {
-    return (
-      User.findOne({ username })
-        // TODO manage system errors (catch)
-        .then((user) => {
-          if (user)
-            return {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              username: user.username,
-              password: user.password,
-              avatar: user.avatar,
-            };
+    return User.findOne({ username })
+      .catch((error) => {
+        throw new SystemError(error.message);
+      })
+      .then((user) => {
+        if (user)
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            username: user.username,
+            password: user.password,
+            avatar: user.avatar,
+          };
 
-          return null;
-        })
-    );
+        return null;
+      });
   },
 
   findById(id) {
-    return (
-      User.findById(id)
-        // TODO manage system errors (catch)
-        .then((user) => {
-          if (user)
-            return {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              username: user.username,
-              password: user.password,
-              avatar: user.avatar,
-            };
+    return User.findById(id)
+      .catch((error) => {
+        throw new SystemError(error.message);
+      })
+      .then((user) => {
+        if (user)
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            username: user.username,
+            password: user.password,
+            avatar: user.avatar,
+          };
 
-          return null;
-        })
-    );
+        return null;
+      });
   },
 
   removeAll() {
-    // TODO implement me
-
-    return (
-      User.deleteMany()
-        // TODO manage system errors (catch)
-        .then(() => {})
-    );
+    return User.deleteMany()
+      .catch((error) => {
+        throw new SystemError(error.message);
+      })
+      .then(() => {});
   },
 
   generateId() {
