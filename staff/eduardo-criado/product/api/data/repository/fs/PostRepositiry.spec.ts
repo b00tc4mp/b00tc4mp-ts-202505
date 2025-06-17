@@ -6,7 +6,7 @@ import { afterEach } from "mocha";
 
 const { FS_POSTS = "./data/repository/fs/posts-test.json" } = process.env;
 
-describe.only("PostRepository (FS)", () => {
+describe("PostRepository (FS)", () => {
   beforeEach(() => fs.writeFile(FS_POSTS, "[]"));
 
   describe("save", () => {

@@ -2,7 +2,7 @@ import { Schema, model, connect, disconnect, Types } from "mongoose";
 
 const { ObjectId } = Types;
 
-import { IUserDoc } from "./types.js";
+import { IUserDoc, IPostDoc } from "./types.js";
 
 const user = new Schema<IUserDoc>({
   name: {
@@ -42,4 +42,39 @@ const user = new Schema<IUserDoc>({
 
 const User = model("User", user);
 
-export { connect, disconnect, ObjectId, User };
+const post = new Schema<IPostDoc>({
+  userId: {
+    type: String,
+    required: true,
+  },
+
+  title: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 200,
+  },
+
+  description: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 300,
+  },
+
+  image: {
+    type: String,
+    required: true,
+    // minlength: 1,
+    // maxlength: 500,
+  },
+
+  createdAt: {
+    type: Date,
+    required: true,
+  },
+});
+
+const Post = model("Post", post);
+
+export { connect, disconnect, ObjectId, User, Post };

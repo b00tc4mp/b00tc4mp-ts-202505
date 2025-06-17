@@ -32,5 +32,34 @@ const user = new Schema({
     },
 });
 const User = model("User", user);
-export { connect, disconnect, ObjectId, User };
+const post = new Schema({
+    userId: {
+        type: String,
+        required: true,
+    },
+    title: {
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 200,
+    },
+    description: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 300,
+    },
+    image: {
+        type: String,
+        required: true,
+        // minlength: 1,
+        // maxlength: 500,
+    },
+    createdAt: {
+        type: Date,
+        required: true,
+    },
+});
+const Post = model("Post", post);
+export { connect, disconnect, ObjectId, User, Post };
 //# sourceMappingURL=index.js.map
