@@ -16,7 +16,11 @@ export const registerUser: RegisterUser = (name, email, username, password) => {
     password,
   })
     .catch((error) => {
-      if (error.code === 11000 || error.message === "user data exists")
+      if (
+        error.code === 11000 ||
+        error.message === "user data exists" ||
+        error.code === "P2002"
+      )
         throw new DuplicityError("user already exists");
 
       throw new SystemError(error.message);
