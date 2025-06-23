@@ -1,5 +1,6 @@
-// import { UserRepository } from "../data/repository/mongo/UserRepository.js"
-import { UserRepository } from "../data/repository/fs/UserRepository.js";
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js"
+// import { UserRepository } from "../data/repository/fs/UserRepository.js"
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
 import { DuplicityError, SystemError } from "./errors.js";
 import { validate } from "./validate.js";
 export const registerUser = (name, email, username, password) => {
@@ -9,7 +10,7 @@ export const registerUser = (name, email, username, password) => {
     validate.text(password, "password", 8, 100);
     return UserRepository.save({ id: UserRepository.generateId(), name, email, username, password })
         .catch(error => {
-        if (error.code === 11000 || error.message === "user data exists")
+        if (error.code === 11000 || error.message === "user data exists" || error.code === "P2002")
             throw new DuplicityError("user already exists");
         throw new SystemError(error.message);
     })

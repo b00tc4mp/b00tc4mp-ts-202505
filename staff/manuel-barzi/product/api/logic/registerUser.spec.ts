@@ -1,14 +1,15 @@
 import { expect } from "chai"
-import { connect, disconnect } from "../data/repository/mongo/index.js"
+import { connect, disconnect } from "../data/repository/no-sql/index.js"
 import { registerUser } from "./registerUser.js"
 import { DuplicityError, ValidationError } from "./errors.js"
-// import { UserRepository } from "../data/repository/mongo/UserRepository.js"
-import { UserRepository } from "../data/repository/fs/UserRepository.js"
+// import { UserRepository } from "../data/repository/fs/UserRepository.js"
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js"
+import { UserRepository } from "../data/repository/sql/UserRepository.js"
 
-const { MONGO_URL_TEST = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } = process.env
+const { MONGO_URL = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } = process.env
 
 describe("registerUser", () => {
-    before(() => connect(MONGO_URL_TEST))
+    before(() => connect(MONGO_URL))
 
     beforeEach(() => UserRepository.removeAll())
 

@@ -1,6 +1,6 @@
 import express from "express"
 import { logic } from "./logic/index.js"
-import { connect, disconnect } from "./data/repository/mongo/index.js"
+import { connect, disconnect } from "./data/repository/no-sql/index.js"
 
 const { PORT = 8080, MONGO_URL = "mongodb://localhost:27017/b00tc4mp-ts-202505" } = process.env
 

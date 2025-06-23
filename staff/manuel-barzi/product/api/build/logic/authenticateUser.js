@@ -1,5 +1,6 @@
-// import { UserRepository } from "../data/repository/mongo/UserRepository.js"
-import { UserRepository } from "../data/repository/fs/UserRepository.js";
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js"
+// import { UserRepository } from "../data/repository/fs/UserRepository.js"
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
 import { NotFoundError, PasswordError, SystemError } from "./errors.js";
 export const authenticateUser = (username, password) => {
     return UserRepository.findByUsername(username)

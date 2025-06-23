@@ -1,9 +1,9 @@
 import { expect } from "chai";
 import { UserRepository } from "./UserRepository.js";
 import { connect, disconnect, User, ObjectId } from "./index.js";
-const { MONGO_URL_TEST = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } = process.env;
-describe("UserRepository (Mongo)", () => {
-    before(() => connect(MONGO_URL_TEST));
+const { MONGO_URL = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } = process.env;
+describe("UserRepository (No-SQL)", () => {
+    before(() => connect(MONGO_URL));
     beforeEach(() => User.deleteMany());
     describe("save", () => {
         it("saves a new user", () => {
