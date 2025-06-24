@@ -1,4 +1,4 @@
-import { IUserDoc } from "../data/repository/mongo/types.js";
+import { IUserDoc } from "../data/repository/no-sql/types.js";
 
 export type RegisterUser = (
   name: string,

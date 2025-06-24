@@ -1,5 +1,5 @@
 import { ValidationError } from "./errors.js";
-const ID_REGEX = /^[0-9a-f]{24}$/i;
+const ID_REGEX = /^[a-z0-9]+$/i;
 const EMAIL_REGEX = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 function validateId(id, explain = "id") {
     if (typeof id !== "string") {
@@ -27,5 +27,4 @@ export const validate = {
     text: ValidateText,
     email: validateEmail,
 };
-// export default validate;
 //# sourceMappingURL=validate.js.map

@@ -1,4 +1,6 @@
-import { UserRepository } from "../data/repository/fs/UserRepository.js";
+// import { UserRepository } from "../data/repository/fs/UserRepository.js";
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
 import { NotFoundError, PasswordError, SystemError } from "./errors.js";
 import { validate } from "./validate.js";
 export const authenticateUser = (username, password) => {

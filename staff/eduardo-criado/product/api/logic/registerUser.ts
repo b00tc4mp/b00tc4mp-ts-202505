@@ -1,5 +1,7 @@
 import { RegisterUser } from "./types.js";
-import { UserRepository } from "../data/repository/fs/UserRepository.js";
+// import { UserRepository } from "../data/repository/fs/UserRepository.js";
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
 import { DuplicityError, SystemError } from "./errors.js";
 import { validate } from "./validate.js";
 
