@@ -27,4 +27,5 @@ export const validate = {
     text: ValidateText,
     email: validateEmail,
 };
+// export default validate;
 //# sourceMappingURL=validate.js.map
