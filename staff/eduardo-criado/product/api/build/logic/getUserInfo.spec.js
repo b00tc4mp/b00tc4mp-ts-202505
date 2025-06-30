@@ -54,8 +54,8 @@ describe("getUserInfo", () => {
     it("fails on invalid user id format", () => {
         let errorThrown;
         try {
-            getUserInfo("5f8a1f8a1f8a1f8a1f8a1f8zZZZ");
-            // getUserInfo("invalid_id");
+            // getUserInfo("5f8a1f8a1f8a1f8a1f8a1f8zZZZ");
+            getUserInfo("invalid_id");
         }
         catch (error) {
             errorThrown = error;
