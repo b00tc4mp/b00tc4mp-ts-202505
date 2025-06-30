@@ -72,6 +72,11 @@ export const PostRepository = {
             });
         });
     },
+    removeAll() {
+        return fs.writeFile(FS_POSTS, "[]").catch((error) => {
+            throw new SystemError("Error clearing posts file: " + error.message);
+        });
+    },
     generateId() {
         return Number((Date.now() + Math.random()).toString().replace(".", "")).toString(36);
     },

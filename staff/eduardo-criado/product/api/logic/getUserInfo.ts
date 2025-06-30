@@ -4,6 +4,7 @@ import { NotFoundError } from "./errors.js";
 // import { UserRepository } from "../data/repository/fs/UserRepository.js";
 // import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
+import { IUserDoc } from "../data/repository/no-sql/types.js";
 
 export const getUserInfo: GetUserInfo = (userId) => {
   validate.id(userId, "user id");
@@ -14,6 +15,6 @@ export const getUserInfo: GetUserInfo = (userId) => {
     })
     .then((user) => {
       if (!user) throw new NotFoundError("user not found");
-      return user;
+      return user as IUserDoc;
     });
 };

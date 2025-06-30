@@ -14,8 +14,16 @@ export type AuthenticateUser = (
 
 export type GetUserInfo = (id: string) => Promise<IUserDoc>;
 
+export type CreatePost = (
+  author: string,
+  title: string,
+  description: string,
+  image: string
+) => Promise<void>;
+
 export type Logic = {
   registerUser: RegisterUser;
   authenticateUser: AuthenticateUser;
   getUserInfo: GetUserInfo;
+  createPost: CreatePost;
 };

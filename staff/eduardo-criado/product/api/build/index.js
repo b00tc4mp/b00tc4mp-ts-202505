@@ -59,6 +59,24 @@ connect(MONGO_URL)
             res.status(500).json({ error: constructor.name, message });
         }
     });
+    api.post("/posts", jsonBodyParser, (req, res) => {
+        try {
+            const { authorId, title, description, image } = req.body;
+            logic
+                .createPost(authorId, title, description, image)
+                .then(() => res.status(201).send())
+                .catch((error) => {
+                const { constructor, message } = error;
+                console.error(error);
+                res.status(500).json({ error: constructor.name, message });
+            });
+        }
+        catch (error) {
+            const { constructor, message } = error;
+            console.error(error);
+            res.status(500).json({ error: constructor.name, message });
+        }
+    });
     api.listen(PORT, () => console.log(`API is up & listening on port ${PORT}`));
     process.on("SIGINT", () => {
         console.log("API is down");

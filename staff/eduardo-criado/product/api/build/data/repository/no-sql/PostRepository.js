@@ -69,6 +69,13 @@ export const PostRepository = {
         })
             .then(() => { });
     },
+    removeAll() {
+        return Post.deleteMany({})
+            .catch((error) => {
+            throw new SystemError(error.message);
+        })
+            .then(() => { });
+    },
     generateId() {
         return new ObjectId().toString();
     },

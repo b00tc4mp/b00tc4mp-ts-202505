@@ -1,5 +1,7 @@
 import { connect, disconnect } from "mongoose";
 import { UserRepository } from "./UserRepository.js";
+import { Post } from "./index.js";
+import { PostRepository } from "./PostRepository.js";
 // import { IUserDoc } from "./types"
 
 try {
@@ -25,16 +27,36 @@ try {
   //     throw new Error(error.message)
   // }
 
-  let user;
+  //   let user;
+
+  //   try {
+  //     await UserRepository.save({
+  //       id: UserRepository.generateId(),
+  //       name: "EduFo",
+  //       email: "edufo@gmail.com",
+  //       avatar: "http://image.com/edufo",
+  //       username: "eduFo",
+  //       password: "123123123",
+  //     });
+  //   } catch (error) {
+  //     throw new Error((error as Error).message);
+  //   }
+  // } catch (error) {
+  //   console.error(error);
+  // } finally {
+  //   await disconnect();
+  // }
+
+  let post;
 
   try {
-    await UserRepository.save({
-      id: UserRepository.generateId(),
-      name: "EduFo",
-      email: "edufo@gmail.com",
-      avatar: "http://image.com/edufo",
-      username: "eduFo",
-      password: "123123123",
+    await PostRepository.save({
+      id: PostRepository.generateId(),
+      author: "123456789012345678901234",
+      title: "Post Title",
+      description: "Post Description",
+      image: "http://image.com/post",
+      createdAt: new Date(),
     });
   } catch (error) {
     throw new Error((error as Error).message);
