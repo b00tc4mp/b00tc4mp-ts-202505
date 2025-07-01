@@ -14,3 +14,19 @@ export interface IUserRepository {
     removeAll(): Promise<void>
     generateId(): string
 }
+
+export interface IPostData {
+    id: string
+    author: string
+    image: string
+    text: string
+    date: Date
+}
+
+export interface IPostRepository {
+    save(post: IPostData): Promise<void>
+    findById(id: string): Promise<IPostData | null>
+    removeAll(): Promise<void>
+    removeById(id: string): Promise<void>
+    generateId(): string
+}

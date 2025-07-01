@@ -3,17 +3,17 @@ import { UserRepository } from "./UserRepository.js"
 import { IUserData } from "../types.js"
 import fs from "fs/promises"
 
-const { FS_USERS = "./data/repository/fs/users-test.json" } = process.env
+const { FS_PATH = "./data/repository/fs/users-test.json" } = process.env
 
 describe("UserRepository (FS)", () => {
-    beforeEach(() => fs.writeFile(FS_USERS, "[]"))
+    beforeEach(() => fs.writeFile(`${FS_PATH}/users.json`, "[]"))
 
     describe("save", () => {
         it("saves a new user", () => {
             const user: IUserData = { id: "user-1", name: "Ed U", email: "edu@mail.com", username: "edu", password: "123123123" }
 
             return UserRepository.save(user)
-                .then(() => fs.readFile(FS_USERS, "utf8"))
+                .then(() => fs.readFile(`${FS_PATH}/users.json`, "utf8"))
                 .then(json => JSON.parse(json))
                 .then((users: IUserData[]) => {
                     const user = users.find(user => user.id === "user-1")
@@ -37,7 +37,7 @@ describe("UserRepository (FS)", () => {
 
             const json = JSON.stringify(users)
 
-            return fs.writeFile(FS_USERS, json)
+            return fs.writeFile(`${FS_PATH}/users.json`, json)
                 .then(() => UserRepository.findByUsername("edu"))
                 .then((user: IUserData | null) => {
                     expect(user).to.exist
@@ -57,7 +57,7 @@ describe("UserRepository (FS)", () => {
 
             const json = JSON.stringify(users)
 
-            return fs.writeFile(FS_USERS, json)
+            return fs.writeFile(`${FS_PATH}/users.json`, json)
                 .then(() => UserRepository.findById("user-1"))
                 .then((user: IUserData | null) => {
                     expect(user).to.exist
@@ -80,9 +80,9 @@ describe("UserRepository (FS)", () => {
 
             const json = JSON.stringify(users)
 
-            return fs.writeFile(FS_USERS, json)
+            return fs.writeFile(`${FS_PATH}/users.json`, json)
                 .then(() => UserRepository.removeAll())
-                .then(() => fs.readFile(FS_USERS, "utf-8"))
+                .then(() => fs.readFile(`${FS_PATH}/users.json`, "utf-8"))
                 .then(json => expect(json).to.equal("[]"))
         })
     })
@@ -95,5 +95,5 @@ describe("UserRepository (FS)", () => {
         })
     })
 
-    afterEach(() => fs.writeFile(FS_USERS, "[]"))
+    afterEach(() => fs.writeFile(`${FS_PATH}/users.json`, "[]"))
 })
