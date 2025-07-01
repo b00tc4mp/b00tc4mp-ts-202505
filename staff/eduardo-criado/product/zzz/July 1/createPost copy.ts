@@ -3,7 +3,7 @@ import { PostRepository } from "../data/repository/no-sql/PostRepository.js";
 import { NotFoundError, SystemError, ValidationError } from "./errors.js";
 import { validate } from "./validate.js";
 import { User } from "../data/repository/no-sql/index.js";
-import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
 
 export const createPost: CreatePost = (
   authorId: string,

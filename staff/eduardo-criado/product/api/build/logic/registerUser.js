@@ -8,8 +8,9 @@ export const registerUser = (name, email, username, password) => {
     validate.email(email, "email", 100);
     validate.text(username, "username", 3, 30);
     validate.text(password, "password", 8, 100);
+    const id = UserRepository.generateId();
     return UserRepository.save({
-        id: UserRepository.generateId(),
+        id,
         name,
         email,
         username,
@@ -22,6 +23,6 @@ export const registerUser = (name, email, username, password) => {
             throw new DuplicityError("user already exists");
         throw new SystemError(error.message);
     })
-        .then((user) => { });
+        .then(() => id);
 };
 //# sourceMappingURL=registerUser.js.map

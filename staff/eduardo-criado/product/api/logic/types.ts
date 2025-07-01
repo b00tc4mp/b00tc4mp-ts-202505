@@ -4,8 +4,9 @@ export type RegisterUser = (
   name: string,
   email: string,
   username: string,
-  password: string
-) => Promise<void>;
+  password: string,
+  avatar?: string
+) => Promise<string>;
 
 export type AuthenticateUser = (
   username: string,
