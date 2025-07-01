@@ -1,5 +1,9 @@
-// import { UserRepository } from "../data/repository/fs/UserRepository.js";
-// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+// import { RegisterUser } from "./types.js";
+// // import { UserRepository } from "../data/repository/fs/UserRepository.js";
+// // import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+// import { UserRepository } from "../data/repository/sql/UserRepository.js";
+// import { DuplicityError, SystemError } from "./errors.js";
+// import { validate } from "./validate.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 import { DuplicityError, SystemError } from "./errors.js";
 import { validate } from "./validate.js";
@@ -8,9 +12,9 @@ export const registerUser = (name, email, username, password) => {
     validate.email(email, "email", 100);
     validate.text(username, "username", 3, 30);
     validate.text(password, "password", 8, 100);
-    const id = UserRepository.generateId();
+    // const id = UserRepository.generateId();
     return UserRepository.save({
-        id,
+        id: UserRepository.generateId(),
         name,
         email,
         username,
@@ -23,6 +27,6 @@ export const registerUser = (name, email, username, password) => {
             throw new DuplicityError("user already exists");
         throw new SystemError(error.message);
     })
-        .then(() => id);
+        .then(() => { });
 };
 //# sourceMappingURL=registerUser.js.map

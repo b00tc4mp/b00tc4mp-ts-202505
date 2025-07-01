@@ -5,9 +5,14 @@ function validateId(id, explain = "id") {
     if (typeof id !== "string") {
         throw new ValidationError(`invalid ${explain} type`);
     }
+    // if (typeof id !== "string" || !id.length)
+    //   throw new ValidationError("invalid ${explain} format");
     if (!ID_REGEX.test(id)) {
         throw new ValidationError(`invalid ${explain} format`);
     }
+    // if (typeof id !== "string" || !id.trim()) {
+    //   throw new ValidationError(`invalid ${explain} format`);
+    // }
 }
 function ValidateText(text, explain = "text", min = 1, max = Infinity) {
     if (typeof text !== "string")

@@ -6,7 +6,7 @@ export type RegisterUser = (
   username: string,
   password: string,
   avatar?: string
-) => Promise<string>;
+) => Promise<void>;
 
 export type AuthenticateUser = (
   username: string,

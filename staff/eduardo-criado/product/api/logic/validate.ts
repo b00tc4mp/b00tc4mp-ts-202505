@@ -10,9 +10,16 @@ function validateId(id: string, explain = "id") {
     throw new ValidationError(`invalid ${explain} type`);
   }
 
+  // if (typeof id !== "string" || !id.length)
+  //   throw new ValidationError("invalid ${explain} format");
+
   if (!ID_REGEX.test(id)) {
     throw new ValidationError(`invalid ${explain} format`);
   }
+
+  // if (typeof id !== "string" || !id.trim()) {
+  //   throw new ValidationError(`invalid ${explain} format`);
+  // }
 }
 
 function ValidateText(text: string, explain = "text", min = 1, max = Infinity) {

@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 export interface IUserDoc {
   name: string;
   email: string;
@@ -7,7 +9,7 @@ export interface IUserDoc {
 }
 
 export interface IPostDoc {
-  author: string;
+  author: Types.ObjectId; // Assuming ObjectId type for MongoDB
   title: string;
   description: string;
   image: string;

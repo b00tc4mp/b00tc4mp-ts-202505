@@ -1,11 +1,12 @@
 import { SystemError } from "../../../logic/errors.js";
 import { IPostRepository, IPostData } from "../types.js";
-import { Post, ObjectId } from "./index.js";
+import { Post } from "./index.js";
+import { Types } from "mongoose";
 
 export const PostRepository: IPostRepository = {
   save(post) {
     const post2 = {
-      _id: new ObjectId(post.id),
+      _id: new Types.ObjectId(post.id),
       author: post.author,
       title: post.title,
       description: post.description,
@@ -29,7 +30,7 @@ export const PostRepository: IPostRepository = {
         if (post)
           return {
             id: post.id,
-            author: post.author,
+            author: post.author.toString(),
             title: post.title,
             description: post.description,
             image: post.image,
@@ -48,7 +49,7 @@ export const PostRepository: IPostRepository = {
       .then((posts) =>
         posts.map((post) => ({
           id: post.id,
-          author: post.author,
+          author: post.author.toString(),
           title: post.title,
           description: post.description,
           image: post.image,
@@ -65,7 +66,7 @@ export const PostRepository: IPostRepository = {
       .then((posts) =>
         posts.map((post) => ({
           id: post.id,
-          author: post.author,
+          author: post.author.toString(),
           title: post.title,
           description: post.description,
           image: post.image,
@@ -75,7 +76,7 @@ export const PostRepository: IPostRepository = {
   },
 
   remove(postId) {
-    return Post.deleteOne({ _id: new ObjectId(postId) })
+    return Post.deleteOne({ _id: new Types.ObjectId(postId) })
       .catch((error) => {
         throw new SystemError(error.message);
       })
@@ -91,6 +92,6 @@ export const PostRepository: IPostRepository = {
   },
 
   generateId() {
-    return new ObjectId().toString();
+    return new Types.ObjectId().toString();
   },
 };

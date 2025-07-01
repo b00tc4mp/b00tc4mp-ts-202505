@@ -1,7 +1,8 @@
 import { expect } from "chai";
 import { UserRepository } from "./UserRepository.js";
 import { IUserData } from "../types.js";
-import { connect, disconnect, User, ObjectId } from "./index.js";
+import { connect, disconnect, User } from "./index.js";
+import { Types } from "mongoose";
 
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } =
   process.env;
@@ -50,7 +51,7 @@ describe("UserRepository (No-SQL)", () => {
       const json = JSON.stringify(users);
 
       const userDoc = {
-        _id: new ObjectId(user.id),
+        _id: new Types.ObjectId(user.id),
         name: user.name,
         email: user.email,
         username: user.username,
@@ -80,7 +81,7 @@ describe("UserRepository (No-SQL)", () => {
       };
 
       const userDoc = {
-        _id: new ObjectId(user.id),
+        _id: new Types.ObjectId(user.id),
         name: user.name,
         email: user.email,
         username: user.username,
@@ -126,7 +127,7 @@ describe("UserRepository (No-SQL)", () => {
       };
 
       const userDoc = {
-        _id: new ObjectId(user.id),
+        _id: new Types.ObjectId(user.id),
         name: user.name,
         email: user.email,
         username: user.username,
@@ -134,7 +135,7 @@ describe("UserRepository (No-SQL)", () => {
       };
 
       const user2Doc = {
-        _id: new ObjectId(user2.id),
+        _id: new Types.ObjectId(user2.id),
         name: user2.name,
         email: user2.email,
         username: user2.username,
@@ -142,7 +143,7 @@ describe("UserRepository (No-SQL)", () => {
       };
 
       const user3Doc = {
-        _id: new ObjectId(user3.id),
+        _id: new Types.ObjectId(user3.id),
         name: user3.name,
         email: user3.email,
         username: user3.username,

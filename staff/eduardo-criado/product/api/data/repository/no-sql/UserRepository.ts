@@ -1,11 +1,12 @@
 import { SystemError } from "../../../logic/errors.js";
 import { IUserRepository, IUserData } from "../types.js";
-import { User, ObjectId } from "./index.js";
+import { User } from "./index.js";
+import { Types } from "mongoose";
 
 export const UserRepository: IUserRepository = {
   save(user) {
     const user2 = {
-      _id: new ObjectId(user.id),
+      _id: new Types.ObjectId(user.id),
       name: user.name,
       email: user.email,
       username: user.username,
@@ -69,6 +70,6 @@ export const UserRepository: IUserRepository = {
   },
 
   generateId() {
-    return new ObjectId().toString();
+    return new Types.ObjectId().toString();
   },
 };

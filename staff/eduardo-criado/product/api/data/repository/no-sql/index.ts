@@ -1,6 +1,6 @@
-import { Schema, model, connect, disconnect, Types } from "mongoose";
+import { Schema, model, connect, disconnect } from "mongoose";
 
-const { ObjectId } = Types;
+const { ObjectId } = Schema.Types;
 
 import { IUserDoc, IPostDoc } from "./types.js";
 
@@ -44,7 +44,7 @@ const User = model("User", user);
 
 const post = new Schema<IPostDoc>({
   author: {
-    type: String,
+    type: ObjectId,
     required: true,
   },
 
@@ -77,4 +77,4 @@ const post = new Schema<IPostDoc>({
 
 const Post = model("Post", post);
 
-export { connect, disconnect, ObjectId, User, Post };
+export { connect, disconnect, User, Post };
