@@ -1,0 +1,17 @@
+{
+  "name": "robot",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test-watch": "tsx --watch robot.test.ts",
+    "test-inspect": "tsx --inspect-brk robot.test.ts",
+    "compile-watch": "tsc --watch --outDir build --module es2015 *.ts",
+    "compile": "tsc --outDir build --module es2015 *.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
