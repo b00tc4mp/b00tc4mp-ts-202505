@@ -1,0 +1,65 @@
+{
+    "id": "c6ffd7eb-3f96-4661-9c4c-f09cd381b426",
+    "model": "sonar-pro",
+    "created": 1751483027,
+    "usage": {
+        "prompt_tokens": 14,
+        "completion_tokens": 131,
+        "total_tokens": 145,
+        "search_context_size": "low"
+    },
+    "citations": [
+        "https://www.astronomy.com/science/astro-for-kids-how-many-stars-are-there-in-space/",
+        "https://www.esa.int/Science_Exploration/Space_Science/Herschel/How_many_stars_are_there_in_the_Universe",
+        "https://www.youtube.com/watch?v=MTeyypxmbK0",
+        "https://en.wikipedia.org/wiki/Milky_Way",
+        "https://imagine.gsfc.nasa.gov/science/objects/milkyway1.html"
+    ],
+    "search_results": [
+        {
+            "title": "Astro for kids: How many stars are there in space?",
+            "url": "https://www.astronomy.com/science/astro-for-kids-how-many-stars-are-there-in-space/",
+            "date": "2021-09-28",
+            "last_updated": "2025-06-26"
+        },
+        {
+            "title": "How many stars are there in the Universe?",
+            "url": "https://www.esa.int/Science_Exploration/Space_Science/Herschel/How_many_stars_are_there_in_the_Universe",
+            "date": "2020-06-01",
+            "last_updated": "2025-06-16"
+        },
+        {
+            "title": "How Many Stars Are in the Universe!?!?",
+            "url": "https://www.youtube.com/watch?v=MTeyypxmbK0",
+            "date": "2025-06-02",
+            "last_updated": "2025-06-29"
+        },
+        {
+            "title": "Milky Way",
+            "url": "https://en.wikipedia.org/wiki/Milky_Way",
+            "date": "2001-09-15",
+            "last_updated": "2025-06-27"
+        },
+        {
+            "title": "Milky Way Galaxy - Imagine the Universe! - NASA",
+            "url": "https://imagine.gsfc.nasa.gov/science/objects/milkyway1.html",
+            "date": null,
+            "last_updated": null
+        }
+    ],
+    "object": "chat.completion",
+    "choices": [
+        {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+                "role": "assistant",
+                "content": "Our galaxy, the **Milky Way**, is estimated to contain **between 100 billion and 400 billion stars**[4][3][2]. The wide range is due to the challenges in detecting very faint, low-mass stars, especially those far from Earth. Most often, astronomers cite numbers between 100 and 400 billion when describing the Milky Way's stellar population[4].\n\nFor reference:\n- The lower estimate is about **100 billion stars**.\n- The upper estimate is about **400 billion stars**.\n\nThis makes the Milky Way a galaxy of average to large size compared to others in the universe[4][2][3]."
+            },
+            "delta": {
+                "role": "assistant",
+                "content": ""
+            }
+        }
+    ]
+}
