@@ -14,4 +14,5 @@ curl --location 'https://api.perplexity.ai/chat/completions' \
       "content": "How many stars are there in our galaxy?"
     }
   ]
-}'
+}' \
+-v
