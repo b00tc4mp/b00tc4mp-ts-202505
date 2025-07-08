@@ -6,17 +6,11 @@ import { Types } from "mongoose";
 // import { UserRepository } from "../data/repository/fs/UserRepository.js";
 import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
 // import { UserRepository } from "../data/repository/sql/UserRepository.js";
-
-const { MONGO_URL = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } =
-    process.env;
-
+const { MONGO_URL = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } = process.env;
 const { ObjectId } = Types;
-
 describe("getUserInfo", () => {
     before(() => connect(MONGO_URL));
-
     beforeEach(() => UserRepository.removeAll());
-
     it("gets info on existing user", () => {
         return UserRepository.save({
             id: "68505d6ee96dfc66eb4a9fe9",
@@ -27,92 +21,92 @@ describe("getUserInfo", () => {
         })
             .then((user) => getUserInfo("68505d6ee96dfc66eb4a9fe9"))
             .then((user) => {
-                expect(user.name).to.equal("Wendy Darling");
-                expect(user.email).to.equal("wendydarling@mail.com");
-                expect(user.username).to.equal("wendydarling");
-                expect(user.password).to.equal("123123123");
-            });
+            expect(user.name).to.equal("Wendy Darling");
+            expect(user.email).to.equal("wendydarling@mail.com");
+            expect(user.username).to.equal("wendydarling");
+            expect(user.password).to.equal("123123123");
+        });
     });
-
     it("fails on non-existing user id", () => {
-        let errorThrown: Error;
-
+        let errorThrown;
         return getUserInfo(new ObjectId().toString())
             .catch((error) => (errorThrown = error))
             .finally(() => {
-                expect(errorThrown).to.be.instanceOf(NotFoundError);
-                expect(errorThrown.message).to.equal("user not found");
-            });
+            expect(errorThrown).to.be.instanceOf(NotFoundError);
+            expect(errorThrown.message).to.equal("user not found");
+        });
     });
-
     it("fails on invalid user id type", () => {
-        let errorThrown: Error;
-
+        let errorThrown;
         try {
             /* @ts-ignore */
             getUserInfo(true);
-        } catch (error) {
-            errorThrown = error as Error;
-        } finally {
-            expect(errorThrown!).to.be.instanceOf(ValidationError);
-            expect(errorThrown!.message).to.equal("invalid user id type");
+        }
+        catch (error) {
+            errorThrown = error;
+        }
+        finally {
+            expect(errorThrown).to.be.instanceOf(ValidationError);
+            expect(errorThrown.message).to.equal("invalid user id type");
         }
     });
-
     it("fails on invalid user id format", () => {
-        let errorThrown: Error;
-
+        let errorThrown;
         try {
             // getUserInfo("5f8a1f8a1f8a1f8a1f8a1f8zZZZ");
             getUserInfo("invalid_id");
-        } catch (error) {
-            errorThrown = error as Error;
-        } finally {
-            expect(errorThrown!).to.be.instanceOf(ValidationError);
-            expect(errorThrown!.message).to.equal("invalid user id format");
+        }
+        catch (error) {
+            errorThrown = error;
+        }
+        finally {
+            expect(errorThrown).to.be.instanceOf(ValidationError);
+            expect(errorThrown.message).to.equal("invalid user id format");
         }
     });
-
     it("fails on null user id", () => {
-        let errorThrown: Error;
+        let errorThrown;
         try {
             // @ts-ignore
             getUserInfo(null);
-        } catch (error) {
-            errorThrown = error as Error;
-        } finally {
-            expect(errorThrown!).to.be.instanceOf(ValidationError);
-            expect(errorThrown!.message).to.equal("invalid user id type");
+        }
+        catch (error) {
+            errorThrown = error;
+        }
+        finally {
+            expect(errorThrown).to.be.instanceOf(ValidationError);
+            expect(errorThrown.message).to.equal("invalid user id type");
         }
     });
-
     it("fails on undefined user id", () => {
-        let errorThrown: Error;
+        let errorThrown;
         try {
             // @ts-ignore
             getUserInfo(undefined);
-        } catch (error) {
-            errorThrown = error as Error;
-        } finally {
-            expect(errorThrown!).to.be.instanceOf(ValidationError);
-            expect(errorThrown!.message).to.equal("invalid user id type");
+        }
+        catch (error) {
+            errorThrown = error;
+        }
+        finally {
+            expect(errorThrown).to.be.instanceOf(ValidationError);
+            expect(errorThrown.message).to.equal("invalid user id type");
         }
     });
-
     it("fails on object as user id", () => {
-        let errorThrown: Error;
+        let errorThrown;
         try {
             // @ts-ignore
             getUserInfo({});
-        } catch (error) {
-            errorThrown = error as Error;
-        } finally {
-            expect(errorThrown!).to.be.instanceOf(ValidationError);
-            expect(errorThrown!.message).to.equal("invalid user id type");
+        }
+        catch (error) {
+            errorThrown = error;
+        }
+        finally {
+            expect(errorThrown).to.be.instanceOf(ValidationError);
+            expect(errorThrown.message).to.equal("invalid user id type");
         }
     });
-
     afterEach(() => UserRepository.removeAll());
-
     after(() => disconnect());
 });
+//# sourceMappingURL=getUserInfo.spec.1.js.map

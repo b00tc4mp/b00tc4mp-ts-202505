@@ -1,6 +1,7 @@
 import { ValidationError } from "./errors.js"
 
-const EMAIL_REGEX = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const EMAIL_REGEX = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+const ID_REGEX = /^[a-z0-9]+$/i
 
 const text = (text: string, explain = "text", min = 1, max = Infinity) => {
     if (typeof text !== "string") throw new ValidationError(`invalid ${explain} type`)
@@ -16,7 +17,14 @@ const email = (email: string, explain = "email", max = Infinity) => {
     if (!EMAIL_REGEX.test(email)) throw new ValidationError(`invalid ${explain} format`)
 }
 
+const id = (id: string, explain = "id") => {
+    if (typeof id !== "string") throw new ValidationError(`invalid ${explain} type`)
+
+    if (!ID_REGEX.test(id)) throw new ValidationError(`invalid ${explain} format`)
+}
+
 export const validate = {
     text,
-    email
+    email,
+    id
 }
