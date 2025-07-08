@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { PostRepository } from "./PostRepository.js";
 import { prisma } from "./index.js";
-describe.only("PostRepository (SQL)", () => {
-    beforeEach(() => Promise.all([prisma.user.deleteMany({}), prisma.post.deleteMany({})]));
+describe("PostRepository (SQL)", () => {
+    beforeEach(() => prisma.post.deleteMany({}).then(() => prisma.user.deleteMany({})));
     describe("save", () => {
         it("saves a new post", () => {
             const user = {
@@ -43,6 +43,6 @@ describe.only("PostRepository (SQL)", () => {
             }));
         });
     });
-    afterEach(() => Promise.all([prisma.user.deleteMany({}), prisma.post.deleteMany({})]));
+    afterEach(() => prisma.post.deleteMany({}).then(() => prisma.user.deleteMany({})));
 });
 //# sourceMappingURL=PostRepository.spec.js.map

@@ -1,5 +1,14 @@
 import { IUserDoc } from "../data/repository/no-sql/types.js";
 
+// export interface User {
+//   id: string;
+//   name: string;
+//   email: string;
+//   username: string;
+//   password: string;
+//   avatar?: string;
+// }
+
 export type RegisterUser = (
   name: string,
   email: string,
@@ -14,6 +23,7 @@ export type AuthenticateUser = (
 ) => Promise<string>;
 
 export type GetUserInfo = (id: string) => Promise<IUserDoc>;
+// export type GetUserInfo = (id: string) => Promise<User>;
 
 export type CreatePost = (
   author: string,

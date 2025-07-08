@@ -16,5 +16,6 @@ export const getUserInfo: GetUserInfo = (userId) => {
     .then((user) => {
       if (!user) throw new NotFoundError("user not found");
       return user as IUserDoc;
+      // return user as User;
     });
 };

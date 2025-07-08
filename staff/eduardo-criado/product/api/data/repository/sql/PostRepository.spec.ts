@@ -3,9 +3,9 @@ import { PostRepository } from "./PostRepository.js";
 import { prisma } from "./index.js";
 import { IPostData, IUserData } from "../types.js";
 
-describe.only("PostRepository (SQL)", () => {
+describe("PostRepository (SQL)", () => {
   beforeEach(() =>
-    Promise.all([prisma.user.deleteMany({}), prisma.post.deleteMany({})])
+    prisma.post.deleteMany({}).then(() => prisma.user.deleteMany({}))
   );
 
   describe("save", () => {
@@ -54,6 +54,6 @@ describe.only("PostRepository (SQL)", () => {
   });
 
   afterEach(() =>
-    Promise.all([prisma.user.deleteMany({}), prisma.post.deleteMany({})])
+    prisma.post.deleteMany({}).then(() => prisma.user.deleteMany({}))
   );
 });
