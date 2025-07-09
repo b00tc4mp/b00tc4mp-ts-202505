@@ -7,13 +7,13 @@ import { Types } from "mongoose";
 // import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 
-const { MONGO_URL_TEST = "mongodb://localhost:27017/product-api-test" } =
+const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } =
   process.env;
 
 const { ObjectId } = Types;
 
 describe("getUserInfo", () => {
-  before(() => connect(MONGO_URL_TEST));
+  before(() => connect(MONGO_URL));
 
   beforeEach(() => UserRepository.removeAll());
 

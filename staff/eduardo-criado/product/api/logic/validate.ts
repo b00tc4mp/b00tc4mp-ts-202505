@@ -22,7 +22,7 @@ function validateId(id: string, explain = "id") {
   // }
 }
 
-function ValidateText(text: string, explain = "text", min = 1, max = Infinity) {
+function validateText(text: string, explain = "text", min = 1, max = Infinity) {
   if (typeof text !== "string")
     throw new ValidationError(`invalid ${explain} type`);
 
@@ -34,16 +34,33 @@ function ValidateText(text: string, explain = "text", min = 1, max = Infinity) {
 }
 
 function validateEmail(email: string, explain = "email", max = Infinity) {
-  ValidateText(email, explain, 6, max);
+  validateText(email, explain, 6, max);
 
   if (!EMAIL_REGEX.test(email))
     throw new ValidationError(`invalid ${explain} format`);
 }
 
+// function validateKeyWords(keyWords: string[], explain = "key words") {
+//   keyWords.forEach((keyWord) => validateText(keyWord, explain));
+// }
+
+function validateKeyWords(keyWords: string[], explain = "key words") {
+  if (!Array.isArray(keyWords)) {
+    throw new ValidationError(`invalid ${explain} type`);
+  }
+
+  if (keyWords.length === 0) {
+    throw new ValidationError(`no ${explain} provided`);
+  }
+
+  keyWords.forEach((keyWord) => validateText(keyWord, explain));
+}
+
 export const validate = {
   id: validateId,
-  text: ValidateText,
+  text: validateText,
   email: validateEmail,
+  keyWords: validateKeyWords,
 };
 
 // export default validate;

@@ -32,9 +32,15 @@ export type CreatePost = (
   image: string
 ) => Promise<void>;
 
+export type GenerateCaption = (
+  userId: string,
+  keywords: string[]
+) => Promise<string>;
+
 export type Logic = {
   registerUser: RegisterUser;
   authenticateUser: AuthenticateUser;
   getUserInfo: GetUserInfo;
   createPost: CreatePost;
+  generateCaption: GenerateCaption;
 };
