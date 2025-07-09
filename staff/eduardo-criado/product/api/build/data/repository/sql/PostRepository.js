@@ -87,7 +87,7 @@ export const PostRepository = {
         })
             .then(() => { });
     },
-    remove(postId) {
+    removeById(postId) {
         return prisma.post
             .delete({
             where: {

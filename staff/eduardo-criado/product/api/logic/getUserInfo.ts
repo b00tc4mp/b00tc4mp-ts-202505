@@ -1,4 +1,4 @@
-import { GetUserInfo } from "./types.js";
+import { GetUserInfo, User } from "./types.js";
 import { validate } from "./validate.js";
 import { NotFoundError, SystemError } from "./errors.js";
 // import { UserRepository } from "../data/repository/fs/UserRepository.js";
@@ -15,7 +15,7 @@ export const getUserInfo: GetUserInfo = (userId) => {
     })
     .then((user) => {
       if (!user) throw new NotFoundError("user not found");
-      return user as IUserDoc;
-      // return user as User;
+      // return user as IUserDoc;
+      return user as User;
     });
 };

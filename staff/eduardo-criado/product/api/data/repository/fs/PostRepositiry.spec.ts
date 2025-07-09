@@ -145,7 +145,7 @@ describe("PostRepository (FS)", () => {
 
       return fs
         .writeFile(FS_POSTS, JSON.stringify(posts))
-        .then(() => PostRepository.remove("post-3"))
+        .then(() => PostRepository.removeById("post-3"))
         .then(() => fs.readFile(FS_POSTS, "utf8"))
         .then((json) => JSON.parse(json))
         .then((posts: IPostData[]) => {

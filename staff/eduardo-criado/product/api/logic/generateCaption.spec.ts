@@ -4,6 +4,8 @@ import { generateCaption } from "./generateCaption.js";
 import { ValidationError, NotFoundError } from "./errors.js";
 
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+// import { UserRepository } from "../data/repository/fs/UserRepository.js";
 
 import { Types } from "mongoose";
 import { beforeEach } from "mocha";
@@ -15,7 +17,7 @@ const {
 
 const { ObjectId } = Types;
 
-describe.only("generateCaption", function () {
+describe("generateCaption", function () {
   this.timeout(10000);
   before(() => connect(MONGO_URL));
 

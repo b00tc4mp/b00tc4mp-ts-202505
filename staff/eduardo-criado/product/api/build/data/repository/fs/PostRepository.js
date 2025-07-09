@@ -57,7 +57,7 @@ export const PostRepository = {
             return authorPosts;
         });
     },
-    remove(postId) {
+    removeById(postId) {
         return fs
             .readFile(FS_POSTS, "utf8")
             .catch((error) => {

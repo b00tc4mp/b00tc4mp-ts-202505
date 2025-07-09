@@ -1,13 +1,13 @@
-import { IUserDoc } from "../data/repository/no-sql/types.js";
+// import { IUserDoc } from "../data/repository/no-sql/types.js";
 
-// export interface User {
-//   id: string;
-//   name: string;
-//   email: string;
-//   username: string;
-//   password: string;
-//   avatar?: string;
-// }
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  username: string;
+  password: string;
+  avatar?: string | null;
+}
 
 export type RegisterUser = (
   name: string,
@@ -22,8 +22,8 @@ export type AuthenticateUser = (
   password: string
 ) => Promise<string>;
 
-export type GetUserInfo = (id: string) => Promise<IUserDoc>;
-// export type GetUserInfo = (id: string) => Promise<User>;
+// export type GetUserInfo = (id: string) => Promise<IUserDoc>;
+export type GetUserInfo = (id: string) => Promise<User>;
 
 export type CreatePost = (
   author: string,
@@ -37,10 +37,18 @@ export type GenerateCaption = (
   keywords: string[]
 ) => Promise<string>;
 
+export type FindUsers = (
+  query: string,
+  order: string,
+  page: number,
+  max: number
+) => Promise<User>;
+
 export type Logic = {
   registerUser: RegisterUser;
   authenticateUser: AuthenticateUser;
   getUserInfo: GetUserInfo;
   createPost: CreatePost;
   generateCaption: GenerateCaption;
+  findUsers: FindUsers;
 };

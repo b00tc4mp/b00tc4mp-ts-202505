@@ -2,11 +2,13 @@ import { expect } from "chai";
 import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { generateCaption } from "./generateCaption.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+// import { UserRepository } from "../data/repository/fs/UserRepository.js";
 import { Types } from "mongoose";
 import { beforeEach } from "mocha";
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test", PORT = 8081, } = process.env;
 const { ObjectId } = Types;
-describe.only("generateCaption", function () {
+describe("generateCaption", function () {
     this.timeout(10000);
     before(() => connect(MONGO_URL));
     beforeEach(() => UserRepository.removeAll());

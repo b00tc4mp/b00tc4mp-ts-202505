@@ -30,6 +30,7 @@ export interface IPostRepository {
   findAll(): Promise<IPostData[]>;
   findByAuthor(authorId: string): Promise<IPostData[]>;
   removeAll(): Promise<void>;
-  remove(postId: string): Promise<void>;
+  // remove(postId: string): Promise<void>;
+  removeById(id: string): Promise<void>;
   generateId(): string;
 }

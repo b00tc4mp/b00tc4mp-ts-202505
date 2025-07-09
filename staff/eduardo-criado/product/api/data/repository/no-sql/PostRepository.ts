@@ -75,7 +75,7 @@ export const PostRepository: IPostRepository = {
       );
   },
 
-  remove(postId) {
+  removeById(postId) {
     return Post.deleteOne({ _id: new Types.ObjectId(postId) })
       .catch((error) => {
         throw new SystemError(error.message);

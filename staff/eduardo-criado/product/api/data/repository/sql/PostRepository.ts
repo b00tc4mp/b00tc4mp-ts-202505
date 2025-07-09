@@ -104,7 +104,7 @@ export const PostRepository: IPostRepository = {
       .then(() => {});
   },
 
-  remove(postId) {
+  removeById(postId) {
     return prisma.post
       .delete({
         where: {

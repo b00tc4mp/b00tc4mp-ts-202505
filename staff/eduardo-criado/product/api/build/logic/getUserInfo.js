@@ -12,8 +12,8 @@ export const getUserInfo = (userId) => {
         .then((user) => {
         if (!user)
             throw new NotFoundError("user not found");
+        // return user as IUserDoc;
         return user;
-        // return user as User;
     });
 };
 //# sourceMappingURL=getUserInfo.js.map

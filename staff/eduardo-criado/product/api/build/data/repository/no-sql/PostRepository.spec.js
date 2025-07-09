@@ -110,7 +110,7 @@ describe("PostRepository (No-SQL)", () => {
                     createdAt: new Date(),
                 };
                 return PostRepository.save(post)
-                    .then(() => PostRepository.remove(post.id))
+                    .then(() => PostRepository.removeById(post.id))
                     .then(() => Post.findById(post.id))
                     .then((post) => {
                     expect(post).to.be.null;
