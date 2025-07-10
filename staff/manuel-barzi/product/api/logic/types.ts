@@ -11,9 +11,9 @@ export type RegisterUser = (name: string, email: string, username: string, passw
 
 export type AuthenticateUser = (username: string, password: string) => Promise<string>
 
-export type GetUserInfo = (id: string) => Promise<User>;
+export type GetUserInfo = (userId: string) => Promise<User>;
 
-export type FindUsers = (query: string, order: string, page: number, max: number) => Promise<User[]>
+export type FindUsers = (userId: string, query: string, sortField: "name" | "email" | "username", sortOrder: "asc" | "desc", pageNumber: number, pageSize: number) => Promise<User[]>
 
 export type Logic = {
     registerUser: RegisterUser

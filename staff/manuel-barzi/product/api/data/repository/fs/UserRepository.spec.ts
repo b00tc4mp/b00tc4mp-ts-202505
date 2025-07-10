@@ -95,5 +95,55 @@ describe("UserRepository (FS)", () => {
         })
     })
 
+    describe("filter", () => {
+        const user: IUserData = {
+            id: "68505d6ee96dfc66eb4a9f01",
+            name: "Wendy Darling",
+            email: "wendydarling@mail.com",
+            username: "wendydarling",
+            password: "123123123",
+        }
+
+        const user2: IUserData = {
+            id: "68505d6ee96dfc66eb4a9f02",
+            name: "Peter Pan",
+            email: "peterpan@mail.com",
+            username: "peterpan",
+            password: "123123123",
+        }
+
+        const user3: IUserData = {
+            id: "68505d6ee96dfc66eb4a9f03",
+            name: "Pepito Grillo",
+            email: "pepitogrillo@mail.com",
+            username: "pepitogrillo",
+            password: "123123123",
+        }
+
+        const user4: IUserData = {
+            id: "68505d6ee96dfc66eb4a9f04",
+            name: "Campa Nilla",
+            email: "campanilla@mail.com",
+            username: "campanilla",
+            password: "123123123",
+        }
+
+        const users = [user, user2, user3, user4]
+
+        const json = JSON.stringify(users)
+
+        return fs.writeFile(`${FS_PATH}/users.json`, json)
+            .then(() => UserRepository.filter({ name: "Pe", username: "Pe", email: "Pe" }, { username: 0 }, { page: 1, size: 1 }))
+            .then(users => {
+                expect(users).to.be.instanceOf(Array)
+                expect(users).to.have.lengthOf(1)
+
+                expect(users[0].name).to.equal("Pepito Grillo")
+                expect(users[0].email).to.equal("pepitogrillo@mail.com")
+                expect(users[0].username).to.equal("pepitogrillo")
+                expect(users[0].password).to.equal("123123123")
+            })
+    })
+
     afterEach(() => fs.writeFile(`${FS_PATH}/users.json`, "[]"))
 })

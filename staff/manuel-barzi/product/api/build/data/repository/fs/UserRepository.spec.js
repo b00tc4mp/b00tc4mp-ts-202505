@@ -73,6 +73,39 @@ describe("UserRepository (FS)", () => {
             expect(id).to.be.a.string;
         });
     });
+    describe("filter", () => {
+        const user = {
+            id: "68505d6ee96dfc66eb4a9f01",
+            name: "Wendy Darling",
+            email: "wendydarling@mail.com",
+            username: "wendydarling",
+            password: "123123123",
+        };
+        const user2 = {
+            id: "68505d6ee96dfc66eb4a9f02",
+            name: "Peter Pan",
+            email: "peterpan@mail.com",
+            username: "peterpan",
+            password: "123123123",
+        };
+        const user3 = {
+            id: "68505d6ee96dfc66eb4a9f03",
+            name: "Pepito Grillo",
+            email: "pepitogrillo@mail.com",
+            username: "pepitogrillo",
+            password: "123123123",
+        };
+        const user4 = {
+            id: "68505d6ee96dfc66eb4a9f04",
+            name: "Campa Nilla",
+            email: "campanilla@mail.com",
+            username: "campanilla",
+            password: "123123123",
+        };
+        const users = [user, user2, user3, user4];
+        const json = JSON.stringify(users);
+        return fs.writeFile(`${FS_PATH}/users.json`, json);
+    });
     afterEach(() => fs.writeFile(`${FS_PATH}/users.json`, "[]"));
 });
 //# sourceMappingURL=UserRepository.spec.js.map

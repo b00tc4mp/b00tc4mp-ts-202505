@@ -61,5 +61,9 @@ export const UserRepository: IUserRepository = {
 
     generateId() {
         return Number((Date.now() + Math.random()).toString().replace(".", "")).toString(36)
+    },
+
+    filter(criteria, sort, page) {
+        return []
     }
 }

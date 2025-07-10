@@ -13,6 +13,11 @@ export interface IUserRepository {
     findById(id: string): Promise<IUserData | null>
     removeAll(): Promise<void>
     generateId(): string
+    filter(
+        criteria: { name?: string, username?: string, email?: string },
+        sort: { [key in "name" | "username" | "email"]?: number },
+        page: { page: number, size: number }
+    ): Promise<IUserData[]>
 }
 
 export interface IPostData {
