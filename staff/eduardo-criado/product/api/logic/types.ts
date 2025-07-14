@@ -23,7 +23,7 @@ export type AuthenticateUser = (
 ) => Promise<string>;
 
 // export type GetUserInfo = (id: string) => Promise<IUserDoc>;
-export type GetUserInfo = (id: string) => Promise<User>;
+export type GetUserInfo = (userId: string) => Promise<User>;
 
 export type CreatePost = (
   author: string,
@@ -37,12 +37,21 @@ export type GenerateCaption = (
   keywords: string[]
 ) => Promise<string>;
 
+// export type FindUsers = (
+//   query: string,
+//   order: string,
+//   page: number,
+//   max: number
+// ) => Promise<User>;
+
 export type FindUsers = (
+  userId: string,
   query: string,
-  order: string,
-  page: number,
-  max: number
-) => Promise<User>;
+  sortField: "name" | "email" | "username",
+  sortOrder: "asc" | "desc",
+  pageNumber: number,
+  pageSize: number
+) => Promise<User[]>;
 
 export type Logic = {
   registerUser: RegisterUser;

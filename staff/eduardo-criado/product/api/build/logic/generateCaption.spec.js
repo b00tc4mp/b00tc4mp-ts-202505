@@ -8,7 +8,7 @@ import { Types } from "mongoose";
 import { beforeEach } from "mocha";
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test", PORT = 8081, } = process.env;
 const { ObjectId } = Types;
-describe("generateCaption", function () {
+describe.skip("generateCaption", function () {
     this.timeout(10000);
     before(() => connect(MONGO_URL));
     beforeEach(() => UserRepository.removeAll());

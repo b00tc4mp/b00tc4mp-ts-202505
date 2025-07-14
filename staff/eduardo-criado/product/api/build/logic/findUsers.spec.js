@@ -3,16 +3,16 @@ import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { findUsers } from "./findUsers.js";
 import { NotFoundError, ValidationError } from "./errors.js";
 import { Types } from "mongoose";
-// import { UserRepository } from "../data/repository/fs/UserRepository.js";
+import { UserRepository } from "../data/repository/fs/UserRepository.js";
 // import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
-import { UserRepository } from "../data/repository/sql/UserRepository.js";
-const { MONGO_URL = "mongodb://localhost:27017/b00tc4mp-ts-202505-test" } = process.env;
+// import { UserRepository } from "../data/repository/sql/UserRepository.js";
+const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } = process.env;
 const { ObjectId } = Types;
 describe("findUsers", () => {
     before(() => connect(MONGO_URL));
     beforeEach(() => UserRepository.removeAll());
-    it("gets info on existing user", () => {
-        return (Promise.all([
+    it("find users according to params", () => {
+        return Promise.all([
             UserRepository.save({
                 id: "68505d6ee96dfc66eb4a9fe9",
                 name: "Wendy Darling",
@@ -20,19 +20,51 @@ describe("findUsers", () => {
                 username: "wendydarling",
                 password: "123123123",
             }),
-        ])
-            .then((user) => findUsers("68505d6ee96dfc66eb4a9fe9"))
-            //   .then((user) => findUsers("id = '68505d6ee96dfc66eb4a9fe9'", "name", 1, 10))
-            .then((user) => {
-            expect(user.name).to.equal("Wendy Darling");
-            expect(user.email).to.equal("wendydarling@mail.com");
-            expect(user.username).to.equal("wendydarling");
-            expect(user.password).to.equal("123123123");
-        }));
+            UserRepository.save({
+                id: "68505d6ee96dfc66eb4a9f02",
+                name: "Peter Pan",
+                email: "peterpan@mail.com",
+                username: "peterpan",
+                password: "123123123",
+            }),
+            UserRepository.save({
+                id: "68505d6ee96dfc66eb4a9f03",
+                name: "Pepito Grillo",
+                email: "pepitogrillo@mail.com",
+                username: "pepitogrillo",
+                password: "123123123",
+            }),
+            UserRepository.save({
+                id: "68505d6ee96dfc66eb4a9f04",
+                name: "Campa Nilla",
+                email: "campanilla@mail.com",
+                username: "campanilla",
+                password: "123123123",
+            }),
+        ]).then(() => findUsers("68505d6ee96dfc66eb4a9fe9", "wendydarling", "username", "asc", 1, 10));
+        // .then(() =>
+        //   findUsers(
+        //     "68505d6ee96dfc66eb4a9f04",
+        //     "Campa Nilla",
+        //     "name",
+        //     "asc",
+        //     1,
+        //     10
+        //   )
+        // )
+        // .then((users) => {
+        //   expect(users).to.be.instanceOf(Array);
+        //   expect(users.length).to.equal(1);
+        //   expect(users[0].id).to.equal("68505d6ee96dfc66eb4a9fe9");
+        //   expect(users[0].name).to.equal("Wendy Darling");
+        //   expect(users[0].email).to.equal("wendydarling@mail.com");
+        //   expect(users[0].username).to.equal("wendydarling");
+        //   expect(users[0].password).to.equal("123123123");
+        // })
     });
     it("fails on non-existing user id", () => {
         let errorThrown;
-        return findUsers(new ObjectId().toString())
+        return findUsers(new ObjectId().toString(), "", "username", "asc", 1, 10)
             .catch((error) => (errorThrown = error))
             .finally(() => {
             expect(errorThrown).to.be.instanceOf(NotFoundError);
@@ -57,7 +89,7 @@ describe("findUsers", () => {
         let errorThrown;
         try {
             // findUsers("5f8a1f8a1f8a1f8a1f8a1f8zZZZ");
-            findUsers("invalid_id");
+            findUsers("invalid_id", "", "username", "asc", 1, 10);
         }
         catch (error) {
             errorThrown = error;

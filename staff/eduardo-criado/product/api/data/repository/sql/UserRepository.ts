@@ -54,4 +54,10 @@ export const UserRepository: IUserRepository = {
       (Date.now() + Math.random()).toString().replace(".", "")
     ).toString(36);
   },
+
+  filter() {
+    return prisma.user.findMany().catch((error) => {
+      throw new SystemError(error.message);
+    });
+  },
 };

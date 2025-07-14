@@ -35,8 +35,8 @@ export const UserRepository = {
             return null;
         });
     },
-    findById(id) {
-        return User.findById(id)
+    findById(userId) {
+        return User.findById(userId)
             .catch((error) => {
             throw new SystemError(error.message);
         })
@@ -62,6 +62,28 @@ export const UserRepository = {
     },
     generateId() {
         return new Types.ObjectId().toString();
+    },
+    filter(criteria, sort, page) {
+        return UserRepository.filter({
+            name: criteria.name,
+            username: criteria.username,
+            email: criteria.email,
+        }, sort, page)
+            .catch((error) => {
+            throw new SystemError(error.message);
+        })
+            .then((users) => {
+            return users.map((user) => {
+                return {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    username: user.username,
+                    password: user.password,
+                    avatar: user.avatar,
+                };
+            });
+        });
     },
 };
 //# sourceMappingURL=UserRepository.js.map

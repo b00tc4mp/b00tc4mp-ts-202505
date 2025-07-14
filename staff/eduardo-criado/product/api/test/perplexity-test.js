@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 // console.log("API KEY:", process.env.PERPLEXITY_API_KEY);
 

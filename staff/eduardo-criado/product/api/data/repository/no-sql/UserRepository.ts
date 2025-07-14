@@ -41,8 +41,8 @@ export const UserRepository: IUserRepository = {
       });
   },
 
-  findById(id) {
-    return User.findById(id)
+  findById(userId) {
+    return User.findById(userId)
       .catch((error) => {
         throw new SystemError(error.message);
       })
@@ -71,5 +71,37 @@ export const UserRepository: IUserRepository = {
 
   generateId() {
     return new Types.ObjectId().toString();
+  },
+
+  filter(
+    criteria: { name?: string; username?: string; email?: string },
+    sort: { [key in "name" | "username" | "email"]?: number },
+    page: { page: number; size: number }
+  ) {
+    return UserRepository.filter(
+      {
+        name: criteria.name,
+        username: criteria.username,
+        email: criteria.email,
+      },
+      sort,
+      page
+    )
+
+      .catch((error) => {
+        throw new SystemError(error.message);
+      })
+      .then((users: IUserData[]) => {
+        return users.map((user) => {
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            username: user.username,
+            password: user.password,
+            avatar: user.avatar,
+          };
+        });
+      });
   },
 };

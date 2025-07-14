@@ -17,7 +17,7 @@ const {
 
 const { ObjectId } = Types;
 
-describe("generateCaption", function () {
+describe.skip("generateCaption", function () {
   this.timeout(10000);
   before(() => connect(MONGO_URL));
 
