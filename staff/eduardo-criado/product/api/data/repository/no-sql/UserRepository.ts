@@ -73,11 +73,7 @@ export const UserRepository: IUserRepository = {
     return new Types.ObjectId().toString();
   },
 
-  filter(
-    criteria: { name?: string; username?: string; email?: string },
-    sort: { [key in "name" | "username" | "email"]?: number },
-    page: { page: number; size: number }
-  ) {
+  filter(criteria, sort, page) {
     return UserRepository.filter(
       {
         name: criteria.name,

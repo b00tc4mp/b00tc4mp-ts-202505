@@ -140,7 +140,7 @@ describe.only("UserRepository (FS)", () => {
             const json = JSON.stringify(users);
             return fs
                 .writeFile(FS_USERS, json)
-                .then(() => UserRepository.filter({ username: "edu" }, {}, { page: 1, size: 1 }))
+                .then(() => UserRepository.filter({ username: "edu" }, { username: 1 }, { page: 1, size: 1 }))
                 .then((users) => {
                 expect(users.length).to.equal(1);
                 expect(users[0].name).to.equal("Ed U");
@@ -175,7 +175,7 @@ describe.only("UserRepository (FS)", () => {
             const json = JSON.stringify(users);
             return fs
                 .writeFile(FS_USERS, json)
-                .then(() => UserRepository.filter({ username: "" }, {}, { page: 1, size: 1 }))
+                .then(() => UserRepository.filter({ username: "" }, { username: 1 }, { page: 1, size: 1 }))
                 .then((users) => {
                 expect(users.length).to.equal(0);
             });

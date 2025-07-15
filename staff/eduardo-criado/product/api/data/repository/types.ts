@@ -15,7 +15,7 @@ export interface IUserRepository {
   generateId(): string;
   filter(
     criteria: { name?: string; username?: string; email?: string },
-    sort: { [key in "name" | "username" | "email"]?: number },
+    sort: { [key in "name" | "username" | "email"]?: 1 | -1 },
     page: { page: number; size: number }
   ): Promise<IUserData[]>;
 }

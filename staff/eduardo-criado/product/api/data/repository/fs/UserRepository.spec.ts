@@ -166,7 +166,11 @@ describe.only("UserRepository (FS)", () => {
       return fs
         .writeFile(FS_USERS, json)
         .then(() =>
-          UserRepository.filter({ username: "edu" }, {}, { page: 1, size: 1 })
+          UserRepository.filter(
+            { username: "edu" },
+            { username: 1 },
+            { page: 1, size: 1 }
+          )
         )
         .then((users: IUserData[]) => {
           expect(users.length).to.equal(1);
@@ -207,7 +211,11 @@ describe.only("UserRepository (FS)", () => {
       return fs
         .writeFile(FS_USERS, json)
         .then(() =>
-          UserRepository.filter({ username: "" }, {}, { page: 1, size: 1 })
+          UserRepository.filter(
+            { username: "" },
+            { username: 1 },
+            { page: 1, size: 1 }
+          )
         )
         .then((users: IUserData[]) => {
           expect(users.length).to.equal(0);
