@@ -20,10 +20,6 @@ const user = new Schema<IUserDoc>({
     maxlength: 100,
   },
 
-  avatar: {
-    type: String,
-  },
-
   username: {
     type: String,
     required: true,
@@ -37,6 +33,10 @@ const user = new Schema<IUserDoc>({
     required: true,
     minlength: 8,
     maxlength: 100,
+  },
+
+  avatar: {
+    type: String,
   },
 });
 

@@ -14,9 +14,6 @@ const user = new Schema({
         minlength: 6,
         maxlength: 100,
     },
-    avatar: {
-        type: String,
-    },
     username: {
         type: String,
         required: true,
@@ -29,6 +26,9 @@ const user = new Schema({
         required: true,
         minlength: 8,
         maxlength: 100,
+    },
+    avatar: {
+        type: String,
     },
 });
 const User = model("User", user);

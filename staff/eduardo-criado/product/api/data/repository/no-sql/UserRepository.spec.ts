@@ -7,7 +7,7 @@ import { Types } from "mongoose";
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } =
   process.env;
 
-describe("UserRepository (No-SQL)", () => {
+describe.only("UserRepository (No-SQL)", () => {
   before(() => connect(MONGO_URL));
 
   beforeEach(() => User.deleteMany());
@@ -168,7 +168,78 @@ describe("UserRepository (No-SQL)", () => {
     });
   });
 
-  afterEach(() => User.deleteMany());
+  describe("filter users", () => {
+    it("return users according to search params", () => {
+      const user: IUserData = {
+        id: "012345678901234567890123",
+        name: "Ed U",
+        email: "edu@mail.com",
+        username: "edu",
+        password: "123123123",
+      };
 
-  after(() => disconnect());
+      const user2: IUserData = {
+        id: "012345678901234567890124",
+        name: "Ed U 2",
+        email: "edu2@mail.com",
+        username: "edu2",
+        password: "123123123",
+      };
+
+      const user3: IUserData = {
+        id: "012345678901234567890125",
+        name: "Ed U 3",
+        email: "edu3@mail.com",
+        username: "edu3",
+        password: "123123123",
+      };
+
+      const userDoc = {
+        _id: new Types.ObjectId(user.id),
+        name: user.name,
+        email: user.email,
+        username: user.username,
+        password: user.password,
+      };
+
+      const user2Doc = {
+        _id: new Types.ObjectId(user2.id),
+        name: user2.name,
+        email: user2.email,
+        username: user2.username,
+        password: user2.password,
+      };
+
+      const user3Doc = {
+        _id: new Types.ObjectId(user3.id),
+        name: user3.name,
+        email: user3.email,
+        username: user3.username,
+        password: user3.password,
+      };
+
+      const userDocs = [userDoc, user2Doc, user3Doc];
+
+      return User.insertMany(userDocs)
+        .then(() =>
+          UserRepository.filter(
+            { username: "edu3" },
+            { username: -1 },
+            { page: 1, size: 1 }
+          )
+        )
+
+        .then((users: IUserData[]) => {
+          expect(users.length).to.equal(1);
+          expect(users[0].name).to.equal("Ed U 3");
+          expect(users[0].email).to.equal("edu3@mail.com");
+          expect(users[0].username).to.equal("edu3");
+          expect(users[0].password).to.equal("123123123");
+        });
+    });
+
+    afterEach(() => User.deleteMany());
+
+    after(() => disconnect());
+  });
 });
