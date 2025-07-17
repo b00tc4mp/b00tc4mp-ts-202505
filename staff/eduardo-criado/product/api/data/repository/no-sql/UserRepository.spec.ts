@@ -7,7 +7,7 @@ import { Types } from "mongoose";
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } =
   process.env;
 
-describe.only("UserRepository (No-SQL)", () => {
+describe("UserRepository (No-SQL)", () => {
   before(() => connect(MONGO_URL));
 
   beforeEach(() => User.deleteMany());

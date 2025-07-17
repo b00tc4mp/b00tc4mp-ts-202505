@@ -3,7 +3,7 @@ import { UserRepository } from "./UserRepository.js";
 import { connect, disconnect, User } from "./index.js";
 import { Types } from "mongoose";
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } = process.env;
-describe.only("UserRepository (No-SQL)", () => {
+describe("UserRepository (No-SQL)", () => {
     before(() => connect(MONGO_URL));
     beforeEach(() => User.deleteMany());
     describe("save", () => {
