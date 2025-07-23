@@ -4,7 +4,7 @@ import { IUserData } from "../types.js";
 import { prisma } from "./index.js";
 import e from "express";
 
-describe.only("UserRepository (SQL)", () => {
+describe("UserRepository (SQL)", () => {
   beforeEach(() => prisma.user.deleteMany({}));
 
   describe("save", () => {
@@ -127,8 +127,8 @@ describe.only("UserRepository (SQL)", () => {
     });
   });
 
-  describe("find users", () => {
-    it("find users according to search params", () => {
+  describe("filter users", () => {
+    it("filter users according to search params", () => {
       const user: IUserData = {
         id: "012345678901234567890123",
         name: "Ed U",

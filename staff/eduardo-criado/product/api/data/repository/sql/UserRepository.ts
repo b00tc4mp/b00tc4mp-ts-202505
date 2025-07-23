@@ -55,33 +55,13 @@ export const UserRepository: IUserRepository = {
     ).toString(36);
   },
 
-  // filter(criteria, sort, page) {
-  //   return prisma.user
-  //     .findMany({
-  //       where: criteria,
-  //       orderBy: {
-  //         [Object.keys(sort)[0]]: Object.values(sort[sortkey])[0],
-  //       },
-  //       skip: (page.page - 1) * page.size,
-  //       take: page.size,
-  //     })
-  //     .catch((error) => {
-  //       throw new SystemError(error.message);
-  //     });
-  // },
   filter(criteria, sort, page) {
-    // Convierte { email: 1 } a { email: "asc" }
-    const sortKey = Object.keys(sort)[0] as "name" | "email" | "username";
-    const sortValue = sort[sortKey];
-    const orderBy =
-      sortKey && sortValue
-        ? { [sortKey]: sortValue === 1 ? "asc" : "desc" }
-        : undefined;
-
     return prisma.user
       .findMany({
         where: criteria,
-        orderBy,
+        orderBy: {
+          [Object.keys(sort)[0]]: Object.values(sort)[0] === 1 ? "asc" : "desc",
+        },
         skip: (page.page - 1) * page.size,
         take: page.size,
       })
@@ -90,3 +70,22 @@ export const UserRepository: IUserRepository = {
       });
   },
 };
+
+// filter(criteria, sort, page) {
+//   // Convierte { email: 1 } a { email: "asc" }
+//   const sortKey = Object.keys(sort)[0] as "name" | "email" | "username";
+//   const sortValue = sort[sortKey];
+//   const orderBy = { [sortKey]: sortValue === 1 ? "asc" : "desc" };
+
+//   return prisma.user
+//     .findMany({
+//       where: criteria,
+//       orderBy,
+//       skip: (page.page - 1) * page.size,
+//       take: page.size,
+//     })
+//     .catch((error) => {
+//       throw new SystemError(error.message);
+//     });
+// },
+// };

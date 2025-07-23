@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { UserRepository } from "./UserRepository.js";
 import { prisma } from "./index.js";
-describe.only("UserRepository (SQL)", () => {
+describe("UserRepository (SQL)", () => {
     beforeEach(() => prisma.user.deleteMany({}));
     describe("save", () => {
         it("saves a new user", () => {
@@ -109,8 +109,8 @@ describe.only("UserRepository (SQL)", () => {
             expect(id).to.be.a.string;
         });
     });
-    describe("find users", () => {
-        it("find users according to search params", () => {
+    describe("filter users", () => {
+        it("filter users according to search params", () => {
             const user = {
                 id: "012345678901234567890123",
                 name: "Ed U",
