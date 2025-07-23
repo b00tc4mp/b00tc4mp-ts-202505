@@ -3,8 +3,8 @@ import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { findUsers } from "./findUsers.js";
 import { NotFoundError, ValidationError } from "./errors.js";
 import { Types } from "mongoose";
-import { UserRepository } from "../data/repository/fs/UserRepository.js";
-// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+// import { UserRepository } from "../data/repository/fs/UserRepository.js";
+import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
 // import { UserRepository } from "../data/repository/sql/UserRepository.js";
 
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } =
@@ -12,7 +12,7 @@ const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } =
 
 const { ObjectId } = Types;
 
-describe("findUsers", () => {
+describe.only("findUsers", () => {
   before(() => connect(MONGO_URL));
 
   beforeEach(() => UserRepository.removeAll());
@@ -47,37 +47,40 @@ describe("findUsers", () => {
         username: "campanilla",
         password: "123123123",
       }),
-    ]).then(() =>
-      findUsers(
-        "68505d6ee96dfc66eb4a9fe9",
-        "wendydarling",
-        "username",
-        "asc",
-        1,
-        10
+    ])
+      .then(() =>
+        findUsers("68505d6ee96dfc66eb4a9f04", "e", "username", "asc", 1, 2)
       )
-    );
-    // .then(() =>
-    //   findUsers(
-    //     "68505d6ee96dfc66eb4a9f04",
-    //     "Campa Nilla",
-    //     "name",
-    //     "asc",
-    //     1,
-    //     10
-    //   )
-    // )
-    // .then((users) => {
-    //   expect(users).to.be.instanceOf(Array);
-    //   expect(users.length).to.equal(1);
-    //   expect(users[0].id).to.equal("68505d6ee96dfc66eb4a9fe9");
-    //   expect(users[0].name).to.equal("Wendy Darling");
-    //   expect(users[0].email).to.equal("wendydarling@mail.com");
-    //   expect(users[0].username).to.equal("wendydarling");
-    //   expect(users[0].password).to.equal("123123123");
-    // })
+      .then((users) => {
+        expect(users).to.be.instanceOf(Array);
+        debugger;
+        expect(users.length).to.equal(2);
+        expect(users[0].id).to.equal("68505d6ee96dfc66eb4a9f03");
+        expect(users[0].name).to.equal("Pepito Grillo");
+        expect(users[0].email).to.equal("pepitogrillo@mail.com");
+        expect(users[0].username).to.equal("pepitogrillo");
+        expect(users[0].password).to.equal("123123123");
+
+        expect(users[1].id).to.equal("68505d6ee96dfc66eb4a9f02");
+
+        expect(users[1].name).to.equal("Peter Pan");
+        expect(users[1].email).to.equal("peterpan@mail.com");
+
+        expect(users[1].username).to.equal("peterpan");
+        expect(users[1].password).to.equal("123123123");
+      });
   });
 
+  // .then(() =>
+  //   findUsers(
+  //     "68505d6ee96dfc66eb4a9f04",
+  //     "Campa Nilla",
+  //     "name",
+  //     "asc",
+  //     1,
+  //     10
+  //   )
+  // )
   it("fails on non-existing user id", () => {
     let errorThrown: Error;
 
