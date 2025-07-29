@@ -2,7 +2,6 @@ import { expect } from "chai";
 import { UserRepository } from "./UserRepository.js";
 import { IUserData } from "../types.js";
 import { prisma } from "./index.js";
-import e from "express";
 
 describe("UserRepository (SQL)", () => {
   beforeEach(() => prisma.user.deleteMany({}));
@@ -159,7 +158,7 @@ describe("UserRepository (SQL)", () => {
         })
         .then(() =>
           UserRepository.filter(
-            { email: "edu2@mail.com" },
+            { email: "edu2@mail.com", username: "edu3" },
             { email: 1 },
             { page: 1, size: 1 }
           )

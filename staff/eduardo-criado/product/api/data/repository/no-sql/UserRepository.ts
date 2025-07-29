@@ -74,7 +74,13 @@ export const UserRepository: IUserRepository = {
   },
 
   filter(criteria, sort, page) {
-    return User.find(criteria)
+    const filterCriteria = {
+      $or: Object.keys(criteria).map((key) => ({
+        [key]: criteria[key as keyof typeof criteria],
+      })),
+    };
+
+    return User.find(filterCriteria)
       .sort(sort)
       .skip((page.page - 1) * page.size)
       .limit(page.size)

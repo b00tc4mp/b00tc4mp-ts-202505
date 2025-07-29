@@ -64,7 +64,12 @@ export const UserRepository = {
         return new Types.ObjectId().toString();
     },
     filter(criteria, sort, page) {
-        return User.find(criteria)
+        const filterCriteria = {
+            $or: Object.keys(criteria).map((key) => ({
+                [key]: criteria[key],
+            })),
+        };
+        return User.find(filterCriteria)
             .sort(sort)
             .skip((page.page - 1) * page.size)
             .limit(page.size)

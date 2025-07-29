@@ -136,7 +136,7 @@ describe("UserRepository (SQL)", () => {
                 .createMany({
                 data: [user, user2, user3],
             })
-                .then(() => UserRepository.filter({ email: "edu2@mail.com" }, { email: 1 }, { page: 1, size: 1 }))
+                .then(() => UserRepository.filter({ email: "edu2@mail.com", username: "edu3" }, { email: 1 }, { page: 1, size: 1 }))
                 .then((users) => {
                 expect(users.length).to.equal(1);
                 expect(users[0].email).to.equal("edu2@mail.com");

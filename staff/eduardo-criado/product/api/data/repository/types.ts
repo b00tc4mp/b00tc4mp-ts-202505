@@ -20,6 +20,18 @@ export interface IUserRepository {
   ): Promise<IUserData[]>;
 }
 
+// filter(
+//   criteria: {
+//     OR?: Array<{
+//       name?: {};
+//       username?: {};
+//       email?: {};
+//     }>;
+//   },
+//   sort: { [key in "name" | "username" | "email"]?: 1 | -1 },
+//   page: { page: number; size: number }
+// ): Promise<IUserData[]>;
+
 export interface IPostData {
   id: string;
   author: string;

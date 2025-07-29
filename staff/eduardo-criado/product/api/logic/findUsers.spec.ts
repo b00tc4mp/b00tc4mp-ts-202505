@@ -12,7 +12,7 @@ const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } =
 
 const { ObjectId } = Types;
 
-describe.only("findUsers", () => {
+describe("findUsers", () => {
   before(() => connect(MONGO_URL));
 
   beforeEach(() => UserRepository.removeAll());
@@ -48,12 +48,21 @@ describe.only("findUsers", () => {
         password: "123123123",
       }),
     ])
-      .then(() =>
-        findUsers("68505d6ee96dfc66eb4a9f04", "e", "username", "asc", 1, 2)
-      )
-      .then((users) => {
-        expect(users).to.be.instanceOf(Array);
+      .then(() => {
         debugger;
+        return findUsers(
+          "68505d6ee96dfc66eb4a9f04",
+          "pe",
+          "username",
+          "asc",
+          1,
+          2
+        );
+      })
+
+      .then((users) => {
+        debugger;
+        expect(users).to.be.instanceOf(Array);
         expect(users.length).to.equal(2);
         expect(users[0].id).to.equal("68505d6ee96dfc66eb4a9f03");
         expect(users[0].name).to.equal("Pepito Grillo");

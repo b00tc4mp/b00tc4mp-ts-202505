@@ -3,7 +3,7 @@ import { UserRepository } from "./UserRepository.js";
 import fs from "fs/promises";
 const { FS_USERS = "./data/repository/fs/users-test.json" } = process.env;
 // const { FS_USERS = "./data/repository/fs/users-test.json" } = process.env;
-describe("UserRepository (FS)", () => {
+describe.only("UserRepository (FS)", () => {
     beforeEach(() => fs.writeFile(FS_USERS, "[]"));
     describe("save", () => {
         it("saves a new user", () => {
@@ -114,7 +114,7 @@ describe("UserRepository (FS)", () => {
         });
     });
     describe("filter by params", () => {
-        it("filters users by params", () => {
+        it("filters users by params in descending order", () => {
             const user = {
                 id: "user-1",
                 name: "Ed U",
@@ -140,12 +140,49 @@ describe("UserRepository (FS)", () => {
             const json = JSON.stringify(users);
             return fs
                 .writeFile(FS_USERS, json)
-                .then(() => UserRepository.filter({ username: "edu" }, { username: 1 }, { page: 1, size: 1 }))
+                .then(() => UserRepository.filter({ username: "edu", name: "Ed U 3" }, { username: 1 }, { page: 1, size: 1 }))
                 .then((users) => {
                 expect(users.length).to.equal(1);
                 expect(users[0].name).to.equal("Ed U");
+                expect(users[0].id).to.equal("user-1");
                 expect(users[0].email).to.equal("edu@mail.com");
                 expect(users[0].username).to.equal("edu");
+                expect(users[0].password).to.equal("123123123");
+            });
+        });
+        it("filters users by params in descending order", () => {
+            const user = {
+                id: "user-1",
+                name: "Ed U",
+                email: "edu@mail.com",
+                username: "edu",
+                password: "123123123",
+            };
+            const user2 = {
+                id: "user-2",
+                name: "Ed U 2",
+                email: "edu2@mail.com",
+                username: "educo",
+                password: "123123123",
+            };
+            const user3 = {
+                id: "user-3",
+                name: "Ed U 3",
+                email: "edu3@mail.com",
+                username: "educa",
+                password: "123123123",
+            };
+            const users = [user, user2, user3];
+            const json = JSON.stringify(users);
+            return fs
+                .writeFile(FS_USERS, json)
+                .then(() => UserRepository.filter({ username: "edu", name: "Ed U 3" }, { username: -1 }, { page: 1, size: 1 }))
+                .then((users) => {
+                expect(users.length).to.equal(1);
+                expect(users[0].name).to.equal("Ed U 3");
+                expect(users[0].id).to.equal("user-3");
+                expect(users[0].email).to.equal("edu3@mail.com");
+                expect(users[0].username).to.equal("educa");
                 expect(users[0].password).to.equal("123123123");
             });
         });
@@ -175,7 +212,7 @@ describe("UserRepository (FS)", () => {
             const json = JSON.stringify(users);
             return fs
                 .writeFile(FS_USERS, json)
-                .then(() => UserRepository.filter({ username: "" }, { username: 1 }, { page: 1, size: 1 }))
+                .then(() => UserRepository.filter({ username: "" }, { username: 1 }, { page: 1, size: 0 }))
                 .then((users) => {
                 expect(users.length).to.equal(0);
             });

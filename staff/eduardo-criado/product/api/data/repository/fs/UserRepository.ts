@@ -118,11 +118,37 @@ export const UserRepository: IUserRepository = {
       .then((json) => {
         let users: IUserData[] = JSON.parse(json);
 
+        // users = users.filter((user) =>
+        //   Object.entries(criteria).every(
+        //     ([key, value]) => user[key as keyof IUserData] === value
+        //   )
+        // );
+
         users = users.filter((user) =>
-          Object.entries(criteria).every(
-            ([key, value]) => user[key as keyof IUserData] === value
-          )
+          Object.entries(criteria).some(([key, value]) => {
+            if (typeof value === "string") {
+              return user[key as keyof IUserData] === value;
+            }
+            return true;
+          })
         );
+
+        // users = users.filter((user) => {
+        //   return Object.entries(criteria).every(([key, value]) => {
+        //     if (typeof value !== "string") {
+        //       return true;
+        //     }
+        //     const stringValue = value as string;
+        //     if (stringValue.trim() === "") {
+        //       return true;
+        //     }
+
+        //     const userField = (
+        //       user[key as keyof IUserData] ?? ""
+        //     ).toLowerCase();
+        //     return userField.includes(stringValue.toLowerCase());
+        //   });
+        // });
 
         const key = Object.keys(sort)[0] as "name" | "username" | "email";
         if (key) {

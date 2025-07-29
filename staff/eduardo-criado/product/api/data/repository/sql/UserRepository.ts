@@ -55,19 +55,29 @@ export const UserRepository: IUserRepository = {
     ).toString(36);
   },
 
+  // filter(criteria, sort, page) {
+  //   return prisma.user
+  //     .findMany({
+  //       where: criteria,
+  //       orderBy: {
+  //         [Object.keys(sort)[0]]: Object.values(sort)[0] === 1 ? "asc" : "desc",
+  //       },
+  //       skip: (page.page - 1) * page.size,
+  //       take: page.size,
+  //     })
+  //     .catch((error) => {
+  //       throw new SystemError(error.message);
+  //     });
+  // },
   filter(criteria, sort, page) {
-    return prisma.user
-      .findMany({
-        where: criteria,
-        orderBy: {
-          [Object.keys(sort)[0]]: Object.values(sort)[0] === 1 ? "asc" : "desc",
-        },
-        skip: (page.page - 1) * page.size,
-        take: page.size,
-      })
-      .catch((error) => {
-        throw new SystemError(error.message);
-      });
+    return prisma.user.findMany({
+      where: criteria,
+      orderBy: {
+        [Object.keys(sort)[0]]: Object.values(sort)[0] === 1 ? "asc" : "desc",
+      },
+      skip: (page.page - 1) * page.size,
+      take: page.size,
+    });
   },
 };
 
