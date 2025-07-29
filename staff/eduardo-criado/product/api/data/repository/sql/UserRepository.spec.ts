@@ -3,7 +3,7 @@ import { UserRepository } from "./UserRepository.js";
 import { IUserData } from "../types.js";
 import { prisma } from "./index.js";
 
-describe.only("UserRepository (SQL)", () => {
+describe("UserRepository (SQL)", () => {
   beforeEach(() => prisma.user.deleteMany({}));
 
   describe("save", () => {

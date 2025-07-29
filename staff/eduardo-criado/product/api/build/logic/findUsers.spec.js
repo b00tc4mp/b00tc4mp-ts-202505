@@ -22,7 +22,7 @@ describe("findUsers", () => {
             }),
             UserRepository.save({
                 id: "68505d6ee96dfc66eb4a9f02",
-                name: "Peter Pan",
+                name: "Pepito Grillo",
                 email: "peterpan@mail.com",
                 username: "peterpan",
                 password: "123123123",
@@ -44,7 +44,7 @@ describe("findUsers", () => {
         ])
             .then(() => {
             debugger;
-            return findUsers("68505d6ee96dfc66eb4a9f04", "pe", "username", "asc", 1, 2);
+            return findUsers("68505d6ee96dfc66eb4a9f04", "Pepito Grillo", "username", "asc", 1, 2);
         })
             .then((users) => {
             debugger;
@@ -56,7 +56,7 @@ describe("findUsers", () => {
             expect(users[0].username).to.equal("pepitogrillo");
             expect(users[0].password).to.equal("123123123");
             expect(users[1].id).to.equal("68505d6ee96dfc66eb4a9f02");
-            expect(users[1].name).to.equal("Peter Pan");
+            expect(users[1].name).to.equal("Pepito Grillo");
             expect(users[1].email).to.equal("peterpan@mail.com");
             expect(users[1].username).to.equal("peterpan");
             expect(users[1].password).to.equal("123123123");
