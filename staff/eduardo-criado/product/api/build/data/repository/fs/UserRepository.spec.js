@@ -3,7 +3,7 @@ import { UserRepository } from "./UserRepository.js";
 import fs from "fs/promises";
 const { FS_USERS = "./data/repository/fs/users-test.json" } = process.env;
 // const { FS_USERS = "./data/repository/fs/users-test.json" } = process.env;
-describe.only("UserRepository (FS)", () => {
+describe("UserRepository (FS)", () => {
     beforeEach(() => fs.writeFile(FS_USERS, "[]"));
     describe("save", () => {
         it("saves a new user", () => {

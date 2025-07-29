@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { UserRepository } from "./UserRepository.js";
 import { prisma } from "./index.js";
-describe("UserRepository (SQL)", () => {
+describe.only("UserRepository (SQL)", () => {
     beforeEach(() => prisma.user.deleteMany({}));
     describe("save", () => {
         it("saves a new user", () => {

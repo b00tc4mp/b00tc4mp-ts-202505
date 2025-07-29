@@ -70,8 +70,14 @@ export const UserRepository: IUserRepository = {
   //     });
   // },
   filter(criteria, sort, page) {
+    const filterCriteria = {
+      OR: Object.keys(criteria).map((key) => ({
+        [key]: criteria[key as keyof typeof criteria],
+      })),
+    };
+
     return prisma.user.findMany({
-      where: criteria,
+      where: filterCriteria,
       orderBy: {
         [Object.keys(sort)[0]]: Object.values(sort)[0] === 1 ? "asc" : "desc",
       },
