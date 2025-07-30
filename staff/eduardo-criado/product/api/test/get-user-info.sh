@@ -9,6 +9,10 @@
 
 # curl -X GET http://localhost:8080/users/841a20afda0fe4010bc645c -v | jq
 
-curl -X GET http://localhost:8080/users/1q2xrb0us4 -v | jq
+# curl -X GET http://localhost:8080/users/h9oz?0ax18p -v | jq
+
+# curl -X GET http://localhost:8080/users/4soy0navlc2 -v | jq
+
+curl -X GET http://localhost:8080/users/4soyczf1duk -v | jq
 
 

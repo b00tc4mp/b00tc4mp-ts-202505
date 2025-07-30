@@ -3,9 +3,7 @@ import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { findUsers } from "./findUsers.js";
 import { NotFoundError, ValidationError } from "./errors.js";
 import { Types } from "mongoose";
-// import { UserRepository } from "../data/repository/fs/UserRepository.js";
-import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
-// import { UserRepository } from "../data/repository/sql/UserRepository.js";
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
 
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } =
   process.env;

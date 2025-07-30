@@ -1,7 +1,5 @@
 import { validate } from "./validate.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
-// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
-// import { UserRepository } from "../data/repository/fs/UserRepository.js";
 import { NotFoundError, SystemError } from "./errors.js";
 export const generateCaption = (userId, keywords) => {
     validate.id(userId, "userId");

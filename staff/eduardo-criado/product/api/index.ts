@@ -91,32 +91,36 @@ connect(MONGO_URL)
       }
     });
 
-    // api.get("/users/find", (req, res) => {
-    //   try {
-    //     const { userId, query, sortField, sortOrder, pageNumber, pageSize } =
-    //       req.query;
+    api.get("/users", (req, res) => {
+      try {
+        const { userId, query, sortField, sortOrder, pageNumber, pageSize } =
+          req.query;
 
-    //     logic
-    //       .findUsers(
-    //         typeof userId === "string" ? userId : "",
-    //         typeof query === "string" ? query : "",
-    //         typeof sortField === "string" ? sortField : "username",
-    //         typeof sortOrder === "string" ? sortOrder : "asc",
-    //         typeof pageNumber === "string" ? Number(pageNumber) : 1,
-    //         typeof pageSize === "string" ? Number(pageSize) : 10
-    //       )
-    //       .then((users) => res.json(users))
-    //       .catch((error) => {
-    //         const { constructor, message } = error as Error;
-    //         console.error(error);
-    //         res.status(500).json({ error: constructor.name, message });
-    //       });
-    //   } catch (error) {
-    //     const { constructor, message } = error as Error;
-    //     console.error(error);
-    //     res.status(500).json({ error: constructor.name, message });
-    //   }
-    // });
+        logic
+          .findUsers(
+            typeof userId === "string" ? userId : "",
+            typeof query === "string" ? query : "",
+            typeof sortField === "string"
+              ? (sortField as "name" | "username" | "email")
+              : "username",
+            typeof sortOrder === "string"
+              ? (sortOrder as "asc" | "desc")
+              : "asc",
+            Number(pageNumber),
+            Number(pageSize)
+          )
+          .then((users) => res.json(users))
+          .catch((error) => {
+            const { constructor, message } = error as Error;
+            console.error(error);
+            res.status(500).json({ error: constructor.name, message });
+          });
+      } catch (error) {
+        const { constructor, message } = error as Error;
+        console.error(error);
+        res.status(500).json({ error: constructor.name, message });
+      }
+    });
 
     api.listen(PORT, () =>
       console.log(`API is up & listening on port ${PORT}`)

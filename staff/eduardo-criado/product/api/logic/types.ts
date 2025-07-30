@@ -1,4 +1,4 @@
-// import { IUserDoc } from "../data/repository/no-sql/types.js";
+// import { IUserDoc } from "../data/repository/sql/types.js";
 
 export interface User {
   id: string;

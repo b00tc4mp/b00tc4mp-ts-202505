@@ -4,8 +4,6 @@ import { generateCaption } from "./generateCaption.js";
 import { ValidationError, NotFoundError } from "./errors.js";
 
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
-// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
-// import { UserRepository } from "../data/repository/fs/UserRepository.js";
 
 import { Types } from "mongoose";
 import { beforeEach } from "mocha";

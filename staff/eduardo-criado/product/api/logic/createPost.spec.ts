@@ -2,10 +2,8 @@ import { expect } from "chai";
 import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { registerUser } from "./registerUser.js";
 import { createPost } from "./createPost.js";
-// import { PostRepository } from "../data/repository/no-sql/PostRepository.js";
-// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
-import { PostRepository } from "../data/repository/fs/PostRepository.js";
-import { UserRepository } from "../data/repository/fs/UserRepository.js";
+import { PostRepository } from "../data/repository/sql/PostRepository.js";
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
 import { ValidationError } from "./errors.js";
 
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } =

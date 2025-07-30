@@ -2,8 +2,6 @@ import { expect } from "chai";
 import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { registerUser } from "./registerUser.js";
 import { DuplicityError, ValidationError } from "./errors.js";
-// import { UserRepository } from "../data/repository/fs/UserRepository.js";
-// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } = process.env;
 describe("registerUser", () => {
