@@ -1,5 +1,5 @@
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
-import { NotFoundError, PasswordError, SystemError } from "./errors.js";
+import { NotFoundError, CredentialsError, SystemError } from "./errors.js";
 import { validate } from "./validate.js";
 export const authenticateUser = (username, password) => {
     validate.text(username, "username", 3, 30);
@@ -12,7 +12,7 @@ export const authenticateUser = (username, password) => {
         if (!user)
             throw new NotFoundError("user not found");
         if (user.password !== password)
-            throw new PasswordError("wrong password");
+            throw new CredentialsError("wrong password");
         return user.id;
     });
 };

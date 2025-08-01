@@ -12,6 +12,11 @@ export const findUsers: FindUsers = (
   pageSize
 ) => {
   validate.id(userId, "user id");
+  validate.text(query, "query", 1, 100);
+  validate.text(sortField, "sort field", 1, 100);
+  validate.text(sortOrder, "sort order", 1, 100);
+  validate.number(pageNumber, "page number");
+  validate.number(pageSize, "page size");
 
   return UserRepository.findById(userId)
     .catch((error) => {

@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import { connect, disconnect } from "../data/repository/no-sql/index.js";
-import { registerUser } from "./registerUser.js";
 import { createPost } from "./createPost.js";
 import { PostRepository } from "../data/repository/sql/PostRepository.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";

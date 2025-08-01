@@ -1,5 +1,3 @@
-// import { IUserDoc } from "../data/repository/sql/types.js";
-
 export interface User {
   id: string;
   name: string;
@@ -22,11 +20,10 @@ export type AuthenticateUser = (
   password: string
 ) => Promise<string>;
 
-// export type GetUserInfo = (id: string) => Promise<IUserDoc>;
 export type GetUserInfo = (userId: string) => Promise<User>;
 
 export type CreatePost = (
-  author: string,
+  userId: string,
   title: string,
   description: string,
   image: string
@@ -36,13 +33,6 @@ export type GenerateCaption = (
   userId: string,
   keywords: string[]
 ) => Promise<string>;
-
-// export type FindUsers = (
-//   query: string,
-//   order: string,
-//   page: number,
-//   max: number
-// ) => Promise<User>;
 
 export type FindUsers = (
   userId: string,

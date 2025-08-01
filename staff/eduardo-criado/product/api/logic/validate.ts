@@ -56,11 +56,18 @@ function validateKeyWords(keyWords: string[], explain = "key words") {
   keyWords.forEach((keyWord) => validateText(keyWord, explain));
 }
 
+function validateNumber(number: number, explain = "number") {
+  if (typeof number !== "number") {
+    throw new ValidationError(`invalid ${explain} type`);
+  }
+}
+
 export const validate = {
   id: validateId,
   text: validateText,
   email: validateEmail,
   keyWords: validateKeyWords,
+  number: validateNumber,
 };
 
 // export default validate;

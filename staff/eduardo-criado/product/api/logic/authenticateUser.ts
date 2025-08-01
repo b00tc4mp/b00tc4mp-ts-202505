@@ -1,6 +1,6 @@
 import { AuthenticateUser } from "./types.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
-import { NotFoundError, PasswordError, SystemError } from "./errors.js";
+import { NotFoundError, CredentialsError, SystemError } from "./errors.js";
 import { validate } from "./validate.js";
 
 export const authenticateUser: AuthenticateUser = (username, password) => {
@@ -14,7 +14,8 @@ export const authenticateUser: AuthenticateUser = (username, password) => {
     .then((user) => {
       if (!user) throw new NotFoundError("user not found");
 
-      if (user.password !== password) throw new PasswordError("wrong password");
+      if (user.password !== password)
+        throw new CredentialsError("wrong password");
 
       return user.id;
     });
