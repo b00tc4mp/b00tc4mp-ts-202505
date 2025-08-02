@@ -12,6 +12,9 @@ import {
   ValidationError,
   SystemError,
 } from "./logic/errors.js";
+
+import cors from "cors";
+
 import { parse } from "dotenv";
 
 const { JWT_SECRET = "" } = process.env;
@@ -22,6 +25,16 @@ const { PORT = 8080, MONGO_URL = "mongodb://localhost:27017/product-api" } =
 connect(MONGO_URL)
   .then(() => {
     const api = express();
+
+    // api.use(cors());
+
+    api.use(
+      cors({
+        origin: "http://localhost:5173", // o el origen de tu frontend
+        methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+      })
+    );
 
     const jsonBodyParser = express.json();
 
