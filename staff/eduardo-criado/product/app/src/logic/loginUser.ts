@@ -1,4 +1,4 @@
-import errors, { SystemError } from "./errors";
+import errors, { SystemError } from "com/errors";
 
 const loginUser = (username: string, password: string) => {
   return fetch(`${import.meta.env.VITE_API_URL}/users/auth`, {
@@ -8,31 +8,28 @@ const loginUser = (username: string, password: string) => {
     },
     body: JSON.stringify({ username, password }),
   })
-    .catch((error) => {
-      throw new Error(error);
+    .catch(() => {
+      throw new SystemError("server connection error");
     })
     .then((response) => {
-      if (response.status === 200)
+      if (response.ok)
         return response
           .json()
           .catch(() => {
-            throw new SystemError("server is not available");
+            throw new SystemError("json parse error");
           })
           .then((token) => (sessionStorage.token = token));
 
       return response
         .json()
         .catch(() => {
-          throw new SystemError("server is not available");
+          throw new SystemError("json parse error");
         })
         .then((body) => {
           const { error, message } = body;
           const constructor = errors[error as keyof typeof errors];
-          if (typeof constructor === "function") {
-            throw new (constructor as typeof SystemError)(message);
-          } else {
-            throw new Error(message);
-          }
+
+          throw new constructor(message);
         });
     });
 };

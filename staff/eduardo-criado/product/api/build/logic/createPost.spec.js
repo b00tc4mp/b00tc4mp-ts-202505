@@ -3,11 +3,17 @@ import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { createPost } from "./createPost.js";
 import { PostRepository } from "../data/repository/sql/PostRepository.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
-import { ValidationError } from "./errors.js";
+import { ValidationError } from "com";
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } = process.env;
 describe("createPost", () => {
     before(() => connect(MONGO_URL));
-    beforeEach(() => Promise.all([PostRepository.removeAll(), UserRepository.removeAll()]));
+    // beforeEach(() =>
+    //   Promise.all([PostRepository.removeAll(), UserRepository.removeAll()])
+    // );
+    beforeEach(async () => {
+        await PostRepository.removeAll();
+        await UserRepository.removeAll();
+    });
     it("creates a new post from a valid user", () => {
         return UserRepository.save({
             id: "123456789012345678901234",
@@ -32,7 +38,7 @@ describe("createPost", () => {
             });
         });
     });
-    it("fails on invalid author id format", () => {
+    it("fails on invalid user id format", () => {
         let errorThrown;
         try {
             /* @ts-ignore */
@@ -44,7 +50,7 @@ describe("createPost", () => {
         finally {
             expect(errorThrown).to.exist;
             expect(errorThrown).to.be.instanceOf(ValidationError);
-            expect(errorThrown.message).to.equal("invalid author id format");
+            expect(errorThrown.message).to.equal("invalid user id format");
         }
     });
     it("fails on invalid title type", () => {

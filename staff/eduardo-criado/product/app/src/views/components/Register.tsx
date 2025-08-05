@@ -1,7 +1,7 @@
 import React, { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import logic from "../../logic";
-import { SystemError } from "../../logic/errors";
+import { SystemError } from "../../../../com/errors";
 
 export default function Register() {
   const [name, setName] = useState("");

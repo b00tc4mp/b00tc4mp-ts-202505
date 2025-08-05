@@ -1,7 +1,6 @@
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 import { PostRepository } from "../data/repository/sql/PostRepository.js";
-import { NotFoundError, SystemError } from "./errors.js";
-import { validate } from "./validate.js";
+import { validate, NotFoundError, SystemError } from "com";
 export const createPost = (userId, title, description, image) => {
     validate.id(userId, "user id");
     validate.text(title, "title", 1, 100);

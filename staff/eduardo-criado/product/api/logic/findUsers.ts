@@ -1,6 +1,5 @@
 import { FindUsers, User } from "./types.js";
-import { validate } from "./validate.js";
-import { NotFoundError, SystemError, ValidationError } from "./errors.js";
+import { validate, NotFoundError, SystemError, ValidationError } from "com";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 
 export const findUsers: FindUsers = (
@@ -53,7 +52,6 @@ export const findUsers: FindUsers = (
                 name: user.name,
                 email: user.email,
                 username: user.username,
-                password: user.password,
                 avatar: user.avatar,
               } as User;
             });

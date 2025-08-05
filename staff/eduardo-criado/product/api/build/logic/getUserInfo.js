@@ -1,5 +1,4 @@
-import { validate } from "./validate.js";
-import { NotFoundError, SystemError } from "./errors.js";
+import { validate, NotFoundError, SystemError } from "com";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 export const getUserInfo = (userId) => {
     validate.id(userId, "user id");
@@ -11,7 +10,13 @@ export const getUserInfo = (userId) => {
         if (!user)
             throw new NotFoundError("user not found");
         // return user as IUserDoc;
-        return user;
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar,
+            username: user.username,
+        };
     });
 };
 //# sourceMappingURL=getUserInfo.js.map

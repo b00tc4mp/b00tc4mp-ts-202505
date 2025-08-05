@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { authenticateUser } from "./authenticateUser.js";
-import { NotFoundError, CredentialsError, ValidationError } from "./errors.js";
+import { NotFoundError, CredentialsError, ValidationError } from "com";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 
 const { MONGO_URL_TEST = "mongodb://localhost:27017/product-api-test" } =

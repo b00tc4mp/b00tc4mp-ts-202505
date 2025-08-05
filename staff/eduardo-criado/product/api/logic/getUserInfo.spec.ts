@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { getUserInfo } from "./getUserInfo.js";
-import { NotFoundError, ValidationError } from "./errors.js";
+import { NotFoundError, ValidationError } from "com";
 import { Types } from "mongoose";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 
@@ -28,7 +28,6 @@ describe("getUserInfo", () => {
         expect(user.name).to.equal("Wendy Darling");
         expect(user.email).to.equal("wendydarling@mail.com");
         expect(user.username).to.equal("wendydarling");
-        expect(user.password).to.equal("123123123");
       });
   });
 

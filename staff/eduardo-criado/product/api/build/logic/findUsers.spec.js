@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { findUsers } from "./findUsers.js";
-import { NotFoundError, ValidationError } from "./errors.js";
+import { NotFoundError, ValidationError } from "com";
 import { Types } from "mongoose";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 const { MONGO_URL = "mongodb://localhost:27017/product-api-test" } = process.env;
@@ -52,12 +52,10 @@ describe("findUsers", () => {
             expect(users[0].name).to.equal("Pepito Grillo");
             expect(users[0].email).to.equal("pepitogrillo@mail.com");
             expect(users[0].username).to.equal("pepitogrillo");
-            expect(users[0].password).to.equal("123123123");
             expect(users[1].id).to.equal("68505d6ee96dfc66eb4a9f02");
             expect(users[1].name).to.equal("Pepito Grillo");
             expect(users[1].email).to.equal("peterpan@mail.com");
             expect(users[1].username).to.equal("peterpan");
-            expect(users[1].password).to.equal("123123123");
         });
     });
     // .then(() =>
@@ -72,7 +70,7 @@ describe("findUsers", () => {
     // )
     it("fails on non-existing user id", () => {
         let errorThrown;
-        return findUsers(new ObjectId().toString(), "", "username", "asc", 1, 10)
+        return findUsers(new ObjectId().toString(), "to", "username", "asc", 1, 10)
             .catch((error) => (errorThrown = error))
             .finally(() => {
             expect(errorThrown).to.be.instanceOf(NotFoundError);

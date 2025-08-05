@@ -13,6 +13,6 @@
 # curl -X POST -H 'Content-Type: application/json' -d '{"name":"Manu","email":"manu3@mail.com","username":"manu3","password":"123123123"}' http://localhost:8080/users -v 
 # curl -X POST -H 'Content-Type: application/json' -d '{"name":"Manu","email":"manu3@mail.com","username":"manu3","password":"123123123"}' http://localhost:8080/users -v 
 
-curl -X POST -H 'Content-Type: application/json' -d '{"name":"Manu","email":"manu4@mail.com","username":"manu4","password":"123123123"}' http://localhost:8080/users -v 
+# curl -X POST -H 'Content-Type: application/json' -d '{"name":"Manu","email":"manu4@mail.com","username":"manu4","password":"123123123"}' http://localhost:8080/users -v 
 
-curl -X POST -H 'Content-Type: application/json' -d '{"name":"Manu","email":"manu5@mail.com","username":"manu5","password":"123123123"}' http://localhost:8080/users -v 
+curl -X POST -H 'Content-Type: application/json' -d '{"name":"Manu","email":"manu7@mail.com","username":"manu7","password":"123123123"}' http://localhost:8080/users -v 

@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { connect, disconnect } from "../data/repository/no-sql/index.js";
 import { generateCaption } from "./generateCaption.js";
-import { ValidationError, NotFoundError } from "./errors.js";
 
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 

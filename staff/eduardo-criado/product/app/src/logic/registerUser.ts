@@ -1,4 +1,4 @@
-import errors, { SystemError } from "./errors";
+import errors, { SystemError } from "com/errors";
 
 const registerUser = (
   name: string,
@@ -13,24 +13,22 @@ const registerUser = (
     },
     body: JSON.stringify({ name, email, username, password }),
   })
-    .catch((error) => {
-      throw new SystemError("server error: " + error);
+    .catch(() => {
+      throw new SystemError("server connection error");
     })
     .then((response) => {
       if (response.status === 201) return;
+
       return response
         .json()
         .catch(() => {
-          throw new SystemError("server is not available");
+          throw new SystemError("json parse error");
         })
         .then((body) => {
           const { error, message } = body;
           const constructor = errors[error as keyof typeof errors];
-          if (typeof constructor === "function") {
-            throw new (constructor as typeof SystemError)(message);
-          } else {
-            throw new Error(message);
-          }
+
+          throw new constructor(message);
         });
     });
 };

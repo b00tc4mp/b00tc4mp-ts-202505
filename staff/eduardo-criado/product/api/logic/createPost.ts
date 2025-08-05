@@ -1,8 +1,7 @@
 import { CreatePost } from "./types.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 import { PostRepository } from "../data/repository/sql/PostRepository.js";
-import { NotFoundError, SystemError, ValidationError } from "./errors.js";
-import { validate } from "./validate.js";
+import { validate, NotFoundError, SystemError, ValidationError } from "com";
 
 export const createPost: CreatePost = (
   userId: string,

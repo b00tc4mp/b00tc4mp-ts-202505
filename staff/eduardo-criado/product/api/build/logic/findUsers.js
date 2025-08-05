@@ -1,5 +1,4 @@
-import { validate } from "./validate.js";
-import { NotFoundError, SystemError } from "./errors.js";
+import { validate, NotFoundError, SystemError } from "com";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
 export const findUsers = (userId, query, sortField, sortOrder, pageNumber, pageSize) => {
     validate.id(userId, "user id");
@@ -38,7 +37,6 @@ export const findUsers = (userId, query, sortField, sortOrder, pageNumber, pageS
                     name: user.name,
                     email: user.email,
                     username: user.username,
-                    password: user.password,
                     avatar: user.avatar,
                 };
             });

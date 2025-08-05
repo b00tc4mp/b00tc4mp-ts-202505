@@ -1,7 +1,6 @@
 import { GenerateCaption } from "./types.js";
-import { validate } from "./validate.js";
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
-import { NotFoundError, SystemError } from "./errors.js";
+import { validate, NotFoundError, SystemError } from "com";
 
 export const generateCaption: GenerateCaption = (userId, keywords) => {
   validate.id(userId, "userId");

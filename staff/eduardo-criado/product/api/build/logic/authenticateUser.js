@@ -1,6 +1,5 @@
 import { UserRepository } from "../data/repository/sql/UserRepository.js";
-import { NotFoundError, CredentialsError, SystemError } from "./errors.js";
-import { validate } from "./validate.js";
+import { validate, NotFoundError, CredentialsError, SystemError } from "com";
 export const authenticateUser = (username, password) => {
     validate.text(username, "username", 3, 30);
     validate.text(password, "password", 8, 100);
