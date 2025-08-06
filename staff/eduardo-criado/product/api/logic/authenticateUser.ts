@@ -5,8 +5,8 @@ import { validate, NotFoundError, CredentialsError, SystemError } from "com";
 export const authenticateUser: AuthenticateUser = (username, password) => {
   validate.text(username, "username", 3, 30);
   validate.text(password, "password", 8, 100);
-  return UserRepository.findByUsername(username)
 
+  return UserRepository.findByUsername(username)
     .catch((error) => {
       new SystemError(error.message);
     })

@@ -1,9 +1,9 @@
 import errors, { SystemError } from "com/errors";
 
-const getUserInfo = (userId: string) => {
+const getUserInfo = () => {
   const token = sessionStorage.getItem("token");
 
-  return fetch(`${import.meta.env.VITE_API_URL}/users/${userId}`, {
+  return fetch(`${import.meta.env.VITE_API_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

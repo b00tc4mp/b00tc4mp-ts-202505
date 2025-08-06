@@ -1,6 +1,6 @@
 curl -X POST \
   -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0c3F4YnhlcjNtZyIsImlhdCI6MTc1NDQyNzQyMCwiZXhwIjoxNzU3MDE5NDIwfQ.XW9k91Lur99Znx0W4MepWS7NBzXZHdvQ8YTqKhAyH-U' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0c3I3OGN0Zjd4ayIsImlhdCI6MTc1NDUwNTAxNywiZXhwIjoxNzU3MDk3MDE3fQ.HL7hvjHuXoFCJTaYhSRQ2HZDEOPwDGrK4wqddE_CUMc' \
   -d '{
     "title": "MANU POST 7",
     "description": "post de manu 7",

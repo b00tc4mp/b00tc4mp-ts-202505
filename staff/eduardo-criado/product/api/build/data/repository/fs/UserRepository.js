@@ -1,5 +1,5 @@
 import fs from "fs/promises";
-import { SystemError } from "../../../logic/errors.js";
+import { SystemError } from "com";
 const { FS_USERS = "./data/repository/fs/users.json" } = process.env;
 export const UserRepository = {
     // save(user) {

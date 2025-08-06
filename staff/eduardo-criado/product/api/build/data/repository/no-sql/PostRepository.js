@@ -1,4 +1,4 @@
-import { SystemError } from "../../../logic/errors.js";
+import { SystemError } from "com";
 import { Post } from "./index.js";
 import { Types } from "mongoose";
 export const PostRepository = {

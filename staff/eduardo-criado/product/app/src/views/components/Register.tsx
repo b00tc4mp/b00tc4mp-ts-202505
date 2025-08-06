@@ -1,5 +1,5 @@
 import React, { useState, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logic from "../../logic";
 import { SystemError } from "../../../../com/errors";
 
@@ -42,6 +42,7 @@ export default function Register() {
 
   const handleLoginClick = () => {
     navigate("/login");
+    setMessage("You clicked the login button");
   };
 
   return (
@@ -76,7 +77,7 @@ export default function Register() {
           <button type="submit">Register</button>
         </form>
         <p>{message}</p>
-        <button onClick={handleLoginClick}>Login</button>
+        <Link to = "/login" onClick={handleLoginClick}>Login</Link>
       </div>
       </>
     );

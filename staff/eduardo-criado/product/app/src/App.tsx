@@ -123,9 +123,9 @@ function App() {
     <div className="App">
       <h1>Product App</h1>
       <p>{message}</p>
-      <button onClick={handleLoginClick}>Login</button>
+      {/* <button onClick={handleLoginClick}>Login</button>
       <button onClick={handleRegisterClick}>Register</button>
-      <button onClick={handleGoToHome}>Home</button>
+      <button onClick={handleGoToHome}>Home</button> */}
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/register" element={<Register />} />

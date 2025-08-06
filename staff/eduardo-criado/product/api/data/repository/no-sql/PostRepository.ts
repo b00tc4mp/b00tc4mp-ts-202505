@@ -1,4 +1,4 @@
-import { SystemError } from "../../../logic/errors.js";
+import { SystemError } from "com";
 import { IPostRepository, IPostData } from "../types.js";
 import { Post } from "./index.js";
 import { Types } from "mongoose";

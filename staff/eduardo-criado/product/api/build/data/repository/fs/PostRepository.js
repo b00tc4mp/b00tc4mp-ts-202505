@@ -1,4 +1,4 @@
-import { SystemError } from "../../../logic/errors.js";
+import { SystemError } from "com";
 import fs from "fs/promises";
 const { FS_POSTS = "./data/repository/fs/posts.json" } = process.env;
 export const PostRepository = {

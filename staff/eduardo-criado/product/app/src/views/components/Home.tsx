@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import logic from "../../logic";
-import { useState } from "react";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function Home( ) {
@@ -10,6 +9,8 @@ function Home( ) {
 
     const [message, setMessage] = useState("")
 
+    const [name, setName] = useState("")
+
 
     const handleLogout = () => {
         logic.logoutUser()
@@ -17,12 +18,28 @@ function Home( ) {
         navigate("/login")
     }
 
+    useEffect(() => {
+        try {
+
+            logic.getUserInfo()
+                .then(user => {
+                    setName(user.name)
+                })
+                .catch(error  =>  {
+                    alert(error.message)
+                })
+        } catch (error) {
+            console.error(error)
+            alert(error)
+        }
+            
+    }, [])
+
     return (
         <div>
-            <h1>Product App</h1>
             <p>{message}</p>
-            {/* <button onClick={onLogin}>Login</button>
-            <button onClick={onRegister}>Register</button> */}
+            <p>{name? `Welcome ${name}!` : "loading user..."}</p>
+            
             <button onClick={handleLogout}>Logout</button>
         </div>
     )

@@ -4,7 +4,7 @@ import { connect, disconnect } from "./data/repository/no-sql/index.js";
 // import jwt from "jsonwebtoken";
 import jwt from "./utils/jsonwebtoken-promised.js";
 // import { validateJWT, validateJWTWrapper } from "./utils/validatejwt.js";
-import { CredentialsError, DuplicityError, NotFoundError, ValidationError, SystemError, } from "./logic/errors.js";
+import { CredentialsError, DuplicityError, NotFoundError, ValidationError, SystemError, } from "com";
 import cors from "cors";
 const { JWT_SECRET = "my-secret" } = process.env;
 const { PORT = 8080, MONGO_URL = "mongodb://localhost:27017/product-api" } = process.env;
@@ -46,7 +46,7 @@ connect(MONGO_URL)
                     expiresIn: "30d",
                 })
                     .then((token) => {
-                    res.json({ token });
+                    res.json(token);
                 });
             })
                 .catch((error) => {
@@ -57,7 +57,7 @@ connect(MONGO_URL)
             next(error);
         }
     });
-    api.get("/users/:userId", (req, res, next) => {
+    api.get("/users/me", (req, res, next) => {
         try {
             const token = req.headers.authorization.slice(7);
             jwt

@@ -1,5 +1,5 @@
 import { IPostRepository, IPostData } from "../types.js";
-import { SystemError } from "../../../logic/errors.js";
+import { SystemError } from "com";
 
 import fs from "fs/promises";
 

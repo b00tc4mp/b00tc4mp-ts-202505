@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import logic from "../../logic";
-import { SystemError } from "../../../../com/errors";
+import { SystemError } from "com";
 
 const Login = () => {
 
@@ -39,6 +39,11 @@ const Login = () => {
         }
     };
 
+    const handleRegisterClick = () => {
+        navigate("/register")
+        setMessage("You clicked the register button")
+    }
+
         return (
             <div>
                 <h2>Login</h2>
@@ -58,6 +63,8 @@ const Login = () => {
                     <button type="submit">Login</button>
                 </form>
                 {message && <p>{message}</p>}
+
+                <Link to="/register" onClick={handleRegisterClick}>Register</Link>
             </div>
         );
 }

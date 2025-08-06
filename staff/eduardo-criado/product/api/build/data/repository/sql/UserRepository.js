@@ -1,4 +1,4 @@
-import { SystemError } from "../../../logic/errors.js";
+import { SystemError } from "com";
 import { prisma } from "./index.js";
 export const UserRepository = {
     save(user) {

@@ -10,7 +10,7 @@ import {
   NotFoundError,
   ValidationError,
   SystemError,
-} from "./logic/errors.js";
+} from "com";
 
 import cors from "cors";
 
@@ -64,7 +64,7 @@ connect(MONGO_URL)
                 expiresIn: "30d",
               })
               .then((token) => {
-                res.json({ token });
+                res.json(token);
               });
           })
           .catch((error) => {
@@ -75,7 +75,7 @@ connect(MONGO_URL)
       }
     });
 
-    api.get("/users/:userId", (req, res, next) => {
+    api.get("/users/me", (req, res, next) => {
       try {
         const token = req.headers.authorization!.slice(7);
 
