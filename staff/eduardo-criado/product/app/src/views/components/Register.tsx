@@ -4,10 +4,6 @@ import logic from "../../logic";
 import { SystemError } from "../../../../com/errors";
 
 export default function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
@@ -15,9 +11,25 @@ export default function Register() {
     event.preventDefault();
     setMessage("");
 
+    const form = event.currentTarget
+
+    const formElements = form.elements as typeof form.elements & {
+      name: HTMLInputElement;
+      email: HTMLInputElement;
+      username: HTMLInputElement;
+      password: HTMLInputElement;
+      
+    };
+
+  const { name: { value: name}, email: { value: email}, username: { value: username}, password: { value: password }} = formElements
+
     try {
       logic
-        .registerUser(name, email, username, password)
+        .registerUser(
+          name,
+          email,
+          username, 
+          password)
         .then(() => {
           setMessage("Registration successful");
           navigate("/login");
@@ -53,26 +65,22 @@ export default function Register() {
           <input
             type="text"
             placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            id = "name"
           />
           <input
             type="email"
             placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            id = "email"
           />
           <input
             type="text"
             placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id = "username"
           />
           <input
             type="password"
             placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            id = "password"
           />
           <button type="submit">Register</button>
         </form>

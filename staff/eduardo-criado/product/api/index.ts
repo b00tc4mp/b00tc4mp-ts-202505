@@ -119,7 +119,7 @@ connect(MONGO_URL)
       }
     });
 
-    api.get("/users", (req, res, next) => {
+    api.get("/users/search", (req, res, next) => {
       try {
         const token = req.headers.authorization!.slice(7);
 

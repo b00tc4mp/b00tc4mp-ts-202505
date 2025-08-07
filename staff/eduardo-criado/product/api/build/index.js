@@ -96,7 +96,7 @@ connect(MONGO_URL)
             next(error);
         }
     });
-    api.get("/users", (req, res, next) => {
+    api.get("/users/search", (req, res, next) => {
         try {
             const token = req.headers.authorization.slice(7);
             jwt

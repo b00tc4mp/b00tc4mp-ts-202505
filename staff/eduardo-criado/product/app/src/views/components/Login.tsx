@@ -5,8 +5,6 @@ import { SystemError } from "com";
 
 const Login = () => {
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
 
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
@@ -15,6 +13,15 @@ const Login = () => {
         event.preventDefault();
         setMessage("");
 
+        const form = event.currentTarget;
+
+        const formElements = form.elements as typeof form.elements & {
+            username: HTMLInputElement;
+            password: HTMLInputElement;
+        };
+
+        const { username: { value: username }, password: { value: password } } = formElements
+        
         try {
             logic.loginUser(username, password)
                 .then(() => {
@@ -51,14 +58,14 @@ const Login = () => {
                     <input
                         type="text"
                         placeholder="Username"
-                        value={username}
-                        onChange={(event) => setUsername(event.target.value)}
+                        id = "username"
+                        
                     />
                     <input
                         type="password"
                         placeholder="Password"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
+                        id = "password"
+                       
                     />
                     <button type="submit">Login</button>
                 </form>
