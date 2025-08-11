@@ -11,25 +11,25 @@ export default function Register() {
     event.preventDefault();
     setMessage("");
 
-    const form = event.currentTarget
+    const form = event.currentTarget;
 
     const formElements = form.elements as typeof form.elements & {
       name: HTMLInputElement;
       email: HTMLInputElement;
       username: HTMLInputElement;
       password: HTMLInputElement;
-      
     };
 
-  const { name: { value: name}, email: { value: email}, username: { value: username}, password: { value: password }} = formElements
+    const {
+      name: { value: name },
+      email: { value: email },
+      username: { value: username },
+      password: { value: password },
+    } = formElements;
 
     try {
       logic
-        .registerUser(
-          name,
-          email,
-          username, 
-          password)
+        .registerUser(name, email, username, password)
         .then(() => {
           setMessage("Registration successful");
           navigate("/login");
@@ -42,51 +42,35 @@ export default function Register() {
             return;
           }
           if (error instanceof Error) {
-        setMessage(error.message);
+            setMessage(error.message);
           } else {
-        setMessage("Registration failed");
+            setMessage("Registration failed");
           }
-      });
+        });
     } catch (error) {
       setMessage("error registering user" + error);
     }
   };
 
-  const handleLoginClick = () => {
-    navigate("/login");
-    setMessage("You clicked the login button");
-  };
+  // const handleLoginClick = () => {
+  //   navigate("/login");
+  //   setMessage("You clicked the login button");
+  // };
 
   return (
-      <>
+    <>
       <div>
         <h1>Register</h1>
         <form onSubmit={handleRegisterSubmit}>
-          <input
-            type="text"
-            placeholder="Name"
-            id = "name"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            id = "email"
-          />
-          <input
-            type="text"
-            placeholder="Username"
-            id = "username"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            id = "password"
-          />
+          <input type="text" placeholder="Name" id="name" />
+          <input type="email" placeholder="Email" id="email" />
+          <input type="text" placeholder="Username" id="username" />
+          <input type="password" placeholder="Password" id="password" />
           <button type="submit">Register</button>
         </form>
         <p>{message}</p>
-        <Link to = "/login" onClick={handleLoginClick}>Login</Link>
+        <Link to="/login">Login</Link>
       </div>
-      </>
-    );
+    </>
+  );
 }

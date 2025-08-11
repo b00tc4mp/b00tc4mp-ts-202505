@@ -5,7 +5,6 @@
 // import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 // import Login from './views/components/Login'
 
-
 // function App() {
 //   const [message, setMessage] = useState(null)
 
@@ -32,9 +31,6 @@
 //     </div>
 //   )
 
- 
-
- 
 // }
 
 // export default App
@@ -94,44 +90,22 @@ function App() {
 export default App
 */
 
-import { useState } from 'react'
-import Register from './views/components/Register'
-import Login from './views/components/Login'
-import Home from './views/components/Home'
-import { useNavigate, Routes, Route } from 'react-router-dom'
+import Register from "./views/components/Register";
+import Login from "./views/components/Login";
+import Home from "./views/components/Home";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [message, setMessage] = useState("")
-  const navigate = useNavigate()
-
-  const handleLoginClick = () => {
-    navigate("/login")
-    setMessage("You clicked the login button")
-  }
-  const handleRegisterClick = () => {
-    navigate("/register")
-    setMessage("You clicked the register button")
-  }
-
-  const handleGoToHome = () => {
-    navigate('/')
-    setMessage("You clicked the home button")
-  }
-
-
   return (
     <div className="App">
       <h1>Product App</h1>
-      <p>{message}</p>
-      {/* <button onClick={handleLoginClick}>Login</button>
-      <button onClick={handleRegisterClick}>Register</button>
-      <button onClick={handleGoToHome}>Home</button> */}
+
       <Routes>
-        <Route path="/" element={<Home />} /> 
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </div>
-  )
+  );
 }
-export default App
+export default App;

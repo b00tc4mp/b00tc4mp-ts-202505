@@ -9,8 +9,19 @@ interface User {
   email: string;
 }
 
+// interface HomeProps {
+//   onLogin: () => void;
+//   onRegister: () => void;
+//   onGoToHome: () => void;
+//   // message?: string;
+// }
+
+// function Home({ onLogin, onRegister, onGoToHome }: HomeProps) {
+
 function Home() {
   const navigate = useNavigate();
+
+  const [searchMessage, setSearchMessage] = useState("");
 
   const [message, setMessage] = useState("");
 
@@ -66,7 +77,7 @@ function Home() {
         )
         .then((users) => {
           setUsers(users);
-          setMessage(
+          setSearchMessage(
             users.length > 0 ? "Search successful" : "No results found"
           );
         })
@@ -92,20 +103,21 @@ function Home() {
   return (
     <div>
       <p>{message}</p>
+      <p>{searchMessage}</p>
       <p>{name ? `Welcome ${name}!` : "Loading user..."}</p>
 
       <form onSubmit={handleSearchSubmit}>
         <input type="text" name="query" placeholder="Search query" />
 
         <select name="sortField" defaultValue="name">
-          <option value="name">Nombre</option>
-          <option value="username">Usuario</option>
-          <option value="email">Correo</option>
+          <option value="name">Name</option>
+          <option value="username">Username</option>
+          <option value="email">Email</option>
         </select>
 
         <select name="sortOrder" defaultValue="asc">
-          <option value="asc">↑ Ascendente</option>
-          <option value="desc">↓ Descendente</option>
+          <option value="asc">↑ Ascendent</option>
+          <option value="desc">↓ Descendent</option>
         </select>
 
         <input
@@ -127,6 +139,10 @@ function Home() {
       </form>
 
       <button onClick={handleLogout}>Logout</button>
+
+      {/* <button onClick={onLogin}>Login</button>
+      <button onClick={onRegister}>Register</button>
+      <button onClick={onGoToHome}>Home</button> */}
 
       {/* Tabla para mostrar los usuarios */}
       <div>
