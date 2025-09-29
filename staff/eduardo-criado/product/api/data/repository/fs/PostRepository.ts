@@ -3,12 +3,12 @@ import { SystemError } from "com";
 
 import fs from "fs/promises";
 
-const { FS_POSTS = "./data/repository/fs/posts.json" } = process.env;
+const { FS_PATH } = process.env;
 
 export const PostRepository: IPostRepository = {
   save(post) {
     return fs
-      .readFile(FS_POSTS, "utf8")
+      .readFile(`${FS_PATH}/posts.json`, "utf8")
       .catch((error) => {
         throw new SystemError("Error reading posts file: " + error.message);
       })
@@ -20,7 +20,7 @@ export const PostRepository: IPostRepository = {
 
         posts.push(post);
         json = JSON.stringify(posts);
-        return fs.writeFile(FS_POSTS, json).catch((error) => {
+        return fs.writeFile(`${FS_PATH}/posts.json`, json).catch((error) => {
           throw new SystemError("Error writing posts file: " + error.message);
         });
       });
@@ -28,7 +28,7 @@ export const PostRepository: IPostRepository = {
 
   findById(id) {
     return fs
-      .readFile(FS_POSTS, "utf8")
+      .readFile(`${FS_PATH}/posts.json`, "utf8")
       .catch((error) => {
         throw new SystemError("Error reading posts file: " + error.message);
       })
@@ -44,7 +44,7 @@ export const PostRepository: IPostRepository = {
 
   findAll() {
     return fs
-      .readFile(FS_POSTS, "utf8")
+      .readFile(`${FS_PATH}/posts.json`, "utf8")
       .catch((error) => {
         throw new SystemError("Error reading posts file: " + error.message);
       })
@@ -56,7 +56,7 @@ export const PostRepository: IPostRepository = {
 
   findByAuthor(author) {
     return fs
-      .readFile(FS_POSTS, "utf8")
+      .readFile(`${FS_PATH}/posts.json`, "utf8")
       .catch((error) => {
         throw new SystemError("Error reading posts file: " + error.message);
       })
@@ -69,7 +69,7 @@ export const PostRepository: IPostRepository = {
 
   removeById(postId) {
     return fs
-      .readFile(FS_POSTS, "utf8")
+      .readFile(`${FS_PATH}/posts.json`, "utf8")
       .catch((error) => {
         throw new SystemError("Error reading posts file: " + error.message);
       })
@@ -77,14 +77,14 @@ export const PostRepository: IPostRepository = {
         let posts: IPostData[] = JSON.parse(json);
         posts = posts.filter((post) => post.id !== postId);
         json = JSON.stringify(posts);
-        return fs.writeFile(FS_POSTS, json).catch((error) => {
+        return fs.writeFile(`${FS_PATH}/posts.json`, json).catch((error) => {
           throw new SystemError("Error deleting post: " + error.message);
         });
       });
   },
 
   removeAll() {
-    return fs.writeFile(FS_POSTS, "[]").catch((error) => {
+    return fs.writeFile(`${FS_PATH}/posts.json`, "[]").catch((error) => {
       throw new SystemError("Error clearing posts file: " + error.message);
     });
   },

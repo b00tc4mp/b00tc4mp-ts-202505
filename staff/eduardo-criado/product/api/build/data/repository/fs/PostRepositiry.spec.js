@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { PostRepository } from "./PostRepository.js";
 import fs from "fs/promises";
 import { afterEach } from "mocha";
-const { FS_POSTS = "./data/repository/fs/posts-test.json" } = process.env;
+const { FS_PATH } = process.env;
 describe("PostRepository (FS)", () => {
-    beforeEach(() => fs.writeFile(FS_POSTS, "[]"));
+    beforeEach(() => fs.writeFile(`${FS_PATH}/posts.json`, "[]"));
     describe("save", () => {
         it("saves a new post", () => {
             const post = {
@@ -16,7 +16,7 @@ describe("PostRepository (FS)", () => {
                 createdAt: new Date(),
             };
             return PostRepository.save(post)
-                .then(() => fs.readFile(FS_POSTS, "utf8"))
+                .then(() => fs.readFile(`${FS_PATH}/posts.json`, "utf8"))
                 .then((json) => JSON.parse(json))
                 .then((posts) => {
                 const savedPost = posts.find((p) => p.id === "post-3");
@@ -43,7 +43,7 @@ describe("PostRepository (FS)", () => {
             };
             const posts = [post];
             return fs
-                .writeFile(FS_POSTS, JSON.stringify(posts))
+                .writeFile(`${FS_PATH}/posts.json`, JSON.stringify(posts))
                 .then(() => PostRepository.findById("post-3"))
                 .then((post) => {
                 expect(post.id).to.equal("post-3");
@@ -67,7 +67,7 @@ describe("PostRepository (FS)", () => {
             };
             const posts = [post];
             return fs
-                .writeFile(FS_POSTS, JSON.stringify(posts))
+                .writeFile(`${FS_PATH}/posts.json`, JSON.stringify(posts))
                 .then(() => PostRepository.findAll())
                 .then((posts) => {
                 expect(posts).to.have.lengthOf(1);
@@ -101,7 +101,7 @@ describe("PostRepository (FS)", () => {
             const posts = [post1, post2];
             const json = JSON.stringify(posts);
             return fs
-                .writeFile(FS_POSTS, json)
+                .writeFile(`${FS_PATH}/posts.json`, json)
                 .then(() => PostRepository.findByAuthor("user-1"))
                 .then((userPosts) => {
                 expect(userPosts).to.have.lengthOf(1);
@@ -126,9 +126,9 @@ describe("PostRepository (FS)", () => {
             };
             const posts = [post];
             return fs
-                .writeFile(FS_POSTS, JSON.stringify(posts))
+                .writeFile(`${FS_PATH}/posts.json`, JSON.stringify(posts))
                 .then(() => PostRepository.removeById("post-3"))
-                .then(() => fs.readFile(FS_POSTS, "utf8"))
+                .then(() => fs.readFile(`${FS_PATH}/posts.json`, "utf8"))
                 .then((json) => JSON.parse(json))
                 .then((posts) => {
                 expect(posts).to.have.lengthOf(0);
@@ -144,6 +144,6 @@ describe("PostRepository (FS)", () => {
             expect(id2).to.be.a("string");
         });
     });
-    afterEach(() => fs.writeFile(FS_POSTS, "[]"));
+    afterEach(() => fs.writeFile(`${FS_PATH}/posts.json`, "[]"));
 });
 //# sourceMappingURL=PostRepositiry.spec.js.map

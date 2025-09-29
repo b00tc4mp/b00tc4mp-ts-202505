@@ -1,10 +1,10 @@
 import { expect } from "chai";
 import { UserRepository } from "./UserRepository.js";
 import fs from "fs/promises";
-const { FS_USERS = "./data/repository/fs/users-test.json" } = process.env;
-// const { FS_USERS = "./data/repository/fs/users-test.json" } = process.env;
+// const { FS_PATH } = process.env;
+const { FS_PATH } = process.env;
 describe("UserRepository (FS)", () => {
-    beforeEach(() => fs.writeFile(FS_USERS, "[]"));
+    beforeEach(() => fs.writeFile(`${FS_PATH}/users.json`, "[]"));
     describe("save", () => {
         it("saves a new user", () => {
             const user = {
@@ -15,7 +15,7 @@ describe("UserRepository (FS)", () => {
                 password: "123123123",
             };
             return UserRepository.save(user)
-                .then(() => fs.readFile(FS_USERS, "utf8"))
+                .then(() => fs.readFile(`${FS_PATH}/users.json`, "utf8"))
                 .then((json) => JSON.parse(json))
                 .then((users) => {
                 const user = users.find((user) => user.id === "user-3");
@@ -41,7 +41,7 @@ describe("UserRepository (FS)", () => {
             const users = [user];
             const json = JSON.stringify(users);
             return fs
-                .writeFile(FS_USERS, json)
+                .writeFile(`${FS_PATH}/users.json`, json)
                 .then(() => UserRepository.findByUsername("edu"))
                 .then((user) => {
                 expect(user).to.exist;
@@ -64,7 +64,7 @@ describe("UserRepository (FS)", () => {
             const users = [user];
             const json = JSON.stringify(users);
             return fs
-                .writeFile(FS_USERS, json)
+                .writeFile(`${FS_PATH}/users.json`, json)
                 .then(() => UserRepository.findById("user-1"))
                 .then((user) => {
                 expect(user).to.exist;
@@ -101,9 +101,9 @@ describe("UserRepository (FS)", () => {
             const users = [user, user2, user3];
             const json = JSON.stringify(users);
             return fs
-                .writeFile(FS_USERS, json)
+                .writeFile(`${FS_PATH}/users.json`, json)
                 .then(() => UserRepository.removeAll())
-                .then(() => fs.readFile(FS_USERS, "utf-8"))
+                .then(() => fs.readFile(`${FS_PATH}/users.json`, "utf-8"))
                 .then((json) => expect(json).to.equal("[]"));
         });
     });
@@ -139,7 +139,7 @@ describe("UserRepository (FS)", () => {
             const users = [user, user2, user3];
             const json = JSON.stringify(users);
             return fs
-                .writeFile(FS_USERS, json)
+                .writeFile(`${FS_PATH}/users.json`, json)
                 .then(() => UserRepository.filter({ username: "edu", name: "Ed U 3" }, { username: 1 }, { page: 1, size: 1 }))
                 .then((users) => {
                 expect(users.length).to.equal(1);
@@ -175,7 +175,7 @@ describe("UserRepository (FS)", () => {
             const users = [user, user2, user3];
             const json = JSON.stringify(users);
             return fs
-                .writeFile(FS_USERS, json)
+                .writeFile(`${FS_PATH}/users.json`, json)
                 .then(() => UserRepository.filter({ username: "edu", name: "Ed U 3" }, { username: -1 }, { page: 1, size: 1 }))
                 .then((users) => {
                 expect(users.length).to.equal(1);
@@ -211,13 +211,13 @@ describe("UserRepository (FS)", () => {
             const users = [user, user2, user3];
             const json = JSON.stringify(users);
             return fs
-                .writeFile(FS_USERS, json)
+                .writeFile(`${FS_PATH}/users.json`, json)
                 .then(() => UserRepository.filter({ username: "" }, { username: 1 }, { page: 1, size: 0 }))
                 .then((users) => {
                 expect(users.length).to.equal(0);
             });
         });
     });
-    afterEach(() => fs.writeFile(FS_USERS, "[]"));
+    afterEach(() => fs.writeFile(`${FS_PATH}/users.json`, "[]"));
 });
 //# sourceMappingURL=UserRepository.spec.js.map

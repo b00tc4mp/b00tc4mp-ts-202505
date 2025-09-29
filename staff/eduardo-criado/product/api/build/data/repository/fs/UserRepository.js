@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import { SystemError } from "com";
-const { FS_USERS = "./data/repository/fs/users.json" } = process.env;
+const { FS_PATH } = process.env;
 export const UserRepository = {
     // save(user) {
     //   return fs
@@ -30,7 +30,7 @@ export const UserRepository = {
     // },
     save(user) {
         return fs
-            .readFile(FS_USERS, "utf8")
+            .readFile(`${FS_PATH}/users.json`, "utf8")
             .catch((error) => {
             throw new SystemError("Error reading users file: " + error.message);
         })
@@ -42,14 +42,14 @@ export const UserRepository = {
                 throw new Error("user data exists");
             users.push(user);
             json = JSON.stringify(users);
-            return fs.writeFile(FS_USERS, json).catch((error) => {
+            return fs.writeFile(`${FS_PATH}/users.json`, json).catch((error) => {
                 throw new SystemError("Error writing users file: " + error.message);
             });
         });
     },
     findByUsername(username) {
         return fs
-            .readFile(FS_USERS, "utf8")
+            .readFile(`${FS_PATH}/users.json`, "utf8")
             .catch((error) => {
             throw new SystemError("Error reading users file: " + error.message);
         })
@@ -63,7 +63,7 @@ export const UserRepository = {
     },
     findById(id) {
         return fs
-            .readFile(FS_USERS, "utf8")
+            .readFile(`${FS_PATH}/users.json`, "utf8")
             .catch((error) => {
             throw new SystemError("Error reading users file: " + error.message);
         })
@@ -76,7 +76,7 @@ export const UserRepository = {
         });
     },
     removeAll() {
-        return fs.writeFile(FS_USERS, "[]").catch((error) => {
+        return fs.writeFile(`${FS_PATH}/users.json`, "[]").catch((error) => {
             throw new SystemError("Error clearing users file: " + error.message);
         });
     },
@@ -86,7 +86,7 @@ export const UserRepository = {
     filter(criteria, sort, page) {
         // TODO validate criteria, sort, page (q sean objetos con las propiedades correctas)
         return fs
-            .readFile(FS_USERS, "utf8")
+            .readFile(`${FS_PATH}/users.json`, "utf8")
             .catch((error) => {
             throw new SystemError("Error reading users file: " + error.message);
         })
