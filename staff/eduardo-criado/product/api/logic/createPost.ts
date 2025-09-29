@@ -1,8 +1,8 @@
 import { CreatePost } from "./types.js";
-// import { UserRepository } from "../data/repository/sql/UserRepository.js";
-// import { PostRepository } from "../data/repository/sql/PostRepository.js";
-import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
-import { PostRepository } from "../data/repository/no-sql/PostRepository.js";
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
+import { PostRepository } from "../data/repository/sql/PostRepository.js";
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+// import { PostRepository } from "../data/repository/no-sql/PostRepository.js";
 import { validate, NotFoundError, SystemError, ValidationError } from "com";
 
 export const createPost: CreatePost = (

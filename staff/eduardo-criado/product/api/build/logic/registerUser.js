@@ -1,5 +1,4 @@
-// import { UserRepository } from "../data/repository/sql/UserRepository.js";
-import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
 import { validate, DuplicityError, SystemError } from "com";
 export const registerUser = (name, email, username, password) => {
     validate.text(name, "name", 1, 100);

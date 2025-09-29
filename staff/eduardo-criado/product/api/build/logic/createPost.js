@@ -1,7 +1,7 @@
-// import { UserRepository } from "../data/repository/sql/UserRepository.js";
-// import { PostRepository } from "../data/repository/sql/PostRepository.js";
-import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
-import { PostRepository } from "../data/repository/no-sql/PostRepository.js";
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
+import { PostRepository } from "../data/repository/sql/PostRepository.js";
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+// import { PostRepository } from "../data/repository/no-sql/PostRepository.js";
 import { validate, NotFoundError, SystemError } from "com";
 export const createPost = (userId, title, description, image) => {
     validate.id(userId, "user id");

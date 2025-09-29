@@ -1,5 +1,5 @@
-// import { UserRepository } from "../data/repository/sql/UserRepository.js";
-import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
+import { UserRepository } from "../data/repository/sql/UserRepository.js";
+// import { UserRepository } from "../data/repository/no-sql/UserRepository.js";
 import { RegisterUser } from "./types.js";
 import { validate, DuplicityError, SystemError } from "com";
 
