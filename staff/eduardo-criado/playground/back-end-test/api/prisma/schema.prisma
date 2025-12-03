@@ -1,0 +1,31 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model Usuario {
+    id                   String     @id @default(uuid())
+    nombre               String
+    email                String     @unique
+    tipo_permiso         String // 'A', 'B', o 'C'
+    permiso_valido_hasta DateTime
+    vehiculos            Vehiculo[] // Relación: un usuario puede tener muchos vehículos
+
+    @@map("usuarios")
+}
+
+model Vehiculo {
+    id             String  @id @default(uuid())
+    marca          String
+    modelo         String
+    matricula      String  @unique
+    tipo           String // 'moto', 'coche', o 'camion'
+    propietario_id String
+    propietario    Usuario @relation(fields: [propietario_id], references: [id])
+
+    @@map("vehiculos")
+}
