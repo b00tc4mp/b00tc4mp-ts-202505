@@ -34,15 +34,15 @@ async function seed() {
         nombre: "Pedro López",
         email: "pedro@example.com",
         tipo_permiso: "B", // Permiso de coche
-        permiso_valido_hasta: new Date("2023-01-01"), // EXPIRADO
+        permiso_valido_hasta: new Date("2027-01-01"), // Válido
       },
     });
-    console.log("✅ Usuario 3 creado (permiso expirado):", usuario3);
+    console.log("✅ Usuario 3 creado (permiso valido):", usuario3);
 
     console.log("\n📋 IDs para usar en las pruebas:");
     console.log(`   Usuario 1 (Juan - Permiso B válido): ${usuario1.id}`);
     console.log(`   Usuario 2 (María - Permiso A válido): ${usuario2.id}`);
-    console.log(`   Usuario 3 (Pedro - Permiso B expirado): ${usuario3.id}`);
+    console.log(`   Usuario 3 (Pedro - Permiso B valido): ${usuario3.id}`);
 
     await prisma.$disconnect();
   } catch (error) {

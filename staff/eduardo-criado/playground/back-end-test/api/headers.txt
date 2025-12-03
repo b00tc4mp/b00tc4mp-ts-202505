@@ -1,0 +1,10 @@
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 182
+ETag: W/"b6-/CuDg5fRF75X4HsEwpPwULeBJak"
+Date: Wed, 03 Dec 2025 21:24:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+

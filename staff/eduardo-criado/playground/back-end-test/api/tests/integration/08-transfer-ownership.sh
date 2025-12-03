@@ -10,7 +10,9 @@ VEHICULO_ID=$(echo $VEHICULO | jq -r '.id')
 PROPIETARIO_ACTUAL=$(echo $VEHICULO | jq -r '.propietario_id')
 
 # Obtener otro usuario con permiso B diferente al actual
-NUEVO_PROPIETARIO=$(curl -s http://localhost:3000/api/usuarios | jq -r '.[] | select(.tipo_permiso == "B" and .id != "'$PROPIETARIO_ACTUAL'") | .id' | head -1)
+# Seleccionar un nuevo propietario con permiso tipo B y permiso vigente
+NOW=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+NUEVO_PROPIETARIO=$(curl -s http://localhost:3000/api/usuarios | jq -r '.[] | select(.tipo_permiso == "B" and .id != "'$PROPIETARIO_ACTUAL'" and .permiso_valido_hasta > "'$NOW'") | .id' | head -1)
 
 if [ -z "$NUEVO_PROPIETARIO" ]; then
   echo "⚠️  No hay otro usuario con permiso B para transferir"
