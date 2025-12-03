@@ -1,0 +1,5 @@
+const response = await fetch ('https://mongoosejs.com/docs/typescript/schemas.html')
+
+const content = await response.text()
+
+console.log(content)
