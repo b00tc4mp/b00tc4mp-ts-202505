@@ -1,6 +1,6 @@
 import { UserRepository } from "../repositories/sql/UserRepository.js";
 import { VehicleService } from "./VehicleService.js";
-import { IVehicleData } from "../repositories/types.js";
+import { IUserData, IVehicleData } from "../repositories/types.js";
 import { NotFoundError } from "../utils/errors.js";
 
 export class UserService {
@@ -26,5 +26,13 @@ export class UserService {
 
     // 2. Obtener los vehículos del usuario
     return await this.vehicleService.getVehiclesByOwnerId(userId);
+  }
+
+  /**
+   * GET /usuarios
+   * Listar todos los usuarios
+   */
+  async getAllUsers(): Promise<IUserData[]> {
+    return await this.userRepo.getAll();
   }
 }

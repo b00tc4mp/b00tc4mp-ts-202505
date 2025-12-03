@@ -10,7 +10,8 @@
     "compile-watch": "tsc --watch",
     "test": "node --env-file=.test.env node_modules/mocha/bin/mocha build/logic/*.spec.js",
     "test-watch": "node --env-file=.test.env --watch node_modules/mocha/bin/mocha build/logic/*.spec.js build/data/repository/**/*.spec.js",
-    "test-inspect": "node --env-file=.test.env --inspect-brk node_modules/mocha/bin/mocha build/logic/*.spec.js build/data/repository/**/*.spec.js"
+    "test-inspect": "node --env-file=.test.env --inspect-brk node_modules/mocha/bin/mocha build/logic/*.spec.js build/data/repository/**/*.spec.js",
+    "seed": "tsx src/scripts/seedData.ts"
   },
   "keywords": [],
   "author": "",

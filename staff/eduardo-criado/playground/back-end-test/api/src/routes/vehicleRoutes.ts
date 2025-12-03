@@ -4,6 +4,9 @@ import { VehicleController } from "../controllers/VehicleController.js";
 const router = Router();
 const vehicleController = new VehicleController();
 
+// GET /vehiculos - Obtener todos los vehículos
+router.get("/", vehicleController.getAllVehicles);
+
 // POST /vehiculos - Registrar un nuevo vehículo
 router.post("/", vehicleController.createVehicle);
 

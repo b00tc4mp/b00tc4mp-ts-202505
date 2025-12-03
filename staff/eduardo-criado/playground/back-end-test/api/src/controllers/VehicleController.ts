@@ -68,6 +68,15 @@ export class VehicleController {
       next(error);
     }
   };
+
+  getAllVehicles = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const vehicles = await this.vehicleService.getAllVehicles();
+      return res.status(200).json(vehicles);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /*

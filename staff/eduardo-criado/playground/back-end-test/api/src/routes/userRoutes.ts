@@ -4,6 +4,9 @@ import { UserController } from "../controllers/UserController.js";
 const router = Router();
 const userController = new UserController();
 
+// GET /usuarios - Listar todos los usuarios
+router.get("/", userController.getAllUsers);
+
 // GET /usuarios/:id/vehiculos - Listar vehículos de un usuario
 router.get("/:id/vehiculos", userController.getUserVehicles);
 

@@ -138,4 +138,8 @@ export class VehicleService {
   async getVehiclesByOwnerId(ownerId: string): Promise<IVehicleData[]> {
     return await this.vehicleRepo.findByOwnerId(ownerId);
   }
+
+  async getAllVehicles(): Promise<IVehicleData[]> {
+    return await this.vehicleRepo.getAll();
+  }
 }

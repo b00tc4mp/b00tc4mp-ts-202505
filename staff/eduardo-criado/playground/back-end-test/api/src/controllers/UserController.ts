@@ -23,6 +23,19 @@ export class UserController {
       next(error);
     }
   };
+
+  /**
+   * GET /usuarios
+   * Listar todos los usuarios
+   */
+  getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const users = await this.userService.getAllUsers();
+      return res.status(200).json(users);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 /*
