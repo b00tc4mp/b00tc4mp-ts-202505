@@ -73,6 +73,7 @@ export const UserRepository: IUserRepository = {
     const filterCriteria = {
       OR: Object.keys(criteria).map((key) => ({
         [key]: criteria[key as keyof typeof criteria],
+        // [key]: { contains: criteria[key as keyof typeof criteria] },
       })),
     };
 

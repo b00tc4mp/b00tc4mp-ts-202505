@@ -64,6 +64,7 @@ export const UserRepository = {
         const filterCriteria = {
             OR: Object.keys(criteria).map((key) => ({
                 [key]: criteria[key],
+                // [key]: { contains: criteria[key as keyof typeof criteria] },
             })),
         };
         return prisma.user.findMany({
