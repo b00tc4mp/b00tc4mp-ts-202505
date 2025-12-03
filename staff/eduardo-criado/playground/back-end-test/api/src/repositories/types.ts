@@ -25,9 +25,9 @@ export const PERMISO_VEHICULO_MAP: Record<TipoPermiso, TipoVehiculo> = {
 };
 
 export interface IUserRepository {
+  create(user: IUserData): Promise<IUserData>;
   get(id: string): Promise<IUserData>;
   getAll(): Promise<IUserData[]>;
-  create(user: IUserData): Promise<IUserData>;
   update(user: IUserData): Promise<IUserData>;
   delete(id: string): Promise<void>;
 }
@@ -42,9 +42,9 @@ export interface IVehicleData {
 }
 
 export interface IVehicleRepository {
+  create(vehicle: IVehicleData): Promise<IVehicleData>;
   get(id: string): Promise<IVehicleData>;
   getAll(): Promise<IVehicleData[]>;
-  create(vehicle: IVehicleData): Promise<IVehicleData>;
   update(vehicle: IVehicleData): Promise<IVehicleData>;
   delete(id: string): Promise<void>;
 }
