@@ -11,7 +11,13 @@
     "test": "mocha --require tsx --extensions ts 'src/**/*.spec.ts'",
     "test-watch": "mocha --require tsx --extensions ts --watch 'src/**/*.spec.ts'",
     "test-inspect": "mocha --require tsx --extensions ts --inspect-brk 'src/**/*.spec.ts'",
-    "seed": "tsx src/scripts/seedData.ts"
+    "seed": "tsx src/scripts/seedData.ts",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write 'src/**/*.ts'",
+    "format:check": "prettier --check 'src/**/*.ts'",
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint --fix 'src/**/*.ts'",
+    "validate": "npm run type-check && npm run format:check && npm run lint && npm run test"
   },
   "keywords": [],
   "author": "",
@@ -30,8 +36,13 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/mocha": "^10.0.10",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
     "chai": "^6.2.1",
+    "eslint": "^9.39.1",
     "mocha": "^11.7.5",
-    "tsx": "^4.19.2"
+    "prettier": "^3.7.4",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.3"
   }
 }
