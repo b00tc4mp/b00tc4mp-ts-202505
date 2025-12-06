@@ -16,9 +16,12 @@ export class VehicleService {
   private vehicleRepo: VehicleRepository;
   private userRepo: UserRepository;
 
-  constructor() {
-    this.vehicleRepo = new VehicleRepository();
-    this.userRepo = new UserRepository();
+  constructor(
+    vehicleRepo: VehicleRepository = new VehicleRepository(),
+    userRepo: UserRepository = new UserRepository()
+  ) {
+    this.vehicleRepo = vehicleRepo;
+    this.userRepo = userRepo;
   }
 
   /**
