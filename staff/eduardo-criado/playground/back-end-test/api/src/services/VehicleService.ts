@@ -50,6 +50,7 @@ export class VehicleService {
     const permisoRequerido = PERMISO_VEHICULO_MAP[propietario.tipo_permiso];
     if (permisoRequerido !== tipo) {
       throw new BadRequestError(
+        //TODO: create a custom error class for validationError
         `El propietario tiene permiso tipo ${propietario.tipo_permiso} que solo permite conducir vehículos tipo ${permisoRequerido}, no ${tipo}`
       );
     }
