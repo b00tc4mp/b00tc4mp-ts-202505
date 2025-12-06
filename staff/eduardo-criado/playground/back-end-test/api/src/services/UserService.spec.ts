@@ -32,11 +32,11 @@ describe("UserService", () => {
       ];
 
       const mockUserRepo = {
-        get: async (id: string) => validUser,
+        get: async (_id: string) => validUser,
       } as UserRepository;
 
       const mockVehicleService = {
-        getVehiclesByOwnerId: async (ownerId: string) => userVehicles,
+        getVehiclesByOwnerId: async (_ownerId: string) => userVehicles,
       } as VehicleService;
 
       const service = new UserService(mockUserRepo, mockVehicleService);
@@ -49,10 +49,10 @@ describe("UserService", () => {
 
     it("should throw NotFoundError when user does not exist", async () => {
       const mockUserRepo = {
-        get: async (id: string) => {
+        get: async (_id: string) => {
           throw new Error("User not found");
         },
-      } as UserRepository;
+      } as unknown as UserRepository;
 
       const mockVehicleService = {} as VehicleService;
 

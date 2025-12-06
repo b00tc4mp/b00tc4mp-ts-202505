@@ -29,11 +29,11 @@ describe("VehicleService", () => {
       };
 
       const mockUserRepo = {
-        get: async (id: string) => validOwner,
+        get: async (_id: string) => validOwner,
       } as UserRepository;
 
       const mockVehicleRepo = {
-        findByMatricula: async (matricula: string) => null,
+        findByMatricula: async (_matricula: string) => null,
         create: async (vehicle: IVehicleData) => vehicle,
       } as VehicleRepository;
 
@@ -58,10 +58,10 @@ describe("VehicleService", () => {
       };
 
       const mockUserRepo = {
-        get: async (id: string) => {
+        get: async (_id: string) => {
           throw new Error("User not found");
         },
-      } as UserRepository;
+      } as unknown as UserRepository;
 
       const mockVehicleRepo = {} as VehicleRepository;
 
@@ -103,11 +103,11 @@ describe("VehicleService", () => {
       };
 
       const mockUserRepo = {
-        get: async (id: string) => validOwner,
+        get: async (_id: string) => validOwner,
       } as UserRepository;
 
       const mockVehicleRepo = {
-        findByMatricula: async (matricula: string) => existingVehicle,
+        findByMatricula: async (_matricula: string) => existingVehicle,
       } as VehicleRepository;
 
       const service = new VehicleService(mockVehicleRepo, mockUserRepo);
@@ -139,11 +139,11 @@ describe("VehicleService", () => {
       };
 
       const mockUserRepo = {
-        get: async (id: string) => ownerWithWrongPermit,
+        get: async (_id: string) => ownerWithWrongPermit,
       } as UserRepository;
 
       const mockVehicleRepo = {
-        findByMatricula: async (matricula: string) => null,
+        findByMatricula: async (_matricula: string) => null,
       } as VehicleRepository;
 
       const service = new VehicleService(mockVehicleRepo, mockUserRepo);
@@ -175,11 +175,11 @@ describe("VehicleService", () => {
       };
 
       const mockUserRepo = {
-        get: async (id: string) => ownerWithExpiredPermit,
+        get: async (_id: string) => ownerWithExpiredPermit,
       } as UserRepository;
 
       const mockVehicleRepo = {
-        findByMatricula: async (matricula: string) => null,
+        findByMatricula: async (_matricula: string) => null,
       } as VehicleRepository;
 
       const service = new VehicleService(mockVehicleRepo, mockUserRepo);
@@ -214,15 +214,15 @@ describe("VehicleService", () => {
       };
 
       const mockVehicleRepo = {
-        get: async (id: string) => existingVehicle,
-        updateOwner: async (vehicleId: string, newOwnerId: string) => ({
+        get: async (_id: string) => existingVehicle,
+        updateOwner: async (_vehicleId: string, newOwnerId: string) => ({
           ...existingVehicle,
           propietario_id: newOwnerId,
         }),
       } as VehicleRepository;
 
       const mockUserRepo = {
-        get: async (id: string) => newOwner,
+        get: async (_id: string) => newOwner,
       } as UserRepository;
 
       const service = new VehicleService(mockVehicleRepo, mockUserRepo);
@@ -254,11 +254,11 @@ describe("VehicleService", () => {
       };
 
       const mockVehicleRepo = {
-        get: async (id: string) => existingVehicle,
+        get: async (_id: string) => existingVehicle,
       } as VehicleRepository;
 
       const mockUserRepo = {
-        get: async (id: string) => owner,
+        get: async (_id: string) => owner,
       } as UserRepository;
 
       const service = new VehicleService(mockVehicleRepo, mockUserRepo);
@@ -294,11 +294,11 @@ describe("VehicleService", () => {
       };
 
       const mockVehicleRepo = {
-        get: async (id: string) => existingVehicle,
+        get: async (_id: string) => existingVehicle,
       } as VehicleRepository;
 
       const mockUserRepo = {
-        get: async (id: string) => newOwnerWrongPermit,
+        get: async (_id: string) => newOwnerWrongPermit,
       } as UserRepository;
 
       const service = new VehicleService(mockVehicleRepo, mockUserRepo);

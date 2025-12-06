@@ -35,7 +35,7 @@ export class VehicleService {
     let propietario;
     try {
       propietario = await this.userRepo.get(propietario_id);
-    } catch (error) {
+    } catch {
       throw new NotFoundError(
         `Propietario con id ${propietario_id} no encontrado`
       );
@@ -94,7 +94,7 @@ export class VehicleService {
     let vehicle;
     try {
       vehicle = await this.vehicleRepo.get(vehicleId);
-    } catch (error) {
+    } catch {
       throw new NotFoundError(`Vehículo con id ${vehicleId} no encontrado`);
     }
 
@@ -102,7 +102,7 @@ export class VehicleService {
     let newOwner;
     try {
       newOwner = await this.userRepo.get(newOwnerId);
-    } catch (error) {
+    } catch {
       throw new NotFoundError(
         `Nuevo propietario con id ${newOwnerId} no encontrado`
       );

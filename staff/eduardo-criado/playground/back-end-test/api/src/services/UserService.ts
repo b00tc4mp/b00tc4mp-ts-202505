@@ -23,7 +23,7 @@ export class UserService {
     // 1. Validar que el usuario existe
     try {
       await this.userRepo.get(userId);
-    } catch (error) {
+    } catch {
       throw new NotFoundError(`Usuario con id ${userId} no encontrado`);
     }
 

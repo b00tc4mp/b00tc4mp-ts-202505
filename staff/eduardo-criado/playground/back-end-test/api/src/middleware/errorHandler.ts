@@ -7,9 +7,9 @@ import { ApiError } from "../utils/errors.js";
  */
 export function errorHandler(
   err: Error,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) {
   // Si es un error personalizado (ApiError), usar su código de estado
   if (err instanceof ApiError) {
