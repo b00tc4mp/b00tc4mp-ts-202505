@@ -1,0 +1,38 @@
+GET http://localhost:3000/health HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/usuarios HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/vehiculos HTTP/1.1
+
+###
+
+# GET http://localhost:3000/api/vehiculos/2a43145f-c8b0-483c-83e2-8dc73eff70ea HTTP/1.1
+
+
+### get vehicle by user
+
+GET http://localhost:3000/api/usuarios/9f83e805-69a3-4f4c-8f14-77742d5e311c/vehiculos HTTP/1.1
+
+
+
+POST https://example.com/comments HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+###
+
+PUT http://localhost:3000/api/vehiculos/2a43145f-c8b0-483c-83e2-8dc73eff70ea/propietario
+Content-Type: application/json
+
+{
+    "nuevo_propietario_id": "7e98dde3-e1cf-4ee7-8797-fc03fa61f7da"
+}
+
