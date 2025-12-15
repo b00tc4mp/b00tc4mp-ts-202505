@@ -61,9 +61,10 @@ describe("UserService", () => {
       try {
         await service.getUserVehicles("non-existent-user");
         expect.fail("Should have thrown NotFoundError");
-      } catch (error: any) {
-        expect(error.name).to.equal("NotFoundError");
-        expect(error.message).to.include("non-existent-user");
+      } catch (error: unknown) {
+        expect(error).to.be.instanceOf(Error);
+        expect((error as Error).name).to.equal("NotFoundError");
+        expect((error as Error).message).to.include("non-existent-user");
       }
     });
   });

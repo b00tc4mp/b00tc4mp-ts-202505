@@ -70,9 +70,10 @@ describe("VehicleService", () => {
       try {
         await service.createVehicle(vehicleData);
         expect.fail("Should have thrown NotFoundError");
-      } catch (error: any) {
-        expect(error.name).to.equal("NotFoundError");
-        expect(error.message).to.include("non-existent-user");
+      } catch (error: unknown) {
+        expect(error).to.be.instanceOf(Error);
+        expect((error as Error).name).to.equal("NotFoundError");
+        expect((error as Error).message).to.include("non-existent-user");
       }
     });
 
@@ -115,13 +116,14 @@ describe("VehicleService", () => {
       try {
         await service.createVehicle(vehicleData);
         expect.fail("Should have thrown ConflictError");
-      } catch (error: any) {
-        expect(error.name).to.equal("ConflictError");
-        expect(error.message).to.include("ABC123");
+      } catch (error: unknown) {
+        expect(error).to.be.instanceOf(Error);
+        expect((error as Error).name).to.equal("ConflictError");
+        expect((error as Error).message).to.include("ABC123");
       }
     });
 
-    it("should throw BadRequestError when owner has wrong permit type", async () => {
+    it("should throw ValidationError when owner has wrong permit type", async () => {
       const ownerWithWrongPermit: IUserData = {
         id: "user-1",
         nombre: "Juan Perez",
@@ -150,14 +152,15 @@ describe("VehicleService", () => {
 
       try {
         await service.createVehicle(vehicleData);
-        expect.fail("Should have thrown BadRequestError");
-      } catch (error: any) {
-        expect(error.name).to.equal("BadRequestError");
-        expect(error.message).to.include("permiso tipo A");
+        expect.fail("Should have thrown ValidationError");
+      } catch (error: unknown) {
+        expect(error).to.be.instanceOf(Error);
+        expect((error as Error).name).to.equal("ValidationError");
+        expect((error as Error).message).to.include("permiso tipo A");
       }
     });
 
-    it("should throw BadRequestError when owner permit is expired", async () => {
+    it("should throw ValidationError when owner permit is expired", async () => {
       const ownerWithExpiredPermit: IUserData = {
         id: "user-1",
         nombre: "Juan Perez",
@@ -186,10 +189,11 @@ describe("VehicleService", () => {
 
       try {
         await service.createVehicle(vehicleData);
-        expect.fail("Should have thrown BadRequestError");
-      } catch (error: any) {
-        expect(error.name).to.equal("BadRequestError");
-        expect(error.message).to.include("expiró");
+        expect.fail("Should have thrown ValidationError");
+      } catch (error: unknown) {
+        expect(error).to.be.instanceOf(Error);
+        expect((error as Error).name).to.equal("ValidationError");
+        expect((error as Error).message).to.include("expiró");
       }
     });
   });
@@ -269,13 +273,14 @@ describe("VehicleService", () => {
           newOwnerId: "user-1",
         });
         expect.fail("Should have thrown BadRequestError");
-      } catch (error: any) {
-        expect(error.name).to.equal("BadRequestError");
-        expect(error.message).to.include("mismo");
+      } catch (error: unknown) {
+        expect(error).to.be.instanceOf(Error);
+        expect((error as Error).name).to.equal("BadRequestError");
+        expect((error as Error).message).to.include("mismo");
       }
     });
 
-    it("should throw BadRequestError when new owner has wrong permit", async () => {
+    it("should throw ValidationError when new owner has wrong permit", async () => {
       const existingVehicle: IVehicleData = {
         id: "vehicle-1",
         marca: "Toyota",
@@ -308,10 +313,11 @@ describe("VehicleService", () => {
           vehicleId: "vehicle-1",
           newOwnerId: "user-2",
         });
-        expect.fail("Should have thrown BadRequestError");
-      } catch (error: any) {
-        expect(error.name).to.equal("BadRequestError");
-        expect(error.message).to.include("permiso tipo A");
+        expect.fail("Should have thrown ValidationError");
+      } catch (error: unknown) {
+        expect(error).to.be.instanceOf(Error);
+        expect((error as Error).name).to.equal("ValidationError");
+        expect((error as Error).message).to.include("permiso tipo A");
       }
     });
   });

@@ -12,13 +12,13 @@ app.use(cors()); // Habilitar CORS
 app.use(express.json()); // Parser de JSON
 app.use(jsonParserError); // Manejar errores de JSON mal formado
 
-// Rutas
-app.use("/api", routes); // Todas las rutas bajo /api
-
-// Ruta de health check
+// Ruta de health check (debe ir ANTES de las rutas /api)
 app.get("/health", (req, res) => {
   res.json({ status: "ok", message: "API de vehículos funcionando" });
 });
+
+// Rutas
+app.use("/api", routes); // Todas las rutas bajo /api
 
 // Middleware de manejo de errores (DEBE ir al final)
 app.use(errorHandler);

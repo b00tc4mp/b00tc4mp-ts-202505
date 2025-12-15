@@ -7,6 +7,7 @@ import {
 } from "../repositories/types.js";
 import {
   BadRequestError,
+  ValidationError,
   NotFoundError,
   ConflictError,
 } from "../utils/errors.js";
@@ -52,8 +53,7 @@ export class VehicleService {
     // 3. Validar que el propietario tiene el permiso adecuado para el tipo de vehículo
     const permisoRequerido = PERMISO_VEHICULO_MAP[propietario.tipo_permiso];
     if (permisoRequerido !== tipo) {
-      throw new BadRequestError(
-        //TODO: create a custom error class for validationError
+      throw new ValidationError(
         `El propietario tiene permiso tipo ${propietario.tipo_permiso} que solo permite conducir vehículos tipo ${permisoRequerido}, no ${tipo}`
       );
     }
@@ -62,7 +62,7 @@ export class VehicleService {
     const fechaActual = new Date();
     const fechaExpiracion = new Date(propietario.permiso_valido_hasta);
     if (fechaExpiracion <= fechaActual) {
-      throw new BadRequestError(
+      throw new ValidationError(
         `El permiso del propietario expiró el ${fechaExpiracion.toISOString()}`
       );
     }
@@ -118,7 +118,7 @@ export class VehicleService {
     // 4. Validar que el nuevo propietario tiene el permiso adecuado
     const permisoRequerido = PERMISO_VEHICULO_MAP[newOwner.tipo_permiso];
     if (permisoRequerido !== vehicle.tipo) {
-      throw new BadRequestError(
+      throw new ValidationError(
         `El nuevo propietario tiene permiso tipo ${newOwner.tipo_permiso} que solo permite conducir vehículos tipo ${permisoRequerido}, no ${vehicle.tipo}`
       );
     }
@@ -127,7 +127,7 @@ export class VehicleService {
     const fechaActual = new Date();
     const fechaExpiracion = new Date(newOwner.permiso_valido_hasta);
     if (fechaExpiracion <= fechaActual) {
-      throw new BadRequestError(
+      throw new ValidationError(
         `El permiso del nuevo propietario expiró el ${fechaExpiracion.toISOString()}`
       );
     }
