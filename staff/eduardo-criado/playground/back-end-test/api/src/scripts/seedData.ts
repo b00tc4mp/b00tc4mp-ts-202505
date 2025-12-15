@@ -5,6 +5,12 @@ async function seed() {
   try {
     console.log("🌱 Sembrando datos de prueba...");
 
+    // Limpiar datos existentes
+    console.log("🧹 Limpiando base de datos...");
+    await prisma.vehiculo.deleteMany();
+    await prisma.usuario.deleteMany();
+    console.log("✅ Base de datos limpiada");
+
     // Crear usuarios de prueba
     const usuario1 = await prisma.usuario.create({
       data: {
