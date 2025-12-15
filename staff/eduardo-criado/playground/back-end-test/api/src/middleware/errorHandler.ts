@@ -32,6 +32,13 @@ export function errorHandler(
     });
   }
 
+  // Si es un error de sistema (500)
+  if (err.name === "SystemError") {
+    return res.status(500).json({
+      error: err.message,
+    });
+  }
+
   // Log del error para debugging (en producción usarías un logger)
   console.error("Error no controlado:", err);
 
